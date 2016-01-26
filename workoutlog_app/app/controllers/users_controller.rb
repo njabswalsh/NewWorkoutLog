@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	def index
+	def home
 	end
 
 	def login
