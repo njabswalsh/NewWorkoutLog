@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 	
 	def password_valid? password
-		digest = Digest::SHA256.hexdigest(password + self.salt.to_s)
-		puts "SALT: " + self.salt.to_s
+		digest = Digest::SHA256.hexdigest(password + self.salt.to_i.to_s)
+		puts "SALT: " + self.salt.to_i.to_s
 		puts "DIGEST: " + digest
 		puts "PASSWORD DIGEST: " + self.password_digest
 		return digest == self.password_digest
