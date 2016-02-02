@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
 	def User.create first_name, last_name, login, password
 		salt = Random.new().rand(2147483647)
+		puts "NEWLY CREATED SALT: " + salt.to_s
 		password_digest = Digest::SHA256.hexdigest(password + salt.to_s)
 		user = User.new(:first_name => first_name, :last_name => last_name, :login => login, :salt => salt, :password_digest => password_digest)
 		user.save
