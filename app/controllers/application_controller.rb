@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def homepage
-  	render text: "<h1>new workoutlogthing!</h1>"
+  	redirect_to("/users/home")
   end
 end

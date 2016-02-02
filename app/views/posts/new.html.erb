@@ -1,0 +1,18 @@
+<h1>New Post<h1>
+
+<%= form_for :post do |p| %>
+	<p>
+		<%= p.label :workout %>
+		<%= p.text_area :workout %>
+	</p>
+
+	<p>
+		<%= p.label :notes %>
+		<%= p.text_area :notes %>
+	</p>
+
+	<p>
+		<%= submit_tag("Save Form", class: "btn btn-success") %>
+	</p>
+
+<% end %>
