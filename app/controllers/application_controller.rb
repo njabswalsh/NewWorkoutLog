@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def homepage
-  	render text: "new workoutlogthing!"
+  	render text: "<h1>new workoutlogthing!</h1>"
   end
 end
