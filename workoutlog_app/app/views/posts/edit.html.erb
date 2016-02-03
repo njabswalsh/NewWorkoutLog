@@ -1,4 +1,4 @@
-<h2> Editing article </h2>
+<h2> Edit Post </h2>
 
 <%= form_for :post, url: post_path(@post), method: 
 :patch do |p| %>
@@ -15,6 +15,10 @@
 			</ul>
 		</div>
 	<% end %>
+
+	<p>
+		<h2><%= p.label :date, @post.date %></h2>
+	</p>
 
 	<p>
 		<%= p.label :workout %><br>
