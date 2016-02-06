@@ -1,22 +1,19 @@
 <% content_for :title, "Login" %>
-<div class="panel panel-info">
-	<div class="panel-heading">Log in</div>
-     <div class="panel-body">
-		<% if flash[:message] %>
-			<p><%= flash[:message] %></p>
-		<% end %>
-		<%= form_tag("post_login", :method => "post") do %>
-			<%= text_field_tag :user_login, nil, placeholder: "Username", class: "form-control" %>
-			<%= password_field_tag :user_password, nil, placeholder: "Password", class: "form-control" %>
-			<%= button_tag(type: "submit", class: "btn btn-primary text-center") do %>
-			    Sign in <i class="icon-repeat"></i>
-			<% end %>
-		<% end %>
+
+<div class="background-well">
+	<%= form_tag("post_login", :method => "post") do %>
+		<fieldset class="form-group">
+		<%= text_field_tag :user_login, nil, placeholder: "Username", class: "form-control" %>
+		</fieldset>
+		<fieldset class="form-group">
+		<%= password_field_tag :user_password, nil, placeholder: "Password", class: "form-control" %>
+		</fieldset>
 		<% if flash[:error] %>
 			<p class="error_message"><%= flash[:error] %></p>
 		<% end %>
-		<% link_to "Create new account", @new %>
-		<a class="button_link" href="new">Create New Account</a>
-	</div>
-
+		<%= button_tag(type: "submit", class: "btn btn-primary") do %>
+		    Sign in <i class="icon-repeat"></i>
+		<% end %>
+		<%= link_to "Create new account", "new", class: "btn btn-primary pull-right" %>
+	<% end %>
 </div>
