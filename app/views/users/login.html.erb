@@ -1,0 +1,14 @@
+<% content_for :title, "Login" %>
+<% if flash[:error] %>
+	<p class="error_message"><%= flash[:error] %></p>
+<% end %>
+<% if flash[:message] %>
+	<p><%= flash[:message] %></p>
+<% end %>
+<%= form_tag("post_login", :method => "post") do %>
+	<p><%= label_tag(:user_login, "Enter your login:") %>
+	<%= text_field_tag(:user_login) %>
+	<%= label_tag(:user_password, "Enter your password:") %>
+	<%= password_field_tag(:user_password) %>
+	</br><%= submit_tag("Login") %></p>
+<% end %>
