@@ -7,11 +7,7 @@
 	</tr>
 
 	<% Post.where("user_id = " + session[:user_id].to_s).each do |post| %>
-
 		<tr>
-			<td><%= post.user_id %></td>
-			<td><%= session[:user_id] %></td>
-
 			<td><%= link_to post.workout, post_path(post) %> </td>
 			<td><%= post.notes %> </td>
 			<td><%= link_to 'Edit', edit_post_path(post) %> </td>
