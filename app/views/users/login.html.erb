@@ -1,19 +1,16 @@
 <% content_for :title, "Login" %>
-
-		<%= form_tag("post_login", :method => "post") do %>
-			<fieldset class="form-group">
-			<label >Username</label>
-			<%= text_field_tag :user_login, nil, placeholder: "Username", class: "form-control" %>
-			</fieldset>
-			<fieldset class="form-group">
-			<label for="formGroupExampleInput">Password</label>
-			<%= password_field_tag :user_password, nil, placeholder: "Password", class: "form-control" %>
-			</fieldset>
-			<% if flash[:error] %>
-				<p class="error_message"><%= flash[:error] %></p>
-			<% end %>
-			<%= button_tag(type: "submit", class: "btn btn-primary") do %>
-			    Sign in <i class="icon-repeat"></i>
-			<% end %>
-			<%= link_to "Create new account", "new", class: "btn btn-primary pull-right" %>
+	<%= form_tag("post_login", :method => "post") do %>
+		<fieldset class="form-group">
+		<%= text_field_tag :user_login, nil, placeholder: "Username", class: "form-control" %>
+		</fieldset>
+		<fieldset class="form-group">
+		<%= password_field_tag :user_password, nil, placeholder: "Password", class: "form-control" %>
+		</fieldset>
+		<% if flash[:error] %>
+			<p class="error_message"><%= flash[:error] %></p>
 		<% end %>
+		<%= button_tag(type: "submit", class: "btn btn-primary") do %>
+		    Sign in <i class="icon-repeat"></i>
+		<% end %>
+		<%= link_to "Create new account", "new", class: "btn btn-primary pull-right" %>
+	<% end %>
