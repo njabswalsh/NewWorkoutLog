@@ -28,8 +28,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    binding_of_caller (0.7.3.pre1)
-      debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.2.0.0)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (3.4.0)
       columnize (~> 0.8)
@@ -133,7 +133,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  byebug (= 3.4.0)
+  bootstrap-sass (= 3.2.0.0)
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
