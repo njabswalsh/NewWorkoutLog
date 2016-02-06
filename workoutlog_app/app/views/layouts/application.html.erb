@@ -12,6 +12,8 @@
 		Hello <%= session[:user_name] %>! <a class="button_link" href="/users/logout"> Logout </a>
 	<% else %>
 		<a class="button_link" href="/users/login"> Login </a>
+		<br>
+		<a class="button_link" href="new">Create New Account</a>
 	<% end %>
 </div>
 
