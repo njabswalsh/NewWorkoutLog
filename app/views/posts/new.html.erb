@@ -1,7 +1,6 @@
 <h1>New Post</h1>
 
 <%= form_for :post, url: posts_path do |p| %>
-
 	<% if @post.errors.any? %>
 		<div id="error_explanation">
 			<h2>
@@ -15,14 +14,22 @@
 		</div>
 	<% end %>
 
+	<p>
+		<% date = Time.now.strftime("%A, %d %B %Y") %>
+		<%= p.hidden_field :date, value: date %>
+		<h2><%= p.label :date, date %><h2>
+
+	</p>
 
 	<p>
 		<%= p.label :workout %>
+		<br>
 		<%= p.text_area :workout %>
 	</p>
 
 	<p>
 		<%= p.label :notes %>
+		<br>
 		<%= p.text_area :notes %>
 	</p>
 
