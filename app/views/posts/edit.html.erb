@@ -17,7 +17,7 @@
 	<% end %>
 
 	<p>
-		<h2><%= p.label :date, @post.date %></h2>
+		<h2><%= p.label :date, @post.date.strftime("%A, %d %B %Y") %></h2>
 	</p>
 
 	<p>
