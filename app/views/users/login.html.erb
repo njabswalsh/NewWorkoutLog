@@ -1,4 +1,6 @@
 <% content_for :title, "Login" %>
+
+<div class="background-well">
 	<%= form_tag("post_login", :method => "post") do %>
 		<fieldset class="form-group">
 		<%= text_field_tag :user_login, nil, placeholder: "Username", class: "form-control" %>
@@ -14,3 +16,4 @@
 		<% end %>
 		<%= link_to "Create new account", "new", class: "btn btn-primary pull-right" %>
 	<% end %>
+</div>

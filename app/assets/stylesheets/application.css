@@ -17,7 +17,7 @@ body {
     background-color: #96cbc7;
 }
 
-#grey_border {
+.background-well {
 	border-radius: 25px;
 	padding: 20px;
 	margin: 10px;
