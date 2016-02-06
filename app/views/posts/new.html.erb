@@ -17,9 +17,9 @@
 	<%= p.hidden_field :user_id, value: session[:user_id] %>
 
 	<p>
-		<% date = Time.now.strftime("%A, %d %B %Y") %>
+		<% date = Time.now %>
 		<%= p.hidden_field :date, value: date %>
-		<h2><%= p.label :date, date %><h2>
+		<h2><%= p.label :date, date.strftime("%A, %d %B %Y") %><h2>
 
 	</p>
 
