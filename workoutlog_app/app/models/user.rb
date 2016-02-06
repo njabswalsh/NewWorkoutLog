@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-	
+	has_many :posts
+
 	def password_valid? password
 		digest = Digest::SHA1.hexdigest(password + self.salt.to_s)
 		return digest == self.password_digest

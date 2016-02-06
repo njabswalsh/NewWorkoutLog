@@ -14,6 +14,8 @@
 		</div>
 	<% end %>
 
+	<%= p.hidden_field :user_id, value: session[:user_id] %>
+
 	<p>
 		<% date = Time.now.strftime("%A, %d %B %Y") %>
 		<%= p.hidden_field :date, value: date %>

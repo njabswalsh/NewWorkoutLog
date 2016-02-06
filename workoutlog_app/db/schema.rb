@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20160202071844) do
 
   create_table "posts", force: true do |t|
+    t.integer  "user_id"
     t.text     "date"
     t.text     "workout"
     t.text     "notes"
