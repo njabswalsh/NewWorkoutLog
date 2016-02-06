@@ -35,7 +35,11 @@ class UsersController < ApplicationController
 			redirect_to(:action => :new)
 		elsif User.create(params[:first_name], params[:last_name], params[:login], params[:password_1])
 			flash[:message] = "Account created!"
-			redirect_to(:action => :login)
+			@user = User.find_by(login: params[:login])
+			session[:user] = @user
+			session[:user_name] = @user.first_name
+			session[:user_id] = @user.id
+			redirect_to(:action => :home)
 		else
 			flash[:error] = "There was a problem creating your account"
 			redirect_to(:action => :new)
