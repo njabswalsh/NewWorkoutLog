@@ -9,19 +9,19 @@
 	<%= form_tag("create", :method => "post") do %>
 		<div class = "row">
 				<fieldset class="form-group">
-					<div class = "col-sm-3 col-xs-6">
+					<div class="col-sm-6 col-xs-12">
 						<%= text_field_tag(:first_name, nil, placeholder: "First Name", class: "form-control") %>
 					</div>
-					<div class = "col-sm-3 col-xs-6">
+					<div class="col-sm-6 col-xs-12">
 						<%= text_field_tag(:last_name, nil, placeholder: "Last Name", class: "form-control") %>
 					</div>
 				</fieldset>
 		</div>
 		<fieldset class="form-group">
-		<%= text_field_tag(:login, nil, placeholder: "Username", class: "form-control") %>
+				<%= text_field_tag(:login, nil, placeholder: "Username", class: "form-control") %>
 		</fieldset>
 		<fieldset class="form-group">
-		<%= password_field_tag(:password_1, nil, placeholder: "Password", class: "form-control") %>
+				<%= password_field_tag(:password_1, nil, placeholder: "Password", class: "form-control") %>
 		</fieldset>
 		<br/><%= submit_tag("Create Account", class: "btn btn-primary") %>
 		<%= link_to "Login", "login", class: "btn btn-primary pull-right" %></p>
