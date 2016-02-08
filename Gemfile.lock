@@ -97,6 +97,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_calendar (2.0.3)
+      rails (>= 3.0)
     slop (3.6.0)
     spring (1.6.2)
     sprockets (2.12.4)
@@ -138,6 +140,7 @@ DEPENDENCIES
   rails_12factor (= 0.0.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_calendar (~> 2.0)
   spring
   sqlite3
   turbolinks

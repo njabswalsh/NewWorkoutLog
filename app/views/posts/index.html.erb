@@ -18,7 +18,20 @@
 		</tr>
 	<% end %>
 </table>
+
+<%= month_calendar do |date| %>
+	<% Post.where("user_id = ? and date > ?", session[:user_id], "2016-02-07").each do |post| %>
+		<% if date.year == 2016 %>
+			<%= post.workout %>
+		<% end %>
+	<% end %>
+<% end %>
+
 <br>
 <%= link_to 'Create New Post', new_post_path %>
 <br>
 <%= link_to 'Back to Home', '/' %>
+
+<% @posts.each do |post| %>
+	<li>Workout: <%= post.workout %>. Notes: <%= post.notes %></li>
+<% end %>
