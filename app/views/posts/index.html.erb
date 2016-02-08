@@ -10,7 +10,7 @@
 		<tr>
 			<td><%= link_to post.workout, post_path(post) %> </td>
 			<td><%= post.notes %> </td>
-			<td><%= link_to 'Edit', edit_post_path(post) %> </td>
+			<td><%= link_to 'Edit', 'post/edit', date: post.date %> </td>
 
 			<td><%= link_to 'Delete', post_path(post),
 			method: :delete,

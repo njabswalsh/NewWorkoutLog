@@ -10,10 +10,19 @@ class PostsController < ApplicationController
 	
 	def new
 		@post = Post.new
+		if params[:date]
+			@date = Date.parse(params[:date])
+		else
+			@date = Date.today
+		end
 	end
 
 	def edit
-		@post = Post.find(params[:id])
+		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
+		if not @post
+			#redirect_to controller: 'posts/new', date: params[:date]
+			redirect_to controller: 'posts', action: 'new', date: params[:date]
+		end		
 	end
 
 	def create

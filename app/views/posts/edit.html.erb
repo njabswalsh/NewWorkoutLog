@@ -18,13 +18,13 @@
 		<div class="text-center">
 
 			<h2>
-			<a href="#">
+			<%= link_to date: @post.date - 1.day do %>
 				<span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
+			<% end %>
 			<%= @post.date.strftime("%a, %d %b %Y") %>
-			<a href="#">
+			<%= link_to date: @post.date + 1.day do %>
 				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
+			<% end %>
 			</h2>
 
 		</div>
@@ -44,7 +44,7 @@
 		</p>
 
 		<p>
-			<%= p.submit %>
+			<%= submit_tag("Save Post", class: "btn btn-success") %>
 		</p>
 	</div>
 
