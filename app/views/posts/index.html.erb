@@ -1,4 +1,4 @@
-<h1>All Posts</h1>
+<h1>My Workouts</h1>
 
 <table>
 	<tr>
@@ -18,6 +18,12 @@
 		</tr>
 	<% end %>
 </table>
+
+<div class='background-well'>
+<%= month_calendar do |date| %>
+  <%= date.day %>
+<% end %>
+<div>
 <br>
 <%= link_to 'Create New Post', new_post_path %>
 <br>

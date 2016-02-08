@@ -24,3 +24,23 @@ body {
 	margin: 10px;
     background: rgb(237,237,237);
 }
+
+.day {
+	border: 3px solid black;
+}
+
+.table>thead>tr>th.calendar-header {
+	border-bottom: 3px solid black;
+}
+
+.next-month {
+	color: rgb(180,180,180) 
+}
+
+.prev-month {
+	color: rgb(180,180,180) 
+}
+
+.thead {
+	border-bottom: black;
+}
