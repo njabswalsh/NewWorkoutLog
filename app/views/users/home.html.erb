@@ -2,8 +2,8 @@
 <div class="background-well">
 <% if session[:user] %>
 <div class="btn-group-vertical center-block" role="group">
-	<%= link_to "Create New Post", new_post_path, class: "btn btn-primary", style:"margin-bottom:5px"%>
-	<%= link_to "View My Workouts", posts_path, class: "btn btn-primary" , style:"margin-bottom:5px"%>
+	<%= link_to "Create New Post", "/posts/new", class: "btn btn-primary", style:"margin-bottom:5px"%>
+	<%= link_to "View My Workouts", "/posts/index", class: "btn btn-primary" , style:"margin-bottom:5px"%>
 	<%= link_to "View My Teams", "/", class: "btn btn-primary" , style:"margin-bottom:5px"%>
 	<%= link_to "Sign Out", "/users/logout", class: "btn btn-primary"%>
 </div>
