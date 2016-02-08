@@ -5,11 +5,16 @@ class PostsController < ApplicationController
 	end
 
 	def new
-		@post = Post.new
 		if params[:date]
 			@date = Date.parse(params[:date])
 		else
 			@date = Date.today
+		end
+		@post = Post.where(date: @date, user_id: session[:user_id]).first
+		if @post
+			redirect_to controller: 'posts', action: 'edit', date: @date
+		else
+			@post = Post.new
 		end
 	end
 

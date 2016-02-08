@@ -46,8 +46,13 @@
 	</p>
 
 	<p>
-		<%= submit_tag("Save Post", class: "btn btn-success") %>
+		<%= submit_tag("Save", class: "btn btn-success") %>
 	</p>
 
 <% end %>
 </div>
+
+<br>
+<%= link_to 'Back to Home', '/' %>
+<br>
+<%= link_to 'View All Posts', controller: 'posts', action: 'index' %>
