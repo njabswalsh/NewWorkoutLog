@@ -1,7 +1,10 @@
 <h1>My Workouts</h1>
 
 <div class="background-well">
+	
+
 	<%= month_calendar do |date| %>
+	
 		<%= date.day %>
 		<% post = Post.where("user_id = ? and date = ?", session[:user_id], date).first %>
 		<% if post %>
@@ -17,7 +20,10 @@
 		<% else %>
 			<%= link_to 'Create', controller: 'posts', action: 'new', date: date %>
 		<% end %>
+
 	<% end %>
+
+
 </div>
 
 <%= link_to 'Back to Home', '/' %>

@@ -44,3 +44,7 @@ body {
 .thead {
 	border-bottom: black;
 }
+
+.calendar {
+	overflow-x:scroll;
+}
