@@ -8,11 +8,10 @@
 		<%= date.day %>
 		<% post = Post.where("user_id = ? and date = ?", session[:user_id], date).first %>
 		<% if post %>
-			<br>
-			Workout: <%= post.workout %>
-			<br>
-			Notes: <%= post.notes %>
-			<br>
+			<% #Do not change the formatting (whitespace) of these two lines! It will change the display of all workouts %>
+			<div class='wrap-text'>Workout:
+<%= post.workout %>
+Notes: <%= post.notes %></div>
 			<%= link_to 'Edit', controller: 'posts', action: 'edit', date: post.date %>
 			<%= link_to 'Delete', controller: 'posts', action: 'destroy', date: post.date,
 			method: :delete,
