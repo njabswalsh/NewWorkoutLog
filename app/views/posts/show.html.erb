@@ -1,16 +1,28 @@
 <p>
-	<h2><%= @post.date.strftime("%A, %d %B %Y") %>
+	<div class="text-center">
+		<h2>
+		<a href="#">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<%= @post.date.strftime("%a, %d %b %Y") %>
+		<a href="#">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		</h2>
+	</div>
 </p>
 
-<p>
-	<strong>Workout:</strong>
-	<%= @post.workout %>
-</p>
+<div class="background-well">
+	<p>
+		<strong>Workout:</strong>
+		<%= @post.workout %>
+	</p>
 
-<p>
-	<strong>Notes:</strong>
-	<%= @post.notes %>
-</p>
+	<p>
+		<strong>Notes:</strong>
+		<%= @post.notes %>
+	</p>
+</div>
 
 <%= link_to 'Edit Post', edit_post_path %>
 <br>
