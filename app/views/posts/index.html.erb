@@ -19,12 +19,20 @@
 	<% end %>
 </table>
 
-<div class='background-well'>
-<%= month_calendar do |date| %>
-  <%= date.day %>
-<% end %>
-<div>
-<br>
-<%= link_to 'Create New Post', new_post_path %>
-<br>
+<div class="background-well">
+	<%= month_calendar do |date| %>
+		<%= date.day %> <%= link_to 'Create', new_post_path %>
+		<% Post.where("user_id = ? and date = ?", session[:user_id], date).each do |post| %>
+			<hr>
+			Workout: <%= post.workout %>
+			<hr>
+			Notes: <%= post.notes %>
+		<% end %>
+	<% end %>
+</div>
+
 <%= link_to 'Back to Home', '/' %>
+
+<% @posts.each do |post| %>
+	<li>Workout: <%= post.workout %>. Notes: <%= post.notes %></li>
+<% end %>
