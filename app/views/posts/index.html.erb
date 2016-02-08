@@ -1,38 +1,23 @@
 <h1>My Workouts</h1>
 
-<table>
-	<tr>
-		<th>Workouts</th>
-		<th>Notes</th>
-	</tr>
-
-	<% Post.where("user_id = " + session[:user_id].to_s).each do |post| %>
-		<tr>
-			<td><%= link_to post.workout, post_path(post) %> </td>
-			<td><%= post.notes %> </td>
-			<td><%= link_to 'Edit', 'post/edit', date: post.date %> </td>
-
-			<td><%= link_to 'Delete', post_path(post),
-			method: :delete,
-			data: {confirm: 'Are you sure you want to delete this post?'} %></td>
-		</tr>
-	<% end %>
-</table>
-
 <div class="background-well">
 	<%= month_calendar do |date| %>
-		<%= date.day %> <%= link_to 'Create', new_post_path %>
-		<% Post.where("user_id = ? and date = ?", session[:user_id], date).each do |post| %>
-			<hr>
+		<%= date.day %>
+		<% post = Post.where("user_id = ? and date = ?", session[:user_id], date).first %>
+		<% if post %>
+			<br>
 			Workout: <%= post.workout %>
-			<hr>
+			<br>
 			Notes: <%= post.notes %>
+			<br>
+			<%= link_to 'Edit', controller: 'posts', action: 'edit', date: post.date %>
+			<%= link_to 'Delete', controller: 'posts', action: 'destroy', date: post.date,
+			method: :delete,
+			:confirm=> 'Are you sure you want to delete this post?' %>
+		<% else %>
+			<%= link_to 'Create', controller: 'posts', action: 'new', date: date %>
 		<% end %>
 	<% end %>
 </div>
 
 <%= link_to 'Back to Home', '/' %>
-
-<% @posts.each do |post| %>
-	<li>Workout: <%= post.workout %>. Notes: <%= post.notes %></li>
-<% end %>

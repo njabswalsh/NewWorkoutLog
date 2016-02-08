@@ -1,4 +1,4 @@
-<%= form_for :post, url: posts_path do |p| %>
+<%= form_for :post, url: {action: 'create'} do |p| %>
 	<% if @post.errors.any? %>
 		<div id="error_explanation">
 			<h2>

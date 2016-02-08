@@ -2,13 +2,8 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.where("user_id = ?", session[:user_id])
-		@nothing = "hi"
 	end
 
-	def show
-		@post = Post.find(params[:id])
-	end
-	
 	def new
 		@post = Post.new
 		if params[:date]
@@ -30,27 +25,29 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 
 		if @post.save
-			redirect_to @post
+			redirect_to action: 'index'
 		else
 			render 'new'
 		end
 	end
 
 	def update
-		@post = Post.find(params[:id])
+		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
 
 		if @post.update(post_params)
-			redirect_to @post
+			redirect_to action: 'index'
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
+		#@post = Post.find(params[:id])
+		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
+		puts @post
 		@post.destroy
 
-		redirect_to posts_path
+		redirect_to action: 'index'
 	end
 
 	private

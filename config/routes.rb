@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Temporary routing structure? (Nolan)
   get ':controller(/:action(/:id))'
   post ':controller(/:action(/:id))'
-
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
