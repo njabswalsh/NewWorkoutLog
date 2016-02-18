@@ -6,14 +6,21 @@ class TeamsController < ApplicationController
 	end
 
 	def view
-		if not params[:id]
-			redirect_to(:action => :index)
+		if session[:user]
+			if not params[:id]
+				redirect_to(:action => :index)
+			end
+			@team = Team.find_by(id: params[:id])
+			if not @team
+				redirect_to(:action => :index)
+			else
+				user = User.find_by(id: session[:user_id])
+				if not @team.users.include? user
+					flash[:error] = "You are not a member of that team!"
+					redirect_to(:action => :join)
+				end
+			end
 		end
-		@team = Team.find_by(id: params[:id])
-		if not @team
-			redirect_to(:action => :index)
-		end
-
 	end
 
 	def create
@@ -21,7 +28,6 @@ class TeamsController < ApplicationController
 			flash[:error] = "Sorry, there is already a team with that name. "
 			redirect_to(:action => :new)
 		elsif Team.create(params[:team_name], params[:team_password])
-			flash[:message] = "New team:" + params[:team_name] + " created!"
 			team = Team.find_by(name: params[:team_name])
 			user = User.find(session[:user_id])
 			user.teams << team
