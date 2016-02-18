@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 		else
 			@date = Date.today
 		end
-		@post = Post.where(date: @date, user_id: session[:user_id]).first
+		@post = Post.find_by(date: @date, user_id: session[:user_id])
 		if @post
 			redirect_to controller: 'posts', action: 'edit', date: @date
 		else
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
+		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
 		if not @post
 			#redirect_to controller: 'posts/new', date: params[:date]
 			redirect_to controller: 'posts', action: 'new', date: params[:date]
@@ -37,8 +37,8 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
-
+		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
+		
 		if @post.update(post_params)
 			redirect_to action: 'index'
 		else
