@@ -1,8 +1,19 @@
 class TeamsController < ApplicationController
-	def home
+	def index
 	end
 
 	def new
+	end
+
+	def view
+		if not params[:id]
+			redirect_to(:action => :index)
+		end
+		@team = Team.find_by(id: params[:id])
+		if not @team
+			redirect_to(:action => :index)
+		end
+
 	end
 
 	def create
@@ -14,7 +25,7 @@ class TeamsController < ApplicationController
 			team = Team.find_by(name: params[:team_name])
 			user = User.find(session[:user_id])
 			user.teams << team
-			redirect_to(:action => :home)
+			redirect_to(:action => :index)
 		else
 			flash[:error] = "There was a problem creating your new team"
 			redirect_to(:action => :new)
@@ -30,11 +41,11 @@ class TeamsController < ApplicationController
 			team = Team.find_by(name: params[:team_name])
 			if team
 				if user.teams.include? team
-					flash[:error] = "You're already a member of " + team.name
+					flash[:error] = "You're already a member of " + team.name + "!"
 					redirect_to(:action => :join)
 				elsif team.password_valid?(params[:team_password])
 					user.teams << team
-					redirect_to :action => :home
+					redirect_to :action => :index
 				else
 					flash[:error] = "Sorry, that team name and password do not match"
 					redirect_to(:action => :join)
