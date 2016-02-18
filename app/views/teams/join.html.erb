@@ -1,0 +1,16 @@
+<% content_for :title, "Join Team" %>
+<% if flash[:error] %>
+	<p class="error_message"><%= flash[:error] %></p>
+<% end %>
+<h2>Join Team</h2>
+<div class="background-well">
+	<%= form_tag("post_join", :method => "post") do %>
+		<fieldset class="form-group">
+				<%= text_field_tag(:team_name, nil, placeholder: "Team Name", class: "form-control") %>
+		</fieldset>
+		<fieldset class="form-group">
+				<%= password_field_tag(:team_password, nil, placeholder: "Password", class: "form-control") %>
+		</fieldset>
+		<%= submit_tag("Join Team", class: "btn btn-primary") %>
+	<% end %>
+</div>

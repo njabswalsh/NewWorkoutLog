@@ -1,0 +1,49 @@
+class TeamsController < ApplicationController
+	def home
+	end
+
+	def new
+	end
+
+	def create
+		if Team.find_by(name: params[:team_name])
+			flash[:error] = "Sorry, there is already a team with that name. "
+			redirect_to(:action => :new)
+		elsif Team.create(params[:team_name], params[:team_password])
+			flash[:message] = "New team:" + params[:team_name] + " created!"
+			team = Team.find_by(name: params[:team_name])
+			user = User.find(session[:user_id])
+			user.teams << team
+			redirect_to(:action => :home)
+		else
+			flash[:error] = "There was a problem creating your new team"
+			redirect_to(:action => :new)
+		end
+	end
+
+	def join
+	end
+
+	def post_join
+		if session[:user_id]
+			user = User.find(session[:user_id])
+			team = Team.find_by(name: params[:team_name])
+			if team
+				if team.password_valid?(params[:team_password])	
+					user.teams << team
+					redirect_to :action => :home
+				else
+					flash[:error] = "Sorry, that team name and password do not match"
+					redirect_to(:action => :join)
+				end
+			else
+				flash[:error] = "Sorry, there is no team with that name"
+				redirect_to(:action => :join)
+			end
+		else
+			flash[:error] = "You must be logged in to join a team"
+			redirect_to(:action => :join)
+		end
+	end
+
+end
