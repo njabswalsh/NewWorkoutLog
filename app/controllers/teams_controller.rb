@@ -29,7 +29,10 @@ class TeamsController < ApplicationController
 			user = User.find(session[:user_id])
 			team = Team.find_by(name: params[:team_name])
 			if team
-				if team.password_valid?(params[:team_password])	
+				if user.teams.include? team
+					flash[:error] = "You're already a member of " + team.name
+					redirect_to(:action => :join)
+				elsif team.password_valid?(params[:team_password])
 					user.teams << team
 					redirect_to :action => :home
 				else
