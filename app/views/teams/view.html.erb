@@ -1,0 +1,6 @@
+<% content_for :title, "View Team" %>
+<h2>Members of <%= @team.name %> </h2>
+<% @team.users.each do |user| %>
+	<%= user.first_name + " " + user.last_name %>
+	<br/>
+<% end %>
