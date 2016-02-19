@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
-		
+
 		if @post.update(post_params)
 			redirect_to action: 'index'
 		else
@@ -48,8 +48,7 @@ class PostsController < ApplicationController
 
 	def destroy
 		#@post = Post.find(params[:id])
-		@post = Post.where(date: params[:date], user_id: session[:user_id]).first
-		puts @post
+		@post = Post.find_by(id: params[:id])
 		@post.destroy
 
 		redirect_to action: 'index'
