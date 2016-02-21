@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 
 		if @post.save
-			redirect_to action: 'index'
+			redirect_to action: 'index', start_date: @post.date
 		else
 			render 'new'
 		end
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
 
 		if @post.update(post_params)
-			redirect_to action: 'index'
+			redirect_to action: 'index', start_date: params[:date]
 		else
 			render 'edit'
 		end
@@ -49,9 +49,10 @@ class PostsController < ApplicationController
 	def destroy
 		#@post = Post.find(params[:id])
 		@post = Post.find_by(id: params[:id])
+		date = @post.date
 		@post.destroy
 
-		redirect_to action: 'index'
+		redirect_to action: 'index', start_date: date
 	end
 
 	private
