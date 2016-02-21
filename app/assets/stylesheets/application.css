@@ -17,6 +17,16 @@ body {
     background-color: #96cbc7;
 }
 
+@media screen and (max-width: 600px) {
+	.resizable {
+		font-size: 7vw
+	}
+}
+@media screen and (min-width: 600px) {
+	.resizable {
+		font-size: 300%
+	}
+}
 
 .background-well {
 	border-radius: 25px;

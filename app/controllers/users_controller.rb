@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 	end
 
 	def post_login
-		@user = User.find_by(login: params[:user_login])
+		@user = User.find_by(login: params[:user_login].downcase)
 		if @user
 			if @user.password_valid?(params[:user_password])	
 				session[:user] = @user
@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
+		params[:login] = params[:login].downcase
 		if User.find_by(login: params[:login])
 			flash[:error] = "Sorry, but that username is already taken."
 			redirect_to(:action => :new)
