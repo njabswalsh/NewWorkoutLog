@@ -1,6 +1,5 @@
 <div class="simple-calendar">
-  <div class="text-center">
-    <h2>
+    <h2 class="text-center resizable">
     <%= link_to start_date: date_range.first - 1.day do %>
       <span class="glyphicon glyphicon-chevron-left"></span><% end %>
   <%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %>
@@ -8,7 +7,6 @@
     <i class="glyphicon glyphicon-chevron-right"></i>
   <% end %>
    </h2>
-  </div>
   
   <div class = "calendar" >
 
