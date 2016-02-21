@@ -1,6 +1,29 @@
 <% content_for :title, "View Team" %>
-<h2>Members of <%= @team.name %> </h2>
+
+<h2><%= @team.name %> </h2>
+<div class="background-well">
+
+<% date = Date.parse(params[:start_date]) %>
+<%= link_to "Previous", start_date: (date.beginning_of_week - 1) %>
+<%= date.beginning_of_week.strftime("%D") %>
+<%= link_to "Next", start_date: (date.end_of_week + 1)  %>
+<br><br>
+
 <% @team.users.each do |user| %>
 	<%= user.first_name + " " + user.last_name %>
 	<br/>
+
+	<%= week_calendar do |date| %>
+		<%= date.day %>
+		<% post = Post.find_by("user_id = ? and date = ?", user.id, date) %>
+		<% if post %>
+			<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
+			<div class='wrap-text'>Workout:
+<%= post.workout %>
+Notes: <%= post.notes %></div>
+		<% end %>
+	<% end %>
+
 <% end %>
+
+</div>

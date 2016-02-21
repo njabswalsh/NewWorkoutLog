@@ -6,7 +6,7 @@
 	<%= month_calendar do |date| %>
 	
 		<%= date.day %>
-		<% post = Post.where("user_id = ? and date = ?", session[:user_id], date).first %>
+		<% post = Post.find_by("user_id = ? and date = ?", session[:user_id], date) %>
 		<% if post %>
 			<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
 			<div class='wrap-text'>Workout:
