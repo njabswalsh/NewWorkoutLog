@@ -29,15 +29,83 @@
 		</div>
 
 
-
-
 	</p>
+
 <div class="background-well">
-	<p>
-		<%= p.label :workout %>
-		<br>
-		<%= p.text_area :workout, class: "form-control" %>
-	</p>
+	  <!-- Trigger the modal with a button -->
+	  <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#addWorkout"><span class="glyphicon glyphicon-plus"></span> Add workout</button>
+
+	  <!-- Modal -->
+	  <div class="modal fade" id="addWorkout" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Touch to add workout</h4>
+	        </div>
+
+
+	        <div class="modal-body">
+	        	<div class="row">
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Deadlift</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Squat</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Bench</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Rowers</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Pull ups</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Core</a>
+				      </div>
+				    </div>
+				  </div>
+
+
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+
+	<hr class="post-divider"/>
+	<hr class="post-divider"/>
+
+	<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#add-note"><span class="glyphicon glyphicon-plus"></span> Add Notes</button>
+
+	  <!-- Modal -->
+	  <div class="modal fade" id="add-note" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Touch to add workout</h4>
+	        </div>
+
+	       </div>
+	    </div>
+	  </div>
+
+
 
 	<p>
 		<%= p.label :notes %>
