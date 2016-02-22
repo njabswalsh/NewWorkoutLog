@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
 
 	def index
+		if not params[:start_date]
+			redirect_to action: 'index', start_date: Date.today
+		end
 		@posts = Post.where("user_id = ?", session[:user_id])
 	end
 

@@ -8,10 +8,10 @@
   <% end %>
    </h2>
   
-  <div class = "calendar" >
+  <div class = "xscroll" >
 
 
-    <table class="table">
+    <table class="table calendar-table">
       <thead>
         <tr>
           <% date_range.slice(0, 7).each do |day| %>
@@ -22,7 +22,7 @@
 
       <tbody>
         <% date_range.each_slice(7) do |week| %>
-          <tr>
+          <tr class="calendar-row">
             <% week.each do |day| %>
               <%= content_tag :td, class: calendar.td_classes_for(day) do %>
                 <% if defined?(Haml) && block_is_haml?(block) %>

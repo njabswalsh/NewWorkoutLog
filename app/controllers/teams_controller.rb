@@ -20,6 +20,9 @@ class TeamsController < ApplicationController
 					redirect_to(:action => :join)
 				end
 			end
+			if not params[:start_date]
+				redirect_to action: 'view', start_date: Date.today
+			end
 		end
 	end
 
