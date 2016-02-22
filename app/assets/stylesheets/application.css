@@ -39,6 +39,34 @@ body {
 	border: 3px solid black;
 }
 
+.table-wrapper { 
+    overflow-x:scroll;
+}
+
+@media screen and (max-width: 415px) {
+	.calendar-table {
+		width: 300%;
+		max-width: none;
+		table-layout: fixed;
+	}
+}
+
+@media screen and (min-width: 415px) and (max-width: 1000px) {
+	.calendar-table {
+		width: 200%;
+		max-width: none;
+		table-layout: fixed;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	.calendar-table {
+		width: 99%;
+		max-width: none;
+		table-layout: fixed;
+	}
+}	
+
 .table>thead>tr>th.calendar-header {
 	border-bottom: 3px solid black;
 }
@@ -55,8 +83,12 @@ body {
 	border-bottom: black;
 }
 
-.calendar {
+.xscroll {
 	overflow-x:scroll;
+}
+
+.calendar-row {
+	height: 50px
 }
 
 div.wrap-text {
