@@ -1,4 +1,5 @@
-<%= form_for :post, url: {action: 'create'} do |p| %>
+<%= form_for @post, url: {action: 'create'} do |p| %>
+
 	<% if @post.errors.any? %>
 		<div id="error_explanation">
 			<h2>
@@ -31,19 +32,22 @@
 
 	</p>
 
-<div class="background-well">
-	  <!-- Trigger the modal with a button -->
-	  <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#addWorkout"><span class="glyphicon glyphicon-plus"></span> Add workout</button>
 
-	  <!-- Modal -->
-	  <div class="modal fade" id="addWorkout" role="dialog">
+	<div class="background-well">
+	  <!-- Trigger the modal with a button -->
+	  <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
+
+	  <h5>You have no recorded exercises today.</h5>
+
+	  <!-- Modal1 -->
+	  <div class="modal fade" id="pick-exercise" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Touch to add workout</h4>
+	          <h4 class="modal-title">Touch to add exercise</h4>
 	        </div>
 
 
@@ -51,15 +55,15 @@
 	        	<div class="row">
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Deadlift</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="deadlift" class="thumbnail">Deadlift</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Squat</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="squat" class="thumbnail">Squat</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Bench</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="bench" class="thumbnail">Bench</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
@@ -85,40 +89,53 @@
 	    </div>
 	  </div>
 
-	<hr class="post-divider"/>
-	<hr class="post-divider"/>
-
-	<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#add-note"><span class="glyphicon glyphicon-plus"></span> Add Notes</button>
-
-	  <!-- Modal -->
-	  <div class="modal fade" id="add-note" role="dialog">
+	  <!-- Modal2 -->
+	  <div class="modal fade" id="add-exercise" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Touch to add workout</h4>
+	          <h4 class="modal-title">Choose exercise details</h4>
 	        </div>
 
-	       </div>
+
+	        <div class="modal-body">
+						<div class="row">
+							<div class="col-sm-4 col-xs-6 col-sm-offset-4 col-xs-offset-3">
+				      	<div class="dummy"></div>
+				        <div class="thumbnail">Deadlift</div>
+				      </div>
+						</div>
+				  </div>
+
+
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
 	    </div>
 	  </div>
 
+		<hr class="post-divider"/>
+		<hr class="post-divider"/>
 
+		<p>
+			<%= p.label :notes %>
+			<br>
+			<%= p.text_area :notes, class: "form-control" %>
+		</p>
 
-	<p>
-		<%= p.label :notes %>
-		<br>
-		<%= p.text_area :notes, class: "form-control" %>
-	</p>
+		<p>
+			<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
+				Save
+			<% end %>
+		</p>
 
-	<p>
-		<%= submit_tag("Save", class: "btn btn-success") %>
-	</p>
-
+	</div>
 <% end %>
-</div>
 
 <br>
 <%= link_to 'Back to Home', '/' %>

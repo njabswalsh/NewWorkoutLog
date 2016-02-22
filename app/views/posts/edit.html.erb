@@ -1,5 +1,6 @@
 <%= form_for :post, url: {action: 'update', date: @post.date} do |p| %>
 
+
 	<% if @post.errors.any? %>
 		<div id="error_explanation">
 			<h2>
@@ -31,19 +32,73 @@
 
 	<div class="background-well">
 
+		<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#add-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
+
+		<h5>You have no recorded exercises today.</h5>
+
+		<!-- Modal -->
+		<div class="modal fade" id="add-exercise" role="dialog">
+		<div class="modal-dialog">
+
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      <h4 class="modal-title">Touch to add exercise</h4>
+		    </div>
+
+
+		    <div class="modal-body">
+		    	<div class="row">
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Deadlift</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Squat</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Bench</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Rowers</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Pull ups</a>
+				      </div>
+				      <div class="col-md-3 col-sm-4 col-xs-6">
+				        <div class="dummy"></div>
+				        <a href="#x" class="thumbnail">Core</a>
+				      </div>
+				    </div>
+				  </div>
+
+
+		    <div class="modal-footer">
+		      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    </div>
+		  </div>
+		  
+		</div>
+		</div>
+
+		<hr class="post-divider"/>
+		<hr class="post-divider"/>
 
 		<p>
-			<%= p.label :workout %><br>
-			<%= p.text_area :workout, class: "form-control" %>
-		</p>
-
-		<p>
-			<%= p.label :notes %><br>
+			<%= p.label :notes %>
+			<br>
 			<%= p.text_area :notes, class: "form-control" %>
 		</p>
 
 		<p>
-			<%= submit_tag("Save", class: "btn btn-success") %>
+			<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
+			 	Save
+			<% end %>
 		</p>
 	</div>
 
