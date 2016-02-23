@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221010024) do
-
-  create_table "exercises", force: true do |t|
-    t.integer  "post_id"
-    t.text     "exercise_name"
-    t.integer  "sets"
-    t.integer  "reps"
-    t.integer  "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20160218221634) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
