@@ -1,7 +1,7 @@
 <% content_for :title, "View Team" %>
 
 <h2><%= @team.name %> </h2>
-<div class="background-well">
+<div class="calendar-background-well">
 
 	<% date = Date.parse(params[:start_date]) %>
 	<%= link_to "Previous", start_date: (date.beginning_of_week - 1) %>
