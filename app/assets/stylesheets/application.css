@@ -44,6 +44,7 @@ body {
 @media screen and (max-width: 600px) {
 	.calendar-background-well {
 		margin: -5px;
+		margin-bottom: 5px;
 		padding: 10px;
 	}
 }
