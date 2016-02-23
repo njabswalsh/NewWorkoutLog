@@ -7,14 +7,16 @@
 	<%= link_to "Previous", start_date: (date.beginning_of_week - 1) %>
 	<%= date.beginning_of_week.strftime("%D") %>
 	<%= link_to "Next", start_date: (date.end_of_week + 1)  %>
-	<br><br>
+	<br/>
 
+	<% @first_user = true %>
 	<% @team.users.each do |user| %>
-		<%= user.first_name + " " + user.last_name %>
-		<br/>
+		<% @user_name = user.first_name + " " + user.last_name %>
+		<% if user == @team.users.last %>
+			<% @last_user = true %>
+		<% end %>
 
 		<%= week_calendar do |date| %>
-			<%= date.day %>
 			<% post = Post.find_by("user_id = ? and date = ?", user.id, date) %>
 			<% if post %>
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
@@ -23,7 +25,7 @@
 Notes: <%= post.notes %></div>
 			<% end %>
 		<% end %>
-
+		<% @first_user = false %>
+		<% @last_user = false %>
 	<% end %>
-
 </div>
