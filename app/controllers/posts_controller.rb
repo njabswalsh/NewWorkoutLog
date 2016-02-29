@@ -24,16 +24,19 @@ class PostsController < ApplicationController
 	def edit
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
 		if not @post
-			#redirect_to controller: 'posts/new', date: params[:date]
 			redirect_to controller: 'posts', action: 'new', date: params[:date]
-		end		
+		end
 	end
 
 	def create
 		@post = Post.new(post_params)
 
 		if @post.save
-			redirect_to action: 'index', start_date: @post.date
+			if params[:return_to]
+				redirect_to params[:return_to]
+			else
+				redirect_to action: 'index', start_date: @post.date
+			end
 		else
 			render 'new'
 		end
@@ -43,7 +46,11 @@ class PostsController < ApplicationController
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
 
 		if @post.update(post_params)
-			redirect_to action: 'index', start_date: params[:date]
+			if params[:return_to]
+				redirect_to params[:return_to]
+			else
+				redirect_to action: 'index', start_date: params[:date]
+			end
 		else
 			render 'edit'
 		end
