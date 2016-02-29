@@ -37,6 +37,27 @@ body {
     background: rgb(237,237,237);
 }
 
+.calendar-background-well {
+	border-radius: 25px;
+	padding: 10px;
+    background: rgb(237,237,237);
+}
+
+@media screen and (max-width: 600px) {
+	.calendar-background-well {
+		margin: -5px;
+		margin-bottom: 5px;
+		padding: 10px;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.calendar-background-well {
+		margin: 10px;
+		padding: 20px;
+	}
+}
+
 .day {
 	border: 3px solid black;
 }
@@ -47,7 +68,7 @@ body {
 
 @media screen and (max-width: 415px) {
 	.calendar-table {
-		width: 300%;
+		width: 330%;
 		max-width: none;
 		table-layout: fixed;
 	}
@@ -71,6 +92,10 @@ body {
 
 .table>thead>tr>th.calendar-header {
 	border-bottom: 3px solid black;
+}
+
+.calendar-name-box {
+	border: 3px solid black;
 }
 
 .next-month {

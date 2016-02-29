@@ -20,12 +20,10 @@
 		<div class="text-center">
 			<h2 class="resizable">
 			<%= link_to date: @date - 1.day do %>
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			<% end %>
+				<span class="glyphicon glyphicon-chevron-left"></span><% end %>
         	<%= @date.strftime("%a, %d %b %Y") %>
 			<%= link_to date: @date + 1.day do %>
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			<% end %>
+				<span class="glyphicon glyphicon-chevron-right"></span><% end %>
 			</h2>
 		</div>
 

@@ -32,7 +32,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       	<% if session[:user] %>
-        	<li><a href="/users/logout">Logout</a></li>
+          <li><%= link_to "Logout", controller: 'users', action: 'logout' %></li>
+          <li><%= link_to "Create New Post", controller: 'posts', action: 'new' %></li>
+          <li><%= link_to "View My Workouts", controller: 'posts', action: 'index' %></li>
+          <li><%= link_to "View Teams", controller: 'teams', action: 'index' %></li>
         <% end %>
         <li><a href="/">Home</a></li>
       </ul>
