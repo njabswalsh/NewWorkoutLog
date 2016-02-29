@@ -24,7 +24,7 @@
         <% date_range.each_slice(7) do |week| %>
           <tr class="calendar-row">
             <% week.each do |day| %>
-              <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+              <%= content_tag :td, class: calendar.td_classes_for(day) + ["post-view"] do %>
                 <% if defined?(Haml) && block_is_haml?(block) %>
                   <% capture_haml do %>
                     <% block.call day, sorted_events.fetch(day, []) %>
