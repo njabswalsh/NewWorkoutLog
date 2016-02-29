@@ -12,7 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
+
 body {
     background-color: #96cbc7;
 }

@@ -21,3 +21,26 @@
     margin: 1em 0;
     padding: 0; 
 }
+.border {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.exercise-input-padding {
+    padding: 20px;
+}
+h4.input-field-header {
+    margin-top: 2px;
+    margin-left: 2px;
+    color: #428bca;
+}
+.input-field>.glyphicon {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 2em;
+    color: #428bca;
+}
+.input-field {
+    display: inline;
+}
