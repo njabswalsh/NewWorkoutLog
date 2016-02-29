@@ -61,8 +61,11 @@ class PostsController < ApplicationController
 		@post = Post.find_by(id: params[:id])
 		date = @post.date
 		@post.destroy
-
-		redirect_to action: 'index', start_date: date
+		if params[:return_to]
+			redirect_to params[:return_to]
+		else
+			redirect_to action: 'index', start_date: date
+		end
 	end
 
 	private
