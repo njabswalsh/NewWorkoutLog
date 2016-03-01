@@ -21,14 +21,16 @@
     margin: 1em 0;
     padding: 0; 
 }
-.border {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-.exercise-input-padding {
-    padding: 20px;
+.spinner-padding {
+    padding: 0px 40px 0px 40px;
+    
+    .col-xs-12 {
+        margin: 10px 0px 20px 0px;
+    }
+
+    .glyphicon {
+        color: #428bca;
+    }
 }
 h4.input-field-header {
     margin-top: 2px;

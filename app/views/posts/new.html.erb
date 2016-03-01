@@ -20,10 +20,12 @@
 		<div class="text-center">
 			<h2 class="resizable">
 			<%= link_to date: @date - 1.day do %>
-				<span class="glyphicon glyphicon-chevron-left"></span><% end %>
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			<% end %>
         	<%= @date.strftime("%a, %d %b %Y") %>
 			<%= link_to date: @date + 1.day do %>
-				<span class="glyphicon glyphicon-chevron-right"></span><% end %>
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			<% end %>
 			</h2>
 		</div>
 
@@ -107,21 +109,50 @@
 				      </div>
 						</div>
 
-						<div class="row exercise-input-padding">
-							<div class="col-xs-12 col-md-4 border">
-								Sets
-								<div class="input-field text-center">
-									<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-									<input type="password" class="form-control" id="pwd" placeholder="Enter password">
-									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						<!-- number spinner http://bootsnipp.com/snippets/featured/bootstrap-number-spinner -->
+						<div class="row spinner-padding">
+							<div class="col-xs-12 col-md-offset-4 col-md-4" id="sets">
+								<h4 class="input-field-header">Sets</h4>
+								<div class="input-group number-spinner">
+									<span class="input-group-btn">
+										<button class="btn btn-default sets" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+									</span>
+									<input type="text" class="form-control text-center" value="3">
+									<span class="input-group-btn">
+										<button class="btn btn-default sets" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+									</span>
 								</div>
 							</div>
-							<div class="col-xs-12 col-md-4 border">
-								Reps
+
+							<div class="col-xs-12 col-md-offset-4 col-md-4" id="reps">
+								<h4 class="input-field-header">Reps</h4>
+								<div class="input-group number-spinner">
+									<span class="input-group-btn">
+										<button class="btn btn-default reps" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+									</span>
+									<input type="text" class="form-control text-center" value="8">
+									<span class="input-group-btn">
+										<button class="btn btn-default reps" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+									</span>
+								</div>
 							</div>
-							<div class="col-xs-12 col-md-4 border">
-								Weight
+
+							<div class="col-xs-12 col-md-offset-4 col-md-4" id="weight">
+								<h4 class="input-field-header">Weight</h4>
+								<div class="input-group number-spinner">
+									<span class="input-group-btn">
+										<button class="btn btn-default weight" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+									</span>
+									<input type="text" class="form-control text-center" value="135">
+									<span class="input-group-btn">
+										<button class="btn btn-default weight" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+									</span>
+								</div>
 							</div>
+
+							<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
+								Save
+							<% end %>
 						</div>
 					</div>
 
