@@ -1,4 +1,4 @@
-<%= form_for :post, url: {action: 'update', date: @post.date} do |p| %>
+<%= form_for :post, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p| %>
 
 
 	<% if @post.errors.any? %>

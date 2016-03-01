@@ -98,12 +98,12 @@ body {
 	border: 3px solid black;
 }
 
-.next-month {
-	color: rgb(180,180,180) 
+.post-view .prev-month {
+    color: rgb(180,180,180)
 }
 
-.prev-month {
-	color: rgb(180,180,180) 
+.post-view .next-month {
+    color: rgb(180,180,180)
 }
 
 .thead {
