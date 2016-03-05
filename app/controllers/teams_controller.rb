@@ -69,4 +69,23 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def leave_team
+		if session[:user_id]
+			user = User.find(session[:user_id])
+			team = Team.find(params[:id])
+			if team
+				if user.teams.include? team
+					user.teams.delete(team)
+					flash[:error] = "You are no longer a member of " + team.name
+				else
+					flash[:error] = "You aren't a member of that team"
+				end
+			else
+				flash[:error] = "There is no team with that name"
+			end
+		else
+			flash[:error] = "You must be logged in to leave a team"
+		end
+		redirect_to(:action => :join)
+	end
 end

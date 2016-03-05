@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
   delete '/posts/:id', to: 'posts#destroy'
+  delete '/teams/leave_team/:id', to: 'teams#leave_team'
   # You can have the root of your site routed with "root"
   root 'application#homepage'
 

@@ -40,3 +40,7 @@ Notes: <%= post.notes %></div>
 		<% @last_user = false %>
 	<% end %>
 </div>
+<%= link_to "Leave this team", "/teams/leave_team/" + @team.id.to_s,
+			method: :delete,
+			data: { confirm: 'Are you sure you want to leave this team?'},
+			class: "btn btn-sm btn-info pull-right" %>
