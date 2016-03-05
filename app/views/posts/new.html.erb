@@ -1,37 +1,42 @@
-<%= form_for @post, url: {action: 'create', return_to: params[:return_to]} do |p| %>
-	<% if @post.errors.any? %>
-		<div id="error_explanation">
-			<h2>
-				You had <%= pluralize(@post.errors.count, "error") %> in the post you tried to save:
-			</h2>
-			<ul>
-				<% @post.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<%= p.hidden_field :user_id, value: session[:user_id] %>
-
-	<p>
-		<%= p.hidden_field :date, value: @date %>
-		<div class="text-center">
-			<h2 class="resizable">
-			<%= link_to date: @date - 1.day do %>
-				<span class="glyphicon glyphicon-chevron-left"></span>
+<% if @post.errors.any? %>
+	<div id="error_explanation">
+		<h2>
+			You had <%= pluralize(@post.errors.count, "error") %> in the post you tried to save:
+		</h2>
+		<ul>
+			<% @post.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
 			<% end %>
-        	<%= @date.strftime("%a, %d %b %Y") %>
-			<%= link_to date: @date + 1.day do %>
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			<% end %>
-			</h2>
-		</div>
+		</ul>
+	</div>
+<% end %>
+<%= p.hidden_field :user_id, value: session[:user_id] %>
+
+<p>
+	<%= p.hidden_field :date, value: @date %>
+	<div class="text-center">
+		<h2 class="resizable">
+		<%= link_to date: @date - 1.day do %>
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		<% end %>
+    	<%= @date.strftime("%a, %d %b %Y") %>
+		<%= link_to date: @date + 1.day do %>
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		<% end %>
+		</h2>
+	</div>
 
 
-	</p>
+</p>
 
 
-	<div class="background-well">
+<div class="background-well">
+	
+
+	<%= %/form_for :exercise, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p|%/ %>
+
+
+
 	  <!-- Trigger the modal with a button -->
 	  <button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
 
@@ -163,8 +168,12 @@
 	    </div>
 	  </div>
 
-		<hr class="post-divider"/>
-		<hr class="post-divider"/>
+	<% %/ end %/ %>
+
+	<hr class="post-divider"/>
+	<hr class="post-divider"/>
+
+	<%= form_for :note, url: {action: 'create'} do |n| %>
 
 		<p>
 			<%= p.label :notes %>
@@ -177,9 +186,9 @@
 				Save
 			<% end %>
 		</p>
+	<% end %>
 
-	</div>
-<% end %>
+</div>
 
 <br>
 <%= link_to 'Back to Home', '/' %>
