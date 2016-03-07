@@ -3,11 +3,16 @@
 <h2><%= @team.name %> </h2>
 <div class="calendar-background-well">
 
-	<% date = Date.parse(params[:start_date]) %>
-	<%= link_to "Previous", start_date: (date.beginning_of_week - 1) %>
-	<%= date.beginning_of_week.strftime("%D") %>
-	<%= link_to "Next", start_date: (date.end_of_week + 1)  %>
-	<br/>
+
+	<h2 class="text-center resizable">
+		<% date = Date.parse(params[:start_date]) %>
+		<%= link_to start_date: (date.beginning_of_week - 1) do %>
+		<span class="glyphicon glyphicon-chevron-left"></span><% end %>
+		<%= date.beginning_of_week.strftime("%D") %>
+		<%= link_to start_date: (date.end_of_week + 1) do %>
+		<i class="glyphicon glyphicon-chevron-right"></i>
+		<% end %>
+	</h2>
 
 	<% @first_user = true %>
 	<% @team.users.each do |user| %>

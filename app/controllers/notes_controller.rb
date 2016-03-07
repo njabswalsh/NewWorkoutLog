@@ -1,31 +1,34 @@
 class NotesController < ApplicationController
 
 	def create
-		puts "POST ID PARAMS: " + params[:note][:post_id]
 		post_id = params[:note][:post_id]
 		note_text = params[:note][:text]
-		puts "POST ID : " + post_id
+		return_to = params[:note][:return_to]
 
 		note = Note.new(:post_id => post_id, :text => note_text)
-		puts "NOTE POST ID: " + note.post_id.to_s
-		if params[:date]
-			@date = Date.parse(params[:date])
-		else
-			@date = Date.today
-			params[:date] = @date
-		end
 
 		if not note.save
-			redirect_to controller: 'posts', action: 'index', date: @date
+			redirect_to controller: 'posts', action: 'index'
 		end
 
-
-		@post = Post.find_by(post_id)
-		puts "POST ID TO SAVE NOTE TO: " + post_id.to_s
-		redirect_to controller: 'posts', action: 'edit', date: @date
+		@post = Post.find(post_id)
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+		end
 	end
 
 	def destroy
+		@note = Note.find_by(id: params[:id])
+		date = params[:date]
+		return_to = params[:return_to]
+		@note.destroy
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => date.to_s
+		end
 	end
 
 end

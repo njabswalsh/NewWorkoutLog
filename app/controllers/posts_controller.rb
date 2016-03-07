@@ -9,6 +9,9 @@ class PostsController < ApplicationController
 
 	def edit
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
+		if params[:return_to]
+			@return_to = params[:return_to]
+		end
 	end
 
 	def create
@@ -21,21 +24,17 @@ class PostsController < ApplicationController
 
 		@post = Post.find_by(date: @date, user_id: session[:user_id])
 		if not @post
-			puts "NO POST YET - CREATE NEW ONE"
-
 			@post = Post.new(:user_id => session[:user_id], :date => @date)
 			if not @post.save
 				redirect_to action: 'index', start_date: @date
 				return
 			end
 		end
-		puts "POST ID: " + @post.id.to_s
 		redirect_to controller: 'posts', action: 'edit', date: @date, return_to: params[:return_to]
 	end
 
 
 	def destroy
-		#@post = Post.find(params[:id])
 		@post = Post.find_by(id: params[:id])
 		date = @post.date
 		@post.destroy
