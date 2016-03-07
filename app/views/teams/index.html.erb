@@ -1,5 +1,8 @@
 <h1>My Teams</h1>
 <div class="background-well btn-group-vertical center-block">
+<% if flash[:error] %>
+	<p class="error_message"><%= flash[:error] %></p>
+<% end %>
 <% user = User.find(session[:user_id]) %>
 <% if user %>
 	<% user.teams.each do |team| %>

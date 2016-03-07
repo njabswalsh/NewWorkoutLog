@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
 		if @post.save
 			if params[:return_to]
-				redirect_to params[:return_to]
+				redirect_to params[:return_to] + "?start_date=" + @post.date.to_s
 			else
 				redirect_to action: 'index', start_date: @post.date
 			end
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
 		if @post.update(post_params)
 			if params[:return_to]
-				redirect_to params[:return_to]
+				redirect_to params[:return_to] + "?start_date=" + @post.date.to_s
 			else
 				redirect_to action: 'index', start_date: params[:date]
 			end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
 		date = @post.date
 		@post.destroy
 		if params[:return_to]
-			redirect_to params[:return_to]
+			redirect_to params[:return_to] + "?start_date=" + @post.date.to_s
 		else
 			redirect_to action: 'index', start_date: date
 		end
