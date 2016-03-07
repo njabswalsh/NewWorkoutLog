@@ -10,8 +10,8 @@
 		<% if post %>
 			<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
 			<div class='wrap-text'>Workout:
-<%= post.workout %>
-Notes: <%= post.notes %></div>
+Notes: <% post.notes.each do |note| %>
+<%= note.text %><% end %></div>
 			<%= link_to controller: 'posts', action: 'edit', date: post.date do %>
 		    <span class="glyphicon glyphicon-pencil"></span><% end %>
 			<%= link_to "/posts/" + post.id.to_s, date: post.date,

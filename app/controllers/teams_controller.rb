@@ -9,19 +9,21 @@ class TeamsController < ApplicationController
 		if session[:user]
 			if not params[:id]
 				redirect_to(:action => :index)
-			end
-			@team = Team.find_by(id: params[:id])
-			if not @team
-				redirect_to(:action => :index)
 			else
-				user = User.find_by(id: session[:user_id])
-				if not @team.users.include? user
-					flash[:error] = "You are not a member of that team!"
-					redirect_to(:action => :join)
+				@team = Team.find_by(id: params[:id])
+				if not @team
+					redirect_to(:action => :index)
+				else
+					user = User.find_by(id: session[:user_id])
+					if not @team.users.include? user
+						flash[:error] = "You are not a member of that team!"
+						redirect_to(:action => :join)
+					else
+						if not params[:start_date]
+							redirect_to action: 'view', start_date: Date.today
+						end
+					end
 				end
-			end
-			if not params[:start_date]
-				redirect_to action: 'view', start_date: Date.today
 			end
 		end
 	end
@@ -69,4 +71,23 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def leave_team
+		if session[:user_id]
+			user = User.find(session[:user_id])
+			team = Team.find(params[:id])
+			if team
+				if user.teams.include? team
+					user.teams.delete(team)
+					flash[:error] = "You are no longer a member of " + team.name
+				else
+					flash[:error] = "You aren't a member of that team"
+				end
+			else
+				flash[:error] = "There is no team with that name"
+			end
+		else
+			flash[:error] = "You must be logged in to leave a team"
+		end
+		redirect_to(:action => :index)
+	end
 end

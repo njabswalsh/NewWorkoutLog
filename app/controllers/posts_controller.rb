@@ -21,11 +21,18 @@ class PostsController < ApplicationController
 
 		@post = Post.find_by(date: @date, user_id: session[:user_id])
 		if not @post
-			@post = Post.new(post_params)
-			@post.save
+			puts "NO POST YET - CREATE NEW ONE"
+
+			@post = Post.new(:user_id => session[:user_id], :date => @date)
+			if not @post.save
+				redirect_to action: 'index', start_date: @date
+				return
+			end
 		end
-		redirect_to controller: 'posts', action: 'edit', date: @date
+		puts "POST ID: " + @post.id.to_s
+		redirect_to controller: 'posts', action: 'edit', date: @date, return_to: params[:return_to]
 	end
+
 
 	def destroy
 		#@post = Post.find(params[:id])
@@ -33,14 +40,10 @@ class PostsController < ApplicationController
 		date = @post.date
 		@post.destroy
 		if params[:return_to]
-			redirect_to params[:return_to]
+			redirect_to params[:return_to] + "?start_date=" + @post.date.to_s
 		else
 			redirect_to action: 'index', start_date: date
 		end
 	end
 
-	private
-		def post_params
-			params.require(:post).permit(:user_id, :date)
-		end
 end

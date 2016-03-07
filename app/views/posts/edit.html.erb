@@ -14,13 +14,11 @@
 <p>
 	<div class="text-center">
 		<h2 class="resizable">
-		<%= link_to date: @post.date - 1.day do %>
-			<span class="glyphicon glyphicon-chevron-left"></span>
-		<% end %>
+		<%= link_to action: 'create', date: @post.date - 1.day do %>
+			<span class="glyphicon glyphicon-chevron-left"></span><% end %>
 		<%= @post.date.strftime("%a, %d %b %Y") %>
-		<%= link_to date: @post.date + 1.day do %>
-			<span class="glyphicon glyphicon-chevron-right"></span>
-		<% end %>
+		<%= link_to action: 'create', date: @post.date + 1.day do %>
+			<span class="glyphicon glyphicon-chevron-right"></span><% end %>
 		</h2>
 
 	</div>
@@ -29,7 +27,7 @@
 <div class="background-well">
 
 
-	<%= %/form_for :exercise, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p|%/ %>
+	<%# %/form_for :exercise, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p|%/ %>
 	
 
 
@@ -88,20 +86,22 @@
 		</div>
 
 
-	<% %/ end %/ %>
+	<%#/ end %/ %>
 
 
 	<hr class="post-divider"/>
 	<hr class="post-divider"/>
 
-	<%= form_for :note, url: {action: 'create'} do |n| %>
+	<%= form_for :note, url: {controller: 'notes', action: 'create'} do |n| %>
 		<p>
-			<%= p.label :notes %>
-			<br>
+			<%= n.label :notes %>
+			<br/>
 			<% @post.notes.each do |note| %>
 			<%= note.text %>
+			<br/>
 			<% end %>
-			<%= p.text_area :text, class: "form-control" %>
+			<%= n.text_area :text, class: "form-control" %>
+			<%= n.hidden_field :post_id, value: @post.id %>
 		</p>
 
 		<p>

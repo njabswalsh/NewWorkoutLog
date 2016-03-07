@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160305044422) do
   end
 
   create_table "notes", force: true do |t|
+    t.integer  "post_id"
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,8 +33,6 @@ ActiveRecord::Schema.define(version: 20160305044422) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
-    t.text     "workout"
-    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

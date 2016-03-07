@@ -21,8 +21,8 @@
 			<% if post %>
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
 				<div class='wrap-text'>Workout:
-<%= post.workout %>
-Notes: <%= post.notes %></div>
+Notes: <% post.notes.each do |note| %>
+<%= note.text %><% end %></div>
 				<% if user.id == session[:user_id] %>
 					<%= link_to controller: 'posts', action: 'edit', date: post.date, return_to: "/teams/view/" + @team.id.to_s do %>
 					<span class="glyphicon glyphicon-pencil"></span><% end %>
@@ -32,7 +32,7 @@ Notes: <%= post.notes %></div>
 					<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
 				<% end %>
 			<% elsif user.id == session[:user_id] %>
-				<%= link_to controller: 'posts', action: 'new', date: date, return_to: "/teams/view/" + @team.id.to_s do %>
+				<%= link_to controller: 'posts', action: 'create', date: date, return_to: "/teams/view/" + @team.id.to_s do %>
 				<span class="glyphicon glyphicon-plus"></span><% end %>
 			<% end %>
 		<% end %>
@@ -40,3 +40,7 @@ Notes: <%= post.notes %></div>
 		<% @last_user = false %>
 	<% end %>
 </div>
+<%= link_to "Leave this team", "/teams/leave_team/" + @team.id.to_s,
+			method: :delete,
+			data: { confirm: 'Are you sure you want to leave ' + @team.name + '?'},
+			class: "btn btn-sm btn-info pull-right" %>
