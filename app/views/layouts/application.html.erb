@@ -33,7 +33,7 @@
       <ul class="nav navbar-nav">
       	<% if session[:user] %>
           <li><%= link_to "Logout", controller: 'users', action: 'logout' %></li>
-          <li><%= link_to "Create New Post", controller: 'posts', action: 'new' %></li>
+          <li><%= link_to "Create New Post", controller: 'posts', action: 'create' %></li>
           <li><%= link_to "View My Workouts", controller: 'posts', action: 'index' %></li>
           <li><%= link_to "View Teams", controller: 'teams', action: 'index' %></li>
         <% end %>

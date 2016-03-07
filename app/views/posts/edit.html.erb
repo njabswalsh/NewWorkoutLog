@@ -1,38 +1,36 @@
-<%= form_for :post, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p| %>
-
-
-	<% if @post.errors.any? %>
-		<div id="error_explanation">
-			<h2>
-				You had <%= pluralize(@post.errors.count, "error") %> in the post you tried to save:
-			</h2>
-			<ul>
-				<% @post.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-
-	<p>
-		<div class="text-center">
-
-			<h2 class="resizable">
-			<%= link_to date: @post.date - 1.day do %>
-				<span class="glyphicon glyphicon-chevron-left"></span>
+<% if @post.errors.any? %>
+	<div id="error_explanation">
+		<h2>
+			You had <%= pluralize(@post.errors.count, "error") %> in the post you tried to save:
+		</h2>
+		<ul>
+			<% @post.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
 			<% end %>
-			<%= @post.date.strftime("%a, %d %b %Y") %>
-			<%= link_to date: @post.date + 1.day do %>
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			<% end %>
-			</h2>
+		</ul>
+	</div>
+<% end %>
 
-		</div>
-	</p>
+<p>
+	<div class="text-center">
+		<h2 class="resizable">
+		<%= link_to action: 'create', date: @post.date - 1.day do %>
+			<span class="glyphicon glyphicon-chevron-left"></span><% end %>
+		<%= @post.date.strftime("%a, %d %b %Y") %>
+		<%= link_to action: 'create', date: @post.date + 1.day do %>
+			<span class="glyphicon glyphicon-chevron-right"></span><% end %>
+		</h2>
+
+	</div>
+</p>
+
+<div class="background-well">
+
 
 	<div class="background-well">
 		<!-- Trigger the modal with a button -->
 		<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
+
 
 		<% if not @post.exercises.empty?  %>
 			<% @post.exercises.each do |exercise| %>
@@ -168,13 +166,23 @@
 			</div>
 		</div>
 
-		<hr class="post-divider"/>
-		<hr class="post-divider"/>
 
+	<%#/ end %/ %>
+
+
+	<hr class="post-divider"/>
+	<hr class="post-divider"/>
+
+	<%= form_for :note, url: {controller: 'notes', action: 'create'} do |n| %>
 		<p>
-			<%= p.label :notes %>
-			<br>
-			<%= p.text_area :notes, class: "form-control" %>
+			<%= n.label :notes %>
+			<br/>
+			<% @post.notes.each do |note| %>
+			<%= note.text %>
+			<br/>
+			<% end %>
+			<%= n.text_area :text, class: "form-control" %>
+			<%= n.hidden_field :post_id, value: @post.id %>
 		</p>
 
 		<p>
@@ -182,9 +190,11 @@
 			 	Save
 			<% end %>
 		</p>
-	</div>
+	
+	<% end %>
 
-<% end %>
+</div>
+
 
 <br>
 <%= link_to 'Back to Home', '/' %>

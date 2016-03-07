@@ -3,8 +3,6 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.integer	 :user_id
       t.date     :date
-      t.text 	 :workout
-      t.text 	 :notes
 
       t.timestamps
     end
