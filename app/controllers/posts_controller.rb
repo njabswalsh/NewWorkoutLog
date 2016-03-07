@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 			@date = Date.parse(params[:date])
 		else
 			@date = Date.today
+			params[:date] = @date
 		end
 
 		@post = Post.find_by(date: @date, user_id: session[:user_id])
@@ -24,20 +25,6 @@ class PostsController < ApplicationController
 			@post.save
 		end
 		redirect_to controller: 'posts', action: 'edit', date: @date
-	end
-
-	def update
-		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
-
-		if @post.update(post_params)
-			if params[:return_to]
-				redirect_to params[:return_to]
-			else
-				redirect_to action: 'index', start_date: params[:date]
-			end
-		else
-			render 'edit'
-		end
 	end
 
 	def destroy
