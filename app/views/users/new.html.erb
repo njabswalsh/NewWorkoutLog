@@ -1,7 +1,4 @@
 <% content_for :title, "New User" %>
-<% if flash[:error] %>
-	<p class="error_message"><%= flash[:error] %></p>
-<% end %>
 <% if session[:user] %>
 	<p>You are already logged in!</p>
 <% else %>
@@ -22,9 +19,14 @@
 		</fieldset>
 		<fieldset class="form-group">
 				<%= password_field_tag(:password_1, nil, placeholder: "Password", class: "form-control") %>
+				<% if flash[:error] %>
+					<span class="help-block" id="error-exists">
+						<p class="error_message text-danger"><%= flash[:error] %></p>
+					</span>
+				<% end %>
 		</fieldset>
-		<br/><%= submit_tag("Create Account", class: "btn btn-primary") %>
-		<%= link_to "Back to Login", "login", class: "btn btn-info pull-right" %></p>
+		<%= submit_tag("Create Account", class: "btn btn-primary") %>
+		<%= link_to "Back to Login", "login", class: "btn btn-info pull-right" %>
 	<% end %>
 </div>
 <% end %>
