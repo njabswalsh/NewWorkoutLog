@@ -24,19 +24,23 @@
 	</div>
 </p>
 
+
+
 <div class="background-well">
+	<!-- Trigger the modal with a button -->
+	<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
 
 
-	<%# %/form_for :exercise, url: {action: 'update', date: @post.date, return_to: params[:return_to]} do |p|%/ %>
-	
-
-
-		<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#add-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
-
+	<% if not @post.exercises.empty?  %>
+		<% @post.exercises.each do |exercise| %>
+			<li><%= exercise.exercise_name %> <%= exercise.sets %> x <%= exercise.reps %> x <%= exercise.weight %></li>
+		<% end %>
+	<% else %>
 		<h5>You have no recorded exercises today.</h5>
+	<% end %>
 
-		<!-- Modal -->
-		<div class="modal fade" id="add-exercise" role="dialog">
+	<!-- Modal1 -->
+	<div class="modal fade" id="pick-exercise" role="dialog">
 		<div class="modal-dialog">
 
 		  <!-- Modal content-->
@@ -51,27 +55,27 @@
 		    	<div class="row">
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Deadlift</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="deadlift" class="thumbnail choose-exercise">Deadlift</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Squat</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="squat" class="thumbnail choose-exercise">Squat</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Bench</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="bench" class="thumbnail choose-exercise">Bench</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Rowers</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="rowers" class="thumbnail choose-exercise">Rowers</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Pull ups</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="pullups" class="thumbnail choose-exercise">Pull ups</a>
 				      </div>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a href="#x" class="thumbnail">Core</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="core" class="thumbnail choose-exercise">Core</a>
 				      </div>
 				    </div>
 				  </div>
@@ -83,10 +87,91 @@
 		  </div>
 		  
 		</div>
+	</div>
+
+	<!-- Modal2 -->
+	<div class="modal fade" id="add-exercise" role="dialog">
+		<div class="modal-dialog">
+
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      <h4 class="modal-title">Choose exercise details</h4>
+		    </div>
+
+
+		    <div class="modal-body">
+		    	<%= form_for :exercise, url: {controller: 'exercises', action: 'create'} do |e| %>
+				<div class="row">
+					<div class="col-sm-4 col-xs-6 col-sm-offset-4 col-xs-offset-3">
+		      			<div class="dummy"></div>
+		        		<div class="thumbnail" id="place_exercise"></div>
+		      		</div>
+				</div>
+
+
+				
+				<!-- number spinner http://bootsnipp.com/snippets/featured/bootstrap-number-spinner -->
+				<div class="row spinner-padding">
+					<div class="col-xs-12 col-md-offset-4 col-md-4" id="sets">
+						<h4 class="input-field-header">Sets</h4>
+						<div class="input-group number-spinner">
+							<span class="input-group-btn">
+								<button class="btn btn-default sets" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+							</span>
+							<%= number_field_tag :sets, 3, class: "form-control text-center" %>
+							<span class="input-group-btn">
+								<button class="btn btn-default sets" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+							</span>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-offset-4 col-md-4" id="reps">
+						<h4 class="input-field-header">Reps</h4>
+						<div class="input-group number-spinner">
+							<span class="input-group-btn">
+								<button class="btn btn-default reps" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+							</span>
+							<%= number_field_tag :reps, 8, class: "form-control text-center" %>
+							<span class="input-group-btn">
+								<button class="btn btn-default reps" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+							</span>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-offset-4 col-md-4" id="weight">
+						<h4 class="input-field-header">Weight</h4>
+						<div class="input-group number-spinner">
+							<span class="input-group-btn">
+								<button class="btn btn-default weight" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+							</span>
+							<%= number_field_tag :weight, 135, class: "form-control text-center" %>
+							<!--<input type="text" class="form-control text-center" value="135">-->
+							<span class="input-group-btn">
+								<button class="btn btn-default weight" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+							</span>
+						</div>
+					</div>
+
+					<%= e.hidden_field :post_id, value: @post.id %>
+					<%= e.hidden_field :exercise_name %>
+					<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
+						Done
+					<% end %>
+				</div>
+				<% end %>
+			</div>
+
+
+		    <div class="modal-footer">
+		      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		    </div>
+		  </div>
+		  
 		</div>
+	</div>
 
-
-	<%#/ end %/ %>
 
 
 	<hr class="post-divider"/>
