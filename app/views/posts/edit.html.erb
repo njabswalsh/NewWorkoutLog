@@ -34,7 +34,7 @@
 		<div class="exercises">
 			<% @post.exercises.each do |exercise| %>
 				<li>
-					<%= exercise.exercise_name %> <%= exercise.sets %> x <%= exercise.reps %> x <%= exercise.weight %>
+					<%= get_exercise_str(exercise) %>
 					<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
 					method: :delete,
 					data: { confirm: 'Are you sure you want to delete this exercise?'} do %>
