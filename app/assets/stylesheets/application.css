@@ -125,8 +125,21 @@ body {
 	white-space: normal;
 }
 
+.exercises {
+	padding:10px 5px 5px 5px;
+}
+
+.notes {
+	padding:0px 5px 5px 5px;
+}
+
 .calendar-row {
 	height: 50px
+}
+
+.max-well-width {
+	max-width: 700px;
+	margin: auto;
 }
 
 div.wrap-text {

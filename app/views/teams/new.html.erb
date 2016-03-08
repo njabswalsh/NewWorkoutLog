@@ -2,8 +2,8 @@
 <% if flash[:error] %>
 	<p class="error_message"><%= flash[:error] %></p>
 <% end %>
-<h2>Create New Team</h2>
-<div class="background-well">
+<h2 class="text-center">Create New Team</h2>
+<div class="background-well max-well-width">
 	<%= form_tag("create", :method => "post") do %>
 		<fieldset class="form-group">
 				<%= text_field_tag(:team_name, nil, placeholder: "Team Name", class: "form-control") %>
@@ -14,6 +14,3 @@
 		<%= submit_tag("Create New Team", class: "btn btn-primary") %>
 	<% end %>
 </div>
-
-<br>
-<%= link_to 'Back to My Teams', '/teams' %>

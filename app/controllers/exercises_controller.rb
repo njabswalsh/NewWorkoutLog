@@ -19,4 +19,17 @@ class ExercisesController < ApplicationController
 			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
 		end
 	end
+
+	def destroy
+		@exercise = Exercise.find_by(id: params[:id])
+		date = params[:date]
+		return_to = params[:return_to]
+		@exercise.destroy
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => date.to_s
+		end
+	end
+
 end

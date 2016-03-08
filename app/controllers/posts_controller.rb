@@ -12,6 +12,10 @@ class PostsController < ApplicationController
 		if params[:return_to]
 			@return_to = params[:return_to]
 		end
+		if params[:note_id]
+			@note_id = params[:note_id]
+			@note_to_edit = Note.find(@note_id)
+		end
 	end
 
 	def create

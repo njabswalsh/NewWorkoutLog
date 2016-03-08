@@ -1,5 +1,5 @@
 <% content_for :title, "Users" %>
-<div class="background-well">
+<div class="background-well max-well-width">
 <% if session[:user] %>
 <div class="btn-group-vertical center-block" role="group">
 	<%= link_to "Create New Post", "/posts/create", class: "btn btn-primary", style:"border-radius:4px;margin-bottom:5px" %>

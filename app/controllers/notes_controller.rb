@@ -19,6 +19,25 @@ class NotesController < ApplicationController
 		end
 	end
 
+	def update
+		post_id = params[:note][:post_id]
+		note_text = params[:note][:text]
+		return_to = params[:note][:return_to]
+
+		note = Note.find(params[:note_id])
+		note.text = note_text
+		if not note.save
+			redirect_to controller: 'posts', action: 'index'
+		end
+
+		@post = Post.find(post_id)
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+		end
+	end
+
 	def destroy
 		@note = Note.find_by(id: params[:id])
 		date = params[:date]

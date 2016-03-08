@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   
   delete '/posts/:id', to: 'posts#destroy'
   delete '/notes/:id', to: 'notes#destroy'
+  delete '/exercises/:id', to: 'exercises#destroy'
   delete '/teams/leave_team/:id', to: 'teams#leave_team'
+
   # You can have the root of your site routed with "root"
   root 'application#homepage'
 

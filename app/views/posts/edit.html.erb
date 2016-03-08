@@ -26,15 +26,22 @@
 
 
 
-<div class="background-well">
+<div class="background-well max-well-width">
 	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
-
+	<button type="button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
 
 	<% if not @post.exercises.empty?  %>
-		<% @post.exercises.each do |exercise| %>
-			<li><%= exercise.exercise_name %> <%= exercise.sets %> x <%= exercise.reps %> x <%= exercise.weight %></li>
-		<% end %>
+		<div class="exercises">
+			<% @post.exercises.each do |exercise| %>
+				<li>
+					<%= exercise.exercise_name %> <%= exercise.sets %> x <%= exercise.reps %> x <%= exercise.weight %>
+					<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
+					method: :delete,
+					data: { confirm: 'Are you sure you want to delete this exercise?'} do %>
+					<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+				</li>
+			<% end %>
+		<div>
 	<% else %>
 		<h5>You have no recorded exercises today.</h5>
 	<% end %>
@@ -174,27 +181,36 @@
 		</div>
 	</div>
 
-
-
 	<hr class="post-divider"/>
 	<hr class="post-divider"/>
 
-	<%= form_for :note, url: {controller: 'notes', action: 'create'} do |n| %>
+	<% if @note_id %>
+		<% url_string = {controller: 'notes', action: 'update', note_id: @note_id} %>
+	<% else %>
+		<% url_string = {controller: 'notes', action: 'create'} %>
+	<% end %>
+	<%= form_for :note, url: url_string do |n| %>
 		<p>
 			<%= n.label :notes %>
-			<br/>
-			<% @post.notes.each do |note| %>
-			<%= note.text %>
-			
-			<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
-			method: :delete,
-			data: { confirm: 'Are you sure you want to delete this note?'} do %>
-			<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-
-
-			<br/>
+			<div class="notes">
+				<% @post.notes.each do |note| %>
+					<% if not note.id.to_s == @note_id %>
+						<%= note.text %>
+						<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
+						method: :delete,
+						data: { confirm: 'Are you sure you want to delete this note?'} do %>
+						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
+						<span class="glyphicon glyphicon-pencil pull-right"></span><% end %>
+						<br/>
+					<% end %>
+				<% end %>
+			</div>
+			<% if @note_id %>
+				<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
+			<% else %>
+				<%= n.text_area :text, class: "form-control" %>
 			<% end %>
-			<%= n.text_area :text, class: "form-control" %>
 			<%= n.hidden_field :post_id, value: @post.id%>
 			<%= n.hidden_field :return_to, value: @return_to %>
 		</p>
@@ -217,9 +233,3 @@
 	<% end %>
 
 </div>
-
-
-<br>
-<%= link_to 'Back to Home', '/' %>
-<br>
-<%= link_to 'View All Posts', controller: 'posts', action: 'index' %>

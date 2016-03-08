@@ -2,7 +2,7 @@
 <% if session[:user] %>
 	<p>You are already logged in!</p>
 <% else %>
-<div class="background-well">
+<div class="background-well max-well-width">
 	<%= form_tag("create", :method => "post") do %>
 		<div class = "row">
 				<fieldset class="form-group">
