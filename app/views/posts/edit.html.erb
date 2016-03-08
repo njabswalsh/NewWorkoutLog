@@ -33,7 +33,7 @@
 
 	<% if not @post.exercises.empty?  %>
 		<% @post.exercises.each do |exercise| %>
-			<li><%= exercise.exercise_name %> <%= exercise.sets %> x <%= exercise.reps %> x <%= exercise.weight %></li>
+			<li><%= get_exercise_str(exercise) %></li>
 		<% end %>
 	<% else %>
 		<h5>You have no recorded exercises today.</h5>

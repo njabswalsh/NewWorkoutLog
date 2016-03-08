@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	helper ExercisesHelper
 
 	def index
 		if not params[:start_date]

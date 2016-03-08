@@ -7,11 +7,12 @@
 	
 		<%= date.day %>
 		<% post = Post.find_by("user_id = ? and date = ?", session[:user_id], date) %>
-		<% if post %>
+		<% if post and not (post.notes.empty? and post.exercises.empty?) %>
 			<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
-			<div class='wrap-text handle-overflow'>Workout:
-Notes: <% post.notes.each do |note| %>
-<%= note.text %><% end %></div>
+			<div class='wrap-text handle-overflow'><% post.exercises.each do |exercise| %><%= get_exercise_str(exercise) %>
+<% end %></div>
+			<div class='wrap-text handle-overflow'><% post.notes.each do |note| %><%= note.text %>
+<% end %></div>
 			<%= link_to controller: 'posts', action: 'edit', date: post.date do %>
 		    <span class="glyphicon glyphicon-pencil"></span><% end %>
 			<%= link_to "/posts/" + post.id.to_s, date: post.date,
