@@ -5,19 +5,18 @@ class ExercisesController < ApplicationController
 		sets = params[:sets]
 		reps = params[:reps]
 		weight = params[:weight]
+		return_to = params[:return_to]
 		exercise = Exercise.new(:post_id => post_id, :sets => sets, :reps => reps, :weight => weight, :exercise_name => exercise_name)
 
-
-		if params[:date]
-			@date = Date.parse(params[:date])
-		else
-			@date = Date.today
-			params[:date] = @date
-		end
-
 		if not exercise.save
-			redirect_to controller: 'posts', action: 'index', date: @date
+			redirect_to controller: 'posts', action: 'index'
 		end
-		redirect_to controller: 'posts', action: 'edit', date: @date
+
+		@post = Post.find(post_id)
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+		end
 	end
 end

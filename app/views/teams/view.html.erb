@@ -25,7 +25,7 @@
 			<% post = Post.find_by("user_id = ? and date = ?", user.id, date) %>
 			<% if post %>
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
-				<div class='wrap-text'>Workout:
+				<div class='wrap-text handle-overflow'>Workout:
 Notes: <% post.notes.each do |note| %>
 <%= note.text %><% end %></div>
 				<% if user.id == session[:user_id] %>

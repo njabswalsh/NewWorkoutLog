@@ -156,6 +156,8 @@
 
 					<%= e.hidden_field :post_id, value: @post.id %>
 					<%= e.hidden_field :exercise_name %>
+					<%= e.hidden_field :return_to, value: @return_to%>
+
 					<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
 						Done
 					<% end %>
@@ -186,7 +188,7 @@
 			
 			<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
 			method: :delete,
-			data: { confirm: 'Are you sure you want to delete this post?'} do %>
+			data: { confirm: 'Are you sure you want to delete this note?'} do %>
 			<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
 
 
