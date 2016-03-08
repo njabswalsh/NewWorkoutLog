@@ -23,7 +23,7 @@
 
 		<%= week_calendar do |date| %>
 			<% post = Post.find_by("user_id = ? and date = ?", user.id, date) %>
-			<% if post %>
+			<% if post and not (post.notes.empty? and post.exercises.empty?) %>
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
 				<div class='wrap-text handle-overflow'><% post.notes.each do |note| %>
 <%= note.text %><% end %></div>
