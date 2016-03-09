@@ -4,8 +4,10 @@ class NotesController < ApplicationController
 		post_id = params[:note][:post_id]
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
+		visibility_list = params[:note][:visibility]
+		visibility_string = visibility_list.map(&:inspect).join(',')
 
-		note = Note.new(:post_id => post_id, :text => note_text)
+		note = Note.new(:post_id => post_id, :text => note_text, :visibility => visibility_string)
 
 		if not note.save
 			redirect_to controller: 'posts', action: 'index'
@@ -23,9 +25,12 @@ class NotesController < ApplicationController
 		post_id = params[:note][:post_id]
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
+		visibility_list = params[:note][:visibility]
+		visibility_string = visibility_list.map(&:inspect).join(',')
 
 		note = Note.find(params[:note_id])
 		note.text = note_text
+		note.visibility = visibility_string
 		if not note.save
 			redirect_to controller: 'posts', action: 'index'
 		end

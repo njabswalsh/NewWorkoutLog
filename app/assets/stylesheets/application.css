@@ -142,6 +142,10 @@ body {
 	margin: auto;
 }
 
+.grey-text {
+	color: gray;
+}
+
 div.wrap-text {
     white-space: pre-wrap;
 }

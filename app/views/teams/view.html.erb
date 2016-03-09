@@ -25,8 +25,18 @@
 			<% post = Post.find_by("user_id = ? and date = ?", user.id, date) %>
 			<% if post and not (post.notes.empty? and post.exercises.empty?) %>
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
-				<div class='wrap-text handle-overflow'><% post.notes.each do |note| %><%= note.text %>
-<% end %></div>
+				<div class='wrap-text handle-overflow'><% post.notes.each do |note| %>
+					<% visibility_list = note.visibility.split(',').map(&:to_i) %>
+					<% if visibility.include?(@team.id) %>
+						<%= note.text %>
+					<% else %>
+						<% current_user = User.find(session[:user_id]) %>
+						<% current_user.teams.each do |current_user_team| %>
+						<% if visibility.include?(current_user_team) %>
+							<div class='grey-text'><%= note.text %></div>
+
+<% end %>				
+</div>
 				<% if user.id == session[:user_id] %>
 					<%= link_to controller: 'posts', action: 'edit', date: post.date, return_to: "/teams/view/" + @team.id.to_s do %>
 					<span class="glyphicon glyphicon-pencil"></span><% end %>
