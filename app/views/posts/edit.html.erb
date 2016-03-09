@@ -246,7 +246,8 @@
 				<% @user.teams.each do |team| %>
 					<div class="ui-checkbox">
 						<label class="check-label">
-							<%= n.check_box("visibility[]", {class: "select-box"}, team.id.to_s) %> <%= team.name %>
+							<%= n.check_box("visibility", {multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
+
 						</label>
 					</div>
 					

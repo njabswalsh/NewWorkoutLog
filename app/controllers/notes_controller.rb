@@ -1,11 +1,12 @@
 class NotesController < ApplicationController
 
 	def create
+		puts "PARAMETERS: " + params.to_s
 		post_id = params[:note][:post_id]
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
-		visibility_string = visibility_list.map(&:inspect).join(',')
+		visibility_string = visibility_list.join(',')
 
 		note = Note.new(:post_id => post_id, :text => note_text, :visibility => visibility_string)
 
@@ -26,7 +27,7 @@ class NotesController < ApplicationController
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
-		visibility_string = visibility_list.map(&:inspect).join(',')
+		visibility_string = visibility_list.join(',')
 
 		note = Note.find(params[:note_id])
 		note.text = note_text
