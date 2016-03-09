@@ -29,3 +29,9 @@ $(document).on('click', '.number-spinner button', function (e) {
 	}
 	btn.closest('.number-spinner').find('input').val(newVal);
 });
+
+
+$(document).on('click', '.select-box', function(e) {
+  console.log("Clicked")
+  $(this).parent().toggleClass("isSelected");
+});
