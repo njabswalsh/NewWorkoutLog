@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 	end
 
 	def edit
+		@user = User.find(session[:user_id])
 		@post = Post.find_by(date: params[:date], user_id: session[:user_id])
 		if params[:return_to]
 			@return_to = params[:return_to]

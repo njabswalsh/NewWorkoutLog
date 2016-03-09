@@ -215,21 +215,58 @@
 			<%= n.hidden_field :return_to, value: @return_to %>
 		</p>
 
-		<p>
-			<%= button_tag(type: "submit", class: "btn btn-primary btn-block btn-med") do %>
-			 	Add Note
-			<% end %>
-		</p>
+		<div class = "row">
+			<fieldset class="form-group">
+				<div class="col-xs-6">
+					<button type="button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#select-visibility">Edit Visibility</button>
+				</div>
+				<div class="col-xs-6">
+					<%= button_tag(type: "submit", class: "btn btn-primary btn-block btn-med") do %>
+					 	Add Note
+					<% end %>
+				</div>
+			</fieldset>
+		</div>
+			
 
-		<p>
-			<% if @return_to %>
-				<% link_string = @return_to + "?start_date=" + @post.date.to_s %>
-			<% else %>
-				<% link_string = '/posts/index' + "?start_date=" + @post.date.to_s %>
-			<% end %>
-			<%= link_to 'Done', link_string, class: "btn btn-success btn-block btn-lg" %>
-		</p>			
-	
+
+	<!-- Modal3 -->
+	<div class="modal fade" id="select-visibility" role="dialog">
+		<div class="modal-dialog">
+
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      <h4 class="modal-title">Select Note Visibility</h4>
+		    </div>
+
+
+			<div class="modal-body">
+				<% @user.teams.each do |team| %>
+					<div class="ui-checkbox">
+						<label class="check-label">
+							<%= n.check_box("visibility[]", {class: "select-box"}, team.id.to_s) %> <%= team.name %>
+						</label>
+					</div>
+					
+				<% end %> 
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+				</div>
+			</div>
+		  </div>
+		  
+		</div>
+	</div>
 	<% end %>
-
+	<p>
+		<% if @return_to %>
+			<% link_string = @return_to + "?start_date=" + @post.date.to_s %>
+		<% else %>
+			<% link_string = '/posts/index' + "?start_date=" + @post.date.to_s %>
+		<% end %>
+		<%= link_to 'Done', link_string, class: "btn btn-success btn-block btn-lg" %>
+	</p>
 </div>
