@@ -32,6 +32,5 @@ $(document).on('click', '.number-spinner button', function (e) {
 
 
 $(document).on('click', '.select-box', function(e) {
-  console.log("Clicked")
   $(this).parent().toggleClass("isSelected");
 });

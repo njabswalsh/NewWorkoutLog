@@ -48,17 +48,17 @@ h4.input-field-header {
 }
 
 label.isSelected {
-  background-color: lightgreen;
+  background-color: lightblue;
 }
 
 .check-label {
   display: block;
   padding: 5px 10px;
   margin: 5px 0;
-  background-color: #ccc;
+  background-color: white;
   border-radius: 7px;
   &:hover {
-    background-color: gold;
+    background-color: lightgrey;
     cursor: pointer;
   }
 }
