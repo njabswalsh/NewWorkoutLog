@@ -224,10 +224,11 @@
 
 		<div class = "row">
 			<fieldset class="form-group">
-				<div class="col-xs-6">
-					<button type="button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#select-visibility">Edit Visibility</button>
+				<div class="btn-group col-xs-7">
+					<button type="button" id="visibility-button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#select-visibility">Visibility: Everyone</button>
 				</div>
-				<div class="col-xs-6">
+
+				<div class="col-xs-5">
 					<%= button_tag(type: "submit", class: "btn btn-primary btn-block btn-med") do %>
 					 	Add Note
 					<% end %>
@@ -250,21 +251,21 @@
 
 
 			<div class="modal-body">
-				<label class="check-label">
-					<%= n.check_box("visibility", {multiple: true, id: "everyone-box", class: "select-box"}, "-1") %> Everyone
+				<label class="check-label isSelected">
+					<%= n.check_box("visibility", {checked: true, multiple: true, id: "everyone-box", class: "select-box"}, "-1") %> Everyone
 				</label>
 				<label class="check-label">
 					<%= check_box_tag "me-box", "yes", false, class: "select-box" %> Only Me
 				</label>
 				<% @user.teams.each do |team| %>
-					<label class="check-label">
-						<%= n.check_box("visibility", {multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
+					<label class="check-label  isSelected">
+						<%= n.check_box("visibility", {checked: true, multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
 
 					</label>
 				<% end %> 
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+					<button type="button" id="visibility-done" class="btn btn-default" data-dismiss="modal">Done</button>
 				</div>
 			</div>
 		  </div>

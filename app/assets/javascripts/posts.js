@@ -31,6 +31,14 @@ $(document).on('click', '.number-spinner button', function (e) {
 });
 
 
+$(document).on('click', '#everyone-box', function(e) {
+	$(this).parent().siblings(".check-label").addClass("isSelected");
+	$(this).parent().siblings(".check-label").children().prop("checked", true);
+	/* Deselect "Only Me" box*/
+	$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
+	$(this).parent().siblings().children("#me-box").prop("checked", false);
+});
+
 $(document).on('click', '.select-box', function(e) {
 	if ($(this).parent().hasClass("isSelected")) {
 		$(this).parent().siblings().children("#everyone-box").parent().removeClass("isSelected");
@@ -51,15 +59,28 @@ $(document).on('click', '.select-box', function(e) {
 	}
 });
 
-$(document).on('click', '#everyone-box', function(e) {
-	$(this).parent().siblings(".check-label").addClass("isSelected");
-	$(this).parent().siblings(".check-label").children().prop("checked", true);
-	/* Deselect "Only Me" box*/
-	$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
-	$(this).parent().siblings().children("#me-box").prop("checked", false);
-});
-
 $(document).on('click', '#me-box', function(e) {
 	$(this).parent().siblings(".check-label").removeClass("isSelected");
 	$(this).parent().siblings(".check-label").children().prop("checked", false);
+});
+
+$(document).on('click', '#visibility-button', function(e) {
+
+});
+
+$(document).on('click', '#visibility-done', function(e) {
+	var text = "";
+	if ($('#everyone-box').parent().hasClass("isSelected")) {
+		text = "Everyone"
+	} else {
+		$('#everyone-box').parent().siblings().each( function () {
+			if ($(this).hasClass("isSelected")){
+				if (!text == "") {
+					text += ", ";
+				}
+				text += $(this).text().trim();
+			}
+        });
+	}
+	$('#visibility-button').text("Visibility: " + text);
 });
