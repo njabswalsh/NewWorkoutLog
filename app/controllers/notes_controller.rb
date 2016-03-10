@@ -6,6 +6,7 @@ class NotesController < ApplicationController
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
+		visibility_list.delete("0")
 		if visibility_list
 			visibility_string = visibility_list.join(',')
 		else
@@ -31,6 +32,7 @@ class NotesController < ApplicationController
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
+		visibility_list.delete("0")
 		if visibility_list
 			visibility_string = visibility_list.join(',')
 		else

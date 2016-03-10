@@ -225,7 +225,7 @@
 		<div class = "row">
 			<fieldset class="form-group">
 				<div class="btn-group col-xs-7">
-					<button type="button" id="visibility-button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#select-visibility">Visibility: Everyone</button>
+					<button type="button" id="visibility-button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#select-visibility">Visibility: <%= get_visibility_string(@note_visibility) %></button>
 				</div>
 
 				<div class="col-xs-5">
@@ -251,15 +251,15 @@
 
 
 			<div class="modal-body">
-				<label class="check-label isSelected">
-					<%= n.check_box("visibility", {checked: true, multiple: true, id: "everyone-box", class: "select-box"}, "-1") %> Everyone
+				<label class="<%= if @note_visibility.include? -1 then 'check-label isSelected' else 'check-label' end %>">
+					<%= n.check_box("visibility", {checked: (@note_visibility.include? -1), multiple: true, id: "everyone-box", class: "select-box"}, "-1") %> Everyone
 				</label>
-				<label class="check-label">
-					<%= check_box_tag "me-box", "yes", false, class: "select-box" %> Only Me
+				<label class="<%= if @note_visibility.empty? then 'check-label isSelected' else 'check-label' end %>">
+					<%= check_box_tag "me-box", "yes", @note_visibility.empty?, class: "select-box" %> Only Me
 				</label>
 				<% @user.teams.each do |team| %>
-					<label class="check-label  isSelected">
-						<%= n.check_box("visibility", {checked: true, multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
+					<label class="<%= if @note_visibility.include? -1 or @note_visibility.include? team.id then 'check-label isSelected' else 'check-label' end %>">
+						<%= n.check_box("visibility", {checked: (@note_visibility.include? -1 or @note_visibility.include? team.id), multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
 
 					</label>
 				<% end %> 
