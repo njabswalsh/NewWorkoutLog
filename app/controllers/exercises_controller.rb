@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
 		sets = params[:sets]
 		reps = params[:reps]
 		weight = params[:weight]
-		return_to = params[:return_to]
+		return_to = params[:exercise][:return_to]
 		exercise = Exercise.new(:post_id => post_id, :sets => sets, :reps => reps, :weight => weight, :exercise_name => exercise_name)
 
 		if not exercise.save

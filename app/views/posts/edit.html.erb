@@ -163,7 +163,7 @@
 
 					<%= e.hidden_field :post_id, value: @post.id %>
 					<%= e.hidden_field :exercise_name %>
-					<%= e.hidden_field :return_to, value: @return_to%>
+					<%= e.hidden_field :return_to, value: @return_to %>
 
 					<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
 						Done
@@ -245,16 +245,16 @@
 
 			<div class="modal-body">
 				<label class="check-label">
-					<%= n.check_box("visibility[]", {id: "everyone-box", class: "select-box"}, "-1") %> Everyone
+					<%= n.check_box("visibility", {multiple: true, id: "everyone-box", class: "select-box"}, "-1") %> Everyone
 				</label>
 				<label class="check-label">
 					<%= check_box_tag "me-box", "yes", false, class: "select-box" %> Only Me
 				</label>
 				<% @user.teams.each do |team| %>
 					<label class="check-label">
-						<%= n.check_box("visibility[]", {class: "select-box"}, team.id.to_s) %> <%= team.name %>
+						<%= n.check_box("visibility", {multiple: true, class: "select-box"}, team.id.to_s, nil) %> <%= team.name %>
+
 					</label>
-					
 				<% end %> 
 
 				<div class="modal-footer">

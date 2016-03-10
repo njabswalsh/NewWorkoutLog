@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160305044422) do
   create_table "notes", force: true do |t|
     t.integer  "post_id"
     t.text     "text"
+    t.text     "visibility"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
