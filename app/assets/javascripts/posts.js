@@ -32,5 +32,34 @@ $(document).on('click', '.number-spinner button', function (e) {
 
 
 $(document).on('click', '.select-box', function(e) {
-  $(this).parent().toggleClass("isSelected");
+	if ($(this).parent().hasClass("isSelected")) {
+		$(this).parent().siblings().children("#everyone-box").parent().removeClass("isSelected");
+		$(this).parent().siblings().children("#everyone-box").prop("checked", false);
+		if (!$(this).parent().siblings(".check-label").hasClass("isSelected")) {
+			$(this).parent().siblings().children("#me-box").parent().addClass("isSelected");
+			$(this).parent().siblings().children("#me-box").prop("checked", true);
+		}
+	} else {
+		$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
+		$(this).parent().siblings().children("#me-box").prop("checked", false);
+	}
+	if ($(this).attr("id") == "me-box") {
+		$(this).parent().addClass("isSelected");
+		$(this).prop("checked", true);
+	} else {
+		$(this).parent().toggleClass("isSelected");
+	}
+});
+
+$(document).on('click', '#everyone-box', function(e) {
+	$(this).parent().siblings(".check-label").addClass("isSelected");
+	$(this).parent().siblings(".check-label").children().prop("checked", true);
+	/* Deselect "Only Me" box*/
+	$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
+	$(this).parent().siblings().children("#me-box").prop("checked", false);
+});
+
+$(document).on('click', '#me-box', function(e) {
+	$(this).parent().siblings(".check-label").removeClass("isSelected");
+	$(this).parent().siblings(".check-label").children().prop("checked", false);
 });

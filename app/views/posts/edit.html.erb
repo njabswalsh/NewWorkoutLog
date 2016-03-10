@@ -243,12 +243,16 @@
 
 
 			<div class="modal-body">
+				<label class="check-label">
+					<%= n.check_box("visibility[]", {id: "everyone-box", class: "select-box"}, "-1") %> Everyone
+				</label>
+				<label class="check-label">
+					<%= check_box_tag "me-box", "yes", false, class: "select-box" %> Only Me
+				</label>
 				<% @user.teams.each do |team| %>
-					<div class="ui-checkbox">
-						<label class="check-label">
-							<%= n.check_box("visibility[]", {class: "select-box"}, team.id.to_s) %> <%= team.name %>
-						</label>
-					</div>
+					<label class="check-label">
+						<%= n.check_box("visibility[]", {class: "select-box"}, team.id.to_s) %> <%= team.name %>
+					</label>
 					
 				<% end %> 
 
