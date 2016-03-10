@@ -6,7 +6,11 @@ class NotesController < ApplicationController
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
-		visibility_string = visibility_list.join(',')
+		if visibility_list
+			visibility_string = visibility_list.join(',')
+		else
+			visibility_string = ""
+		end
 
 		note = Note.new(:post_id => post_id, :text => note_text, :visibility => visibility_string)
 
@@ -27,7 +31,11 @@ class NotesController < ApplicationController
 		note_text = params[:note][:text]
 		return_to = params[:note][:return_to]
 		visibility_list = params[:note][:visibility]
-		visibility_string = visibility_list.join(',')
+		if visibility_list
+			visibility_string = visibility_list.join(',')
+		else
+			visibility_string = ""
+		end
 
 		note = Note.find(params[:note_id])
 		note.text = note_text
