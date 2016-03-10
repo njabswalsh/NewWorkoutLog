@@ -60,32 +60,14 @@
 
 		    <div class="modal-body">
 		    	<div class="row">
+		    		<% ExerciseType.all.each do |exercise_type| %>
 				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="deadlift" class="thumbnail choose-exercise">Deadlift</a>
+				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail choose-exercise"><%= exercise_type.name %></a>
 				      </div>
-				      <div class="col-md-3 col-sm-4 col-xs-6">
-				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="squat" class="thumbnail choose-exercise">Squat</a>
-				      </div>
-				      <div class="col-md-3 col-sm-4 col-xs-6">
-				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="bench" class="thumbnail choose-exercise">Bench</a>
-				      </div>
-				      <div class="col-md-3 col-sm-4 col-xs-6">
-				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="rowers" class="thumbnail choose-exercise">Rowers</a>
-				      </div>
-				      <div class="col-md-3 col-sm-4 col-xs-6">
-				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="pullups" class="thumbnail choose-exercise">Pull ups</a>
-				      </div>
-				      <div class="col-md-3 col-sm-4 col-xs-6">
-				        <div class="dummy"></div>
-				        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="core" class="thumbnail choose-exercise">Core</a>
-				      </div>
-				    </div>
-				  </div>
+				    <% end %>
+				</div>
+			</div>
 
 
 		    <div class="modal-footer">
