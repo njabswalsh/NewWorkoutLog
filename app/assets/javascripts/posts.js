@@ -31,6 +31,14 @@ $(document).on('click', '.number-spinner button', function (e) {
 });
 
 
+$(document).on('click', '#everyone-box', function(e) {
+	$(this).parent().siblings(".check-label").addClass("isSelected");
+	$(this).parent().siblings(".check-label").children().prop("checked", true);
+	/* Deselect "Only Me" box*/
+	$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
+	$(this).parent().siblings().children("#me-box").prop("checked", false);
+});
+
 $(document).on('click', '.select-box', function(e) {
 	if ($(this).parent().hasClass("isSelected")) {
 		$(this).parent().siblings().children("#everyone-box").parent().removeClass("isSelected");
@@ -49,14 +57,6 @@ $(document).on('click', '.select-box', function(e) {
 	} else {
 		$(this).parent().toggleClass("isSelected");
 	}
-});
-
-$(document).on('click', '#everyone-box', function(e) {
-	$(this).parent().siblings(".check-label").addClass("isSelected");
-	$(this).parent().siblings(".check-label").children().prop("checked", true);
-	/* Deselect "Only Me" box*/
-	$(this).parent().siblings().children("#me-box").parent().removeClass("isSelected");
-	$(this).parent().siblings().children("#me-box").prop("checked", false);
 });
 
 $(document).on('click', '#me-box', function(e) {
