@@ -9,8 +9,11 @@
 		<% post = Post.find_by("user_id = ? and date = ?", session[:user_id], date) %>
 		<% if post and not (post.notes.empty? and post.exercises.empty?) %>
 			<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
-			<div class='wrap-text handle-overflow'><% post.exercises.each do |exercise| %><%= get_exercise_str(exercise) %>
+			<div class='wrap-text handle-overflow'><% exercises_mapping = get_post_exercises_mapping(post) %><% exercises_mapping.each do |exercise_name, exercise_entries_array| %><%= get_exercise_string_from_exercise_entries_array(exercise_name, exercise_entries_array) %>
 <% end %></div>
+			<% if not post.notes.empty? and not post.exercises.empty? %>
+				<hr class="divide-cell"/>
+			<% end %>
 			<div class='wrap-text handle-overflow'><% post.notes.each do |note| %><%= note.text %>
 <% end %></div>
 			<%= link_to controller: 'posts', action: 'edit', date: post.date do %>
