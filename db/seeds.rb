@@ -18,15 +18,18 @@ exercise_type_list = [
 	["Jerk", ""],
 	["Clean and Jerk", ""],
 	["Tricep Pushdowns", ""],
-	["Dumbell Rows", ""],
+	["Dumbbell Rows", ""],
 	["Pullups", ""],
 	["Lat Pulldowns", ""],
-	["Dumbell Flies", ""],
+	["Dumbbell Flies", ""],
 	["Chinups", ""],
 	["Calf Raises", ""],
 	["Shoulder Press", ""],
 	["Lateral Raises", ""],
-	["Bent-Over Dumbell Flies", ""]
+	["Bent-Over Dumbbell Flies", ""],
+	["Dumbbell Bench", ""],
+	["Dips", ""],
+	["Assisted Dips", ""]
 ]
 
 exercise_type_list.each do |name, icon_address|
