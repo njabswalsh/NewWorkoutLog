@@ -63,3 +63,24 @@ $(document).on('click', '#me-box', function(e) {
 	$(this).parent().siblings(".check-label").removeClass("isSelected");
 	$(this).parent().siblings(".check-label").children().prop("checked", false);
 });
+
+$(document).on('click', '#visibility-button', function(e) {
+
+});
+
+$(document).on('click', '#visibility-done', function(e) {
+	var text = "";
+	if ($('#everyone-box').parent().hasClass("isSelected")) {
+		text = "Everyone"
+	} else {
+		$('#everyone-box').parent().siblings().each( function () {
+			if ($(this).hasClass("isSelected")){
+				if (!text == "") {
+					text += ", ";
+				}
+				text += $(this).text().trim();
+			}
+        });
+	}
+	$('#visibility-button').text("Visibility: " + text);
+});
