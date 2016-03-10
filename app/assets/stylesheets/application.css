@@ -150,6 +150,32 @@ body {
     overflow-y: scroll;
 }
 
+.divide-cell {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: .4em 0;
+    padding: 0;
+}
+
+li.exercise-name-bullet {
+  	list-style: none;
+}
+
+li.exercise-name-bullet:before {
+	content: "\2022";
+}
+
+li.exercise-entry-bullet {
+  	list-style: none;
+}
+
+li.exercise-entry-bullet:before {
+	margin-left:15px;
+	content: "\27A2";
+}
+
 div.wrap-text {
     white-space: pre-wrap;
 }
