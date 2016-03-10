@@ -27,8 +27,11 @@
 				<% #Do not change the formatting (whitespace) of the div below! It will change the display of all workouts %>
 
 
+				<div class='wrap-text handle-overflow'><% exercises_mapping = get_post_exercises_mapping(post) %><% exercises_mapping.each do |exercise_name, exercise_entries_array| %><%= get_exercise_string_from_exercise_entries_array(exercise_name, exercise_entries_array) %>
+<% end %></div>
 				<div class='wrap-text handle-overflow'><% post.notes.each do |note| %><% visibility_list = note.visibility.split(',').map(&:to_i) %><% note.visibility.to_s %><% if visibility_list.include?(-1) or visibility_list.include?(@team.id) %><%# -1 indicated the user chose the 'everyone' visibility option %><%= note.text %>
 <% else %><% current_user = User.find(session[:user_id]) %><% if user.id == session[:user_id] %><div class='grey-text'><%= note.text %></div><% else %><% current_user.teams.each do |current_user_team| %><% if visibility_list.include?(current_user_team.id) %><div class='grey-text'><%= note.text %></div><% break %><% end %><% end %><% end %><% end %><% end %></div>
+
 
 
 				<% if user.id == session[:user_id] %>
