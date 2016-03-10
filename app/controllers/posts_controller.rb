@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	helper ExercisesHelper
 	helper PostsHelper
+	helper NotesHelper
 
 	def index
 		if not params[:start_date]
@@ -18,7 +19,11 @@ class PostsController < ApplicationController
 		if params[:note_id]
 			@note_id = params[:note_id]
 			@note_to_edit = Note.find(@note_id)
+			@note_visibility = @note_to_edit.visibility.split(',').map(&:to_i)
+		else
+			@note_visibility = [-1]
 		end
+		puts "NOTES VISIBILITY:" + @note_visibility.to_s
 	end
 
 	def create
