@@ -35,18 +35,16 @@
 
 			<% exercises_mapping = get_post_exercises_mapping(@post) %>
 			<% exercises_mapping.each do |exercise_name, exercise_entries_array| %>
-				<li class="exercise-name-bullet">
-					<%= exercise_name %>
-					<% exercise_entries_array.each do |exercise| %>
-						<li class="exercise-entry-bullet">
-							<%= get_exercise_sets_reps_weight_string(exercise) %>
-							<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
-							method: :delete,
-							data: { confirm: 'Are you sure you want to delete this exercise?'} do %>
-							<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-						</li>
-					<% end %>
-				</li>
+				<%= exercise_name %>
+				<% exercise_entries_array.each do |exercise| %>
+					<li class="exercise-entry-bullet">
+						<%= get_exercise_sets_reps_weight_string(exercise) %>
+						<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
+						method: :delete,
+						data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
+						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+					</li>
+				<% end %>
 			<% end %>
 		<div>
 	<% else %>
@@ -184,13 +182,13 @@
 			<div class="notes">
 				<% @post.notes.each do |note| %>
 					<% if not note.id.to_s == @note_id %>
-						<%= note.text %>
+						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
+						<span style="color:black"><%= note.text %></span><% end %>
 						<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
 						method: :delete,
-						data: { confirm: 'Are you sure you want to delete this note?'} do %>
+						data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %>
 						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
-						<span class="glyphicon glyphicon-pencil pull-right"></span><% end %>
+
 						<br/>
 					<% end %>
 				<% end %>
