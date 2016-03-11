@@ -5,11 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-exercise_type_list = [
+ExerciseType.delete_all
+
+
+top_exercise_type_list = [
 	["Squats", ""],
 	["Bench Press", ""],
-	["Overhead Press", ""],
 	["Deadlift", ""],
+	["Overhead Press", ""],
+	["Pullups", ""]
+]
+
+top_exercise_type_list.each do |name, icon_address|
+	ExerciseType.create(name: name, icon_address: icon_address)
+end
+
+exercise_type_list = [
 	["Front Squats", ""],
 	["Single Leg Deadlifts", ""],
 	["Bicep Curls", ""],
@@ -19,7 +30,6 @@ exercise_type_list = [
 	["Clean and Jerk", ""],
 	["Tricep Pushdowns", ""],
 	["Dumbbell Rows", ""],
-	["Pullups", ""],
 	["Lat Pulldowns", ""],
 	["Dumbbell Flies", ""],
 	["Chinups", ""],
@@ -29,9 +39,11 @@ exercise_type_list = [
 	["Bent-Over Dumbbell Flies", ""],
 	["Dumbbell Bench", ""],
 	["Dips", ""],
+	["Hamstring Ball Curls", ""],
 	["Assisted Dips", ""]
 ]
-
+exercise_type_list = exercise_type_list.sort_by { |e| e[0] }
+puts exercise_type_list.to_s
 exercise_type_list.each do |name, icon_address|
 	ExerciseType.create(name: name, icon_address: icon_address)
 end
