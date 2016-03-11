@@ -42,6 +42,15 @@ body {
 	white-space: normal;
 }
 
+@media screen and (max-width: 600px) {
+	.background-well.edit-well {
+		padding:15px;
+		padding-top:20px;
+		margin:-5px;
+		margin-top:0px
+	}
+}
+
 .calendar-background-well {
 	border-radius: 25px;
 	padding: 10px;
