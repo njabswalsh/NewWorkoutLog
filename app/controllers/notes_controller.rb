@@ -50,11 +50,15 @@ class NotesController < ApplicationController
 			redirect_to controller: 'posts', action: 'index'
 		end
 
-		@post = Post.find(post_id)
-		if not return_to == ""
-			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		if not params[:button_action] == "add_note"
+			redirect_to params[:button_action]
 		else
-			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+			@post = Post.find(post_id)
+			if not return_to == ""
+				redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+			else
+				redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+			end
 		end
 	end
 
