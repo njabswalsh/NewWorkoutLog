@@ -1,29 +1,33 @@
 class NotesController < ApplicationController
 
 	def create
-		puts "PARAMETERS: " + params.to_s
-		post_id = params[:note][:post_id]
 		note_text = params[:note][:text]
+		post_id = params[:note][:post_id]
 		return_to = params[:note][:return_to]
-		visibility_list = params[:note][:visibility]
-		visibility_list.delete("0")
-		if visibility_list
-			visibility_string = visibility_list.join(',')
-		else
-			visibility_string = ""
+		if not note_text == ""
+			visibility_list = params[:note][:visibility]
+			visibility_list.delete("0")
+			if visibility_list
+				visibility_string = visibility_list.join(',')
+			else
+				visibility_string = ""
+			end
+
+			note = Note.new(:post_id => post_id, :text => note_text, :visibility => visibility_string)
+
+			if not note.save
+				redirect_to controller: 'posts', action: 'index'
+			end
 		end
-
-		note = Note.new(:post_id => post_id, :text => note_text, :visibility => visibility_string)
-
-		if not note.save
-			redirect_to controller: 'posts', action: 'index'
-		end
-
-		@post = Post.find(post_id)
-		if not return_to == ""
-			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		if not params[:button_action] == "add_note"
+			redirect_to params[:button_action]
 		else
-			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+			@post = Post.find(post_id)
+			if not return_to == ""
+				redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+			else
+				redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+			end
 		end
 	end
 

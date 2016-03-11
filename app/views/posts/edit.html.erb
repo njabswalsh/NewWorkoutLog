@@ -212,7 +212,7 @@
 				</div>
 
 				<div class="col-xs-5">
-					<%= button_tag(type: "submit", class: "btn btn-primary btn-block btn-med") do %>
+					<%= button_tag(type: "submit", name: "button_action", value: "add_note", class: "btn btn-primary btn-block btn-med") do %>
 					 	Add Note
 					<% end %>
 				</div>
@@ -255,13 +255,15 @@
 		  
 		</div>
 	</div>
-	<% end %>
 	<p>
 		<% if @return_to %>
 			<% link_string = @return_to + "?start_date=" + @post.date.to_s %>
 		<% else %>
 			<% link_string = '/posts/index' + "?start_date=" + @post.date.to_s %>
 		<% end %>
-		<%= link_to 'Done', link_string, class: "btn btn-success btn-block btn-lg" %>
+		<%= button_tag name: "button_action", value: link_string, class: "btn btn-success btn-block btn-lg" do %>
+			Done
+		<% end %>
 	</p>
+	<% end %>
 </div>
