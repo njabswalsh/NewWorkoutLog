@@ -84,3 +84,15 @@ $(document).on('click', '#visibility-done', function(e) {
 	}
 	$('#visibility-button').text("Visibility: " + text);
 });
+
+
+$(document).on('input', '#search-box', function(e){
+	var search_val = $("#search-box").val().toLowerCase()
+	$('a.choose-exercise').each( function () {
+		if ($(this).text().toLowerCase().indexOf(search_val) >= 0){
+			$(this).parent().show();
+		} else {
+			$(this).parent().hide();
+		}
+    });
+});
