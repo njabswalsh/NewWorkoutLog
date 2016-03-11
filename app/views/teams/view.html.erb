@@ -3,7 +3,6 @@
 <h1 class="text-center"><%= @team.name %> </h1>
 <div class="calendar-background-well">
 
-
 	<h2 class="text-center resizable">
 		<% date = Date.parse(params[:start_date]) %>
 		<%= link_to start_date: (date.beginning_of_week - 1) do %>
