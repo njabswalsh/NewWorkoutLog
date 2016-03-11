@@ -41,6 +41,7 @@ exercise_type_list = [
 	["Dips", ""],
 	["Hamstring Ball Curls", ""],
 	["Assisted Dips", ""]
+	["Dumbbell Front Raise", ""]
 ]
 exercise_type_list = exercise_type_list.sort_by { |e| e[0] }
 puts exercise_type_list.to_s
