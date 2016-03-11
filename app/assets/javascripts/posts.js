@@ -96,3 +96,9 @@ $(document).on('input', '#search-box', function(e){
 		}
     });
 });
+
+$(document).on('click', '#add_note_button', function(e){
+	if ($("#note_entry").val() == "") {
+		e.preventDefault();
+	}
+});

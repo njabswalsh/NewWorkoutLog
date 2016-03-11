@@ -197,7 +197,7 @@
 			<% if @note_id %>
 				<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
 			<% else %>
-				<%= n.text_area :text, class: "form-control" %>
+				<%= n.text_area :text, id: "note_entry", class: "form-control" %>
 			<% end %>
 			<%= n.hidden_field :post_id, value: @post.id%>
 			<%= n.hidden_field :return_to, value: @return_to %>
@@ -210,7 +210,7 @@
 				</div>
 
 				<div class="col-xs-5">
-					<%= button_tag(type: "submit", name: "button_action", value: "add_note", class: "btn btn-primary btn-block btn-med") do %>
+					<%= button_tag(id: "add_note_button", type: "submit", name: "button_action", value: "add_note", class: "btn btn-primary btn-block btn-med") do %>
 					 	Add Note
 					<% end %>
 				</div>
