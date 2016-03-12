@@ -102,6 +102,12 @@ $(document).on('input', '#search-box', function(e){
     $('#new_exercise_link').text(link_text).prepend(cache_children);
     // Change the hidden form value
     $('#hidden_etype_name').val($("#search-box").val());
+    // Hide the new exercise button if there is no text
+    if ($("#search-box").val() == "") {
+    	$("#new_exercise_link").parent().hide()
+    } else {
+    	$("#new_exercise_link").parent().show()
+    }
 });
 
 $(document).on('click', '#add_note_button', function(e){
