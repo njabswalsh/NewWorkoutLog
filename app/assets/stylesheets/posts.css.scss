@@ -57,10 +57,13 @@ label.isSelected {
   margin: 5px 0;
   background-color: white;
   border-radius: 7px;
-  &:hover {
-    background-color: lightgrey;
-    cursor: pointer;
-  }
+}
+
+@media screen and (min-width: 600px) {
+    .check-label:hover {
+        background-color: lightgrey;
+        cursor: pointer;
+    }
 }
 
 #visibility-button {
@@ -82,4 +85,8 @@ label.isSelected {
     .search-span {
         float: right;
     }
+}
+
+.edit-exercise-entry:hover {
+    cursor: pointer;
 }

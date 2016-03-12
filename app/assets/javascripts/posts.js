@@ -118,12 +118,7 @@ $(document).on('click', '.add-exercise-entry', function(){
 
 $(document).on('click', '.edit-exercise-entry', function(){
 	exercise_id = parseInt($(this)[0].id.substr(9));
-	$elem = $(this);
-	do {
-		$elem = $($elem.prev()[0]);
-	}
-	while (!$elem.hasClass("exercise-name"));
-	exercise_name = $elem.text();
+	exercise_name = $(this).parent().siblings(".exercise-name").text();
 
 	var numbers = $(this).text().split("x");
 	var sets = parseInt(numbers[0]);
