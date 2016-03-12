@@ -49,6 +49,9 @@ body {
 		margin:-5px;
 		margin-top:0px
 	}
+	.team-names-column{
+		width: 8%;
+	}
 }
 
 .calendar-background-well {
@@ -80,27 +83,27 @@ body {
     overflow-x:scroll;
 }
 
+.calendar-table {
+	max-width: none;
+	table-layout: fixed;
+}
+
 @media screen and (max-width: 415px) {
 	.calendar-table {
-		width: 330%;
-		max-width: none;
-		table-layout: fixed;
+		width: 380%;
+		min-width: 1100px;
 	}
 }
 
 @media screen and (min-width: 415px) and (max-width: 1000px) {
 	.calendar-table {
-		width: 200%;
-		max-width: none;
-		table-layout: fixed;
+		width: 300%;
 	}
 }
 
 @media screen and (min-width: 1000px) {
 	.calendar-table {
 		width: 99%;
-		max-width: none;
-		table-layout: fixed;
 	}
 }	
 
