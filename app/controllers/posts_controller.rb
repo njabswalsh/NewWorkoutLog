@@ -23,7 +23,6 @@ class PostsController < ApplicationController
 		else
 			@note_visibility = [-1]
 		end
-		puts "NOTES VISIBILITY:" + @note_visibility.to_s
 	end
 
 	def create

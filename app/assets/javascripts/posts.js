@@ -95,10 +95,41 @@ $(document).on('input', '#search-box', function(e){
 			$(this).parent().hide();
 		}
     });
+    // Change the text displayed in the new exercise box
+    var cache_children = $('#new_exercise_link').children();
+    var default_link_text =  "New Exercise: "
+    var link_text = default_link_text + $("#search-box").val();
+    $('#new_exercise_link').text(link_text).prepend(cache_children);
+    // Change the hidden form value
+    $('#hidden_etype_name').val($("#search-box").val());
 });
 
 $(document).on('click', '#add_note_button', function(e){
 	if ($("#note_entry").val() == "") {
 		e.preventDefault();
+	}
+});
+
+$(document).on('click', '#new_exercise_link', function(e){
+	if (!$("#search-box").val() == "") {
+		var valuesToSubmit = $('#new_exercise_form').serialize();
+	    $.ajax({
+	        type: "POST",
+	        url: $('#new_exercise_form').attr('action'), //sumbits it to the given url of the form
+	        data: valuesToSubmit,
+	        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+	    }).success(function(json){
+	        if (json["status"] == "created"){
+	        	var name = json["name"];
+	        	var first_holder = $('.et_holder')[0];
+	        	var newThumbnail = $(first_holder).clone();
+	        	$(newThumbnail).children('.choose-exercise').text(name);
+	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
+	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
+	        	$(newThumbnail).show();
+	        } else {
+	        	// Fail gracefully?
+	        }
+	    });
 	}
 });
