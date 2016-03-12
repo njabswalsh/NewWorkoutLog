@@ -142,6 +142,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	console.log(action)
 	$("#exercise-form").attr('action', action);
 	//console.log($(this));
+});
 
 $(document).on('click', '#new_exercise_link', function(e){
 	if (!$("#search-box").val() == "") {
