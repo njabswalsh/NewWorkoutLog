@@ -1,3 +1,6 @@
+<% if flash[:error] %>
+	<p class="error_message"><%= flash[:error] %></p>
+<% end %>
 <% content_for :title, "Users" %>
 <div class="background-well max-well-width">
 <% if session[:user] %>
