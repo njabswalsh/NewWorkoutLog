@@ -115,21 +115,35 @@ $(document).on('click', '#new_exercise_link', function(e){
 		var valuesToSubmit = $('#new_exercise_form').serialize();
 	    $.ajax({
 	        type: "POST",
-	        url: $('#new_exercise_form').attr('action'), //sumbits it to the given url of the form
+	        url: $('#new_exercise_form').attr('action'),
 	        data: valuesToSubmit,
-	        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+	        dataType: "JSON"
 	    }).success(function(json){
 	        if (json["status"] == "created"){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
+	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
 	        	$(newThumbnail).children('.choose-exercise').text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
 	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
+	        	$(newThumbnail).append($(close_button));
 	        	$(newThumbnail).show();
 	        } else {
 	        	// Fail gracefully?
 	        }
 	    });
 	}
+});
+
+$(document).on('click', '.delete_et', function(e){
+	$(this).parent().remove();
+	$.ajax({
+	        type: "POST",
+	        url: "/exercise_types/" + $(this).attr("id"),
+	        data: {"_method":"delete"},
+	        dataType: "JSON"
+	}).success(function(json){
+		//console.log("Status: ", json)
+	});
 });
