@@ -20,6 +20,30 @@ class ExercisesController < ApplicationController
 		end
 	end
 
+	def update
+		post_id = params[:exercise][:post_id]
+		sets = params[:sets]
+		reps = params[:reps]
+		weight = params[:weight]
+		return_to = params[:exercise][:return_to]
+		
+		exercise = Exercise.find(params[:exercise_id])
+		exercise.sets = sets
+		exercise.reps = reps
+		exercise.weight = weight
+
+		if not exercise.save
+			redirect_to controller: 'posts', action: 'index'
+		end
+
+		@post = Post.find(post_id)
+		if not return_to == ""
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s, :return_to => return_to
+		else
+			redirect_to controller: 'posts', action: 'edit', :date => @post.date.to_s
+		end
+	end
+
 	def destroy
 		@exercise = Exercise.find_by(id: params[:id])
 		date = params[:date]

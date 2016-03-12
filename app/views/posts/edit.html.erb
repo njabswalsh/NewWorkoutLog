@@ -28,16 +28,16 @@
 
 <div class="edit-well background-well max-well-width">
 	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-primary btn-block btn-med" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
+	<button type="button" class="btn btn-primary btn-block btn-med add-exercise-entry" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
 
 	<% if not @post.exercises.empty?  %>
 		<div class="exercises">
 
 			<% exercises_mapping = get_post_exercises_mapping(@post) %>
 			<% exercises_mapping.each do |exercise_name, exercise_entries_array| %>
-				<%= exercise_name %>
+				<div class="exercise-name"><%= exercise_name %></div>
 				<% exercise_entries_array.each do |exercise| %>
-					<li class="exercise-entry-bullet">
+					<li data-toggle="modal" data-target="#add-exercise" class="exercise-entry-bullet edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>">
 						<%= get_exercise_sets_reps_weight_string(exercise) %>
 						<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
 						method: :delete,
@@ -97,7 +97,7 @@
 
 
 		    <div class="modal-body">
-		    	<%= form_for :exercise, url: {controller: 'exercises', action: 'create'} do |e| %>
+		    	<%= form_for :exercise, :html => {:id => "exercise-form"}, url: {controller: 'exercises', action: 'create'} do |e| %>
 				<div class="row">
 					<div class="col-sm-4 col-xs-6 col-sm-offset-4 col-xs-offset-3">
 		      			<div class="dummy"></div>
@@ -115,7 +115,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-default sets" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 							</span>
-							<%= number_field_tag :sets, 3, class: "form-control text-center" %>
+							<%= number_field_tag :sets, 3, class: "form-control text-center sets-input" %>
 							<span class="input-group-btn">
 								<button class="btn btn-default sets" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 							</span>
@@ -128,7 +128,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-default reps" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 							</span>
-							<%= number_field_tag :reps, 8, class: "form-control text-center" %>
+							<%= number_field_tag :reps, 8, class: "form-control text-center reps-input" %>
 							<span class="input-group-btn">
 								<button class="btn btn-default reps" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 							</span>
@@ -141,7 +141,7 @@
 							<span class="input-group-btn">
 								<button class="btn btn-default weight" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 							</span>
-							<%= number_field_tag :weight, 135, class: "form-control text-center" %>
+							<%= number_field_tag :weight, 135, class: "form-control text-center weight-input" %>
 							<!--<input type="text" class="form-control text-center" value="135">-->
 							<span class="input-group-btn">
 								<button class="btn btn-default weight" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
@@ -154,7 +154,7 @@
 					<%= e.hidden_field :return_to, value: @return_to %>
 
 					<%= button_tag(type: "submit", class: "btn btn-success btn-block btn-lg") do %>
-						Done
+						<div id="add_edit_exercise">Add Exercise</div>
 					<% end %>
 				</div>
 				<% end %>
@@ -179,7 +179,7 @@
 	<% end %>
 	<%= form_for :note, url: url_string do |n| %>
 		<p>
-			<%= n.label :notes %>
+			<%= n.label :notes %> 
 			<div class="notes">
 				<% @post.notes.each do |note| %>
 					<% if not note.id.to_s == @note_id %>

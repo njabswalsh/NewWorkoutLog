@@ -102,3 +102,36 @@ $(document).on('click', '#add_note_button', function(e){
 		e.preventDefault();
 	}
 });
+
+$(document).on('click', '.add-exercise-entry', function(){
+	$("#add_edit_exercise").text("Add Exercise");
+	$("#exercise-form").attr('action', '/exercises/create');
+});
+
+$(document).on('click', '.edit-exercise-entry', function(){
+	exercise_id = parseInt($(this)[0].id.substr(9));
+	$elem = $(this);
+	do {
+		$elem = $($elem.prev()[0]);
+	}
+	while (!$elem.hasClass("exercise-name"));
+	exercise_name = $elem.text();
+
+	var numbers = $(this).text().split("x");
+	var sets = parseInt(numbers[0]);
+	var reps = parseInt(numbers[1]);
+	var weight = parseInt(numbers[2]);
+
+	$(".sets-input").attr('value', sets);
+	$(".reps-input").attr('value', reps);
+	$(".weight-input").attr('value', weight);
+		
+
+	$("#place_exercise").text(exercise_name);
+	$("#add_edit_exercise").text("Save Exercise");
+
+	var action = '/exercises/update?exercise_id=' + exercise_id;
+	console.log(action)
+	$("#exercise-form").attr('action', action);
+	//console.log($(this));
+});
