@@ -1,8 +1,16 @@
 class TeamsController < ApplicationController
 	def index
+		if not session[:user]
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
+		end
 	end
 
 	def new
+		if not session[:user]
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
+		end
 	end
 
 	def view
@@ -25,21 +33,29 @@ class TeamsController < ApplicationController
 					end
 				end
 			end
+		else
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
 		end
 	end
 
 	def create
-		if Team.find_by(name: params[:team_name])
-			flash[:error] = "Sorry, there is already a team with that name. "
-			redirect_to(:action => :new)
-		elsif Team.create(params[:team_name], params[:team_password])
-			team = Team.find_by(name: params[:team_name])
-			user = User.find(session[:user_id])
-			user.teams << team
-			redirect_to(:action => :index)
+		if session[:user]
+			if Team.find_by(name: params[:team_name])
+				flash[:error] = "Sorry, there is already a team with that name. "
+				redirect_to(:action => :new)
+			elsif Team.create(params[:team_name], params[:team_password])
+				team = Team.find_by(name: params[:team_name])
+				user = User.find(session[:user_id])
+				user.teams << team
+				redirect_to(:action => :index)
+			else
+				flash[:error] = "There was a problem creating your new team"
+				redirect_to(:action => :new)
+			end
 		else
-			flash[:error] = "There was a problem creating your new team"
-			redirect_to(:action => :new)
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
 		end
 	end
 
@@ -47,7 +63,7 @@ class TeamsController < ApplicationController
 	end
 
 	def post_join
-		if session[:user_id]
+		if session[:user]
 			user = User.find(session[:user_id])
 			team = Team.find_by(name: params[:team_name])
 			if team
@@ -66,13 +82,13 @@ class TeamsController < ApplicationController
 				redirect_to(:action => :join)
 			end
 		else
-			flash[:error] = "You must be logged in to join a team"
-			redirect_to(:action => :join)
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
 		end
 	end
 
 	def leave_team
-		if session[:user_id]
+		if session[:user]
 			user = User.find(session[:user_id])
 			team = Team.find(params[:id])
 			if team
@@ -85,9 +101,10 @@ class TeamsController < ApplicationController
 			else
 				flash[:error] = "There is no team with that name"
 			end
+			redirect_to(:action => :index)
 		else
-			flash[:error] = "You must be logged in to leave a team"
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
 		end
-		redirect_to(:action => :index)
 	end
 end

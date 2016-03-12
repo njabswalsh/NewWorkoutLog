@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  
+  delete '/exercise_types/:id', to: 'exercise_types#destroy'
   delete '/posts/:id', to: 'posts#destroy'
   delete '/notes/:id', to: 'notes#destroy'
   delete '/exercises/:id', to: 'exercises#destroy'
