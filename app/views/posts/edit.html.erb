@@ -193,7 +193,7 @@
 		<p>
 			<%= n.label :notes %> 
 			<div class="notes">
-				<% @post.notes.each do |note| %>
+				<% @post.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
 					<% if not note.id.to_s == @note_id %>
 						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
 						<span style="color:black"><%= note.text %></span><% end %>
