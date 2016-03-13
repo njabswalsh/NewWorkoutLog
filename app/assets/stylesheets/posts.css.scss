@@ -86,15 +86,24 @@ label.isSelected {
         float: right;
     }
 }
+@media screen and (min-width: 600px) {
+    .edit-exercise-entry:hover {
+        cursor: pointer;
+    }
 
-.edit-exercise-entry:hover {
+    .choose-exercise:hover {
+        cursor: pointer;
+    }
+
+    #new_exercise_link:hover {
+        cursor: pointer;
+    }
+}
+
+.edit-exercise-entry {
     cursor: pointer;
 }
 
-.choose-exercise:hover {
-    cursor: pointer;
-}
-
-#new_exercise_link:hover {
+.exercise-name {
     cursor: pointer;
 }

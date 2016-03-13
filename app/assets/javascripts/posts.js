@@ -120,16 +120,24 @@ $(document).on('click', '#add_note_button', function(e){
 $(document).on('click', '.add-exercise-entry', function(){
 	$("#add_edit_exercise").text("Add Exercise");
 	$("#exercise-form").attr('action', '/exercises/create');
+	$(".sets-input").attr('value', "");
+	$(".reps-input").attr('value', "");
+	$(".weight-input").attr('value', "");
+});
+
+$(document).on('click', '.exercise-name', function(){
+	exercise_name = $(this).text();
+	$("#place_exercise").text(exercise_name);
+	$("#exercise_exercise_name").val(exercise_name);
 });
 
 $(document).on('click', '.edit-exercise-entry', function(){
 	exercise_id = parseInt($(this)[0].id.substr(9));
-	exercise_name = $(this).parent().siblings(".exercise-name").text();
+	exercise_name = $(this).attr('e-name');
 
-	var numbers = $(this).text().split("x");
-	var sets = parseInt(numbers[0]);
-	var reps = parseInt(numbers[1]);
-	var weight = parseInt(numbers[2]);
+	var sets = $(this).attr('e-sets');
+	var reps = $(this).attr('e-reps');
+	var weight = $(this).attr('e-weight');
 
 	$(".sets-input").attr('value', sets);
 	$(".reps-input").attr('value', reps);
@@ -140,9 +148,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$("#add_edit_exercise").text("Save Exercise");
 
 	var action = '/exercises/update?exercise_id=' + exercise_id;
-	console.log(action)
 	$("#exercise-form").attr('action', action);
-	//console.log($(this));
 });
 
 $(document).on('click', '#new_exercise_link', function(e){
