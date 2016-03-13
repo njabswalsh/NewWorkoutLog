@@ -35,7 +35,7 @@
 
 			<% exercises_mapping = get_post_exercises_mapping(@post) %>
 			<% exercises_mapping.each do |exercise_name, exercise_entries_array| %>
-				<div class="exercise-name"><%= exercise_name %></div>
+				<div class="exercise-name add-exercise-entry" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
 				<% exercise_entries_array.each do |exercise| %>
 					<li class="exercise-entry-bullet">
 						<span class="edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= get_exercise_sets_reps_weight_string(exercise) %></span>

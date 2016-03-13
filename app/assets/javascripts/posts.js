@@ -120,6 +120,15 @@ $(document).on('click', '#add_note_button', function(e){
 $(document).on('click', '.add-exercise-entry', function(){
 	$("#add_edit_exercise").text("Add Exercise");
 	$("#exercise-form").attr('action', '/exercises/create');
+	$(".sets-input").attr('value', "");
+	$(".reps-input").attr('value', "");
+	$(".weight-input").attr('value', "");
+});
+
+$(document).on('click', '.exercise-name', function(){
+	exercise_name = $(this).text();
+	$("#place_exercise").text(exercise_name);
+	$("#exercise_exercise_name").val(exercise_name);
 });
 
 $(document).on('click', '.edit-exercise-entry', function(){
