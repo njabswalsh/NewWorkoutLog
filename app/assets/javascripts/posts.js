@@ -10,23 +10,29 @@ $(document).on('click', '.number-spinner button', function (e) {
 	e.preventDefault();
 
 	var btn = $(this),
-		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+		textVal = btn.closest('.number-spinner').find('input').val().trim(),
 		newVal = 0;
+
+	oldValue = parseInt(textVal);
+	if (isNaN(oldValue)) {
+		oldValue = 0;
+	}
 
 	var incrementer = 1;
 	if (btn.hasClass("weight")) {
 		incrementer = 5;
 	}
 
-
 	if (btn.attr('data-dir') == 'up') {
-		newVal = Math.max(parseInt(oldValue) + incrementer, 1);
+		newVal = oldValue + incrementer;
 	} else {
-		newVal = Math.max(parseInt(oldValue) - incrementer, 1);
+		newVal = oldValue - incrementer;
 	}
-	if (isNaN(newVal)){
-		newVal = 1;
+
+	if (newVal == 0 || (newVal < 0 && !btn.hasClass("weight"))) {
+		newVal = ""
 	}
+
 	btn.closest('.number-spinner').find('input').val(newVal);
 });
 
@@ -120,9 +126,9 @@ $(document).on('click', '#add_note_button', function(e){
 $(document).on('click', '.add-exercise-entry', function(){
 	$("#add_edit_exercise").text("Add Exercise");
 	$("#exercise-form").attr('action', '/exercises/create');
-	$(".sets-input").attr('value', "");
-	$(".reps-input").attr('value', "");
-	$(".weight-input").attr('value', "");
+	$(".sets-input").val("");
+	$(".reps-input").val("");
+	$(".weight-input").val("");
 });
 
 $(document).on('click', '.exercise-name', function(){
