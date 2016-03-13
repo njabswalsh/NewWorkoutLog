@@ -44,7 +44,7 @@ body {
 
 @media screen and (max-width: 600px) {
 	.background-well.edit-well {
-		padding:15px;
+		padding:10px;
 		padding-top:20px;
 		margin:-5px;
 		margin-top:0px
