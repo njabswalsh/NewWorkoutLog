@@ -126,10 +126,9 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	exercise_id = parseInt($(this)[0].id.substr(9));
 	exercise_name = $(this).attr('e-name');
 
-	var numbers = $(this).text().split("x");
-	var sets = parseInt(numbers[0]);
-	var reps = parseInt(numbers[1]);
-	var weight = parseInt(numbers[2]);
+	var sets = $(this).attr('e-sets');
+	var reps = $(this).attr('e-reps');
+	var weight = $(this).attr('e-weight');
 
 	$(".sets-input").attr('value', sets);
 	$(".reps-input").attr('value', reps);
@@ -140,9 +139,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$("#add_edit_exercise").text("Save Exercise");
 
 	var action = '/exercises/update?exercise_id=' + exercise_id;
-	console.log(action)
 	$("#exercise-form").attr('action', action);
-	//console.log($(this));
 });
 
 $(document).on('click', '#new_exercise_link', function(e){
