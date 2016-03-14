@@ -145,9 +145,9 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	var reps = $(this).attr('e-reps');
 	var weight = $(this).attr('e-weight');
 
-	$(".sets-input").attr('value', sets);
-	$(".reps-input").attr('value', reps);
-	$(".weight-input").attr('value', weight);
+	$(".sets-input").val(sets);
+	$(".reps-input").val(reps);
+	$(".weight-input").val(weight);
 		
 
 	$("#place_exercise").text(exercise_name);
