@@ -194,3 +194,8 @@ $(document).on('click', '.delete_et', function(e){
 		//console.log("Status: ", json)
 	});
 });
+
+$(function() {
+	$( ".ui-sortable" ).sortable();
+	$( ".ui-sortable" ).disableSelection();
+});

@@ -31,22 +31,27 @@
 	<button type="button" class="btn btn-primary btn-block btn-med add-exercise-entry" data-toggle="modal" data-target="#pick-exercise"><span class="glyphicon glyphicon-plus"></span> Add exercise</button>
 
 	<% if not @post.exercises.empty?  %>
-		<div class="exercises">
-
+		<div class="exercises ui-sortable">
 			<% exercises_mapping = get_post_exercises_mapping(@post) %>
 			<% exercises_mapping.each do |exercise_name, exercise_entries_array| %>
-				<div class="exercise-name add-exercise-entry" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
-				<% exercise_entries_array.each do |exercise| %>
-					<li class="exercise-entry-bullet">
-						<span class="edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= get_exercise_sets_reps_weight_string(exercise) %></span>
-						<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
-						method: :delete,
-						data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
-						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-					</li>
-				<% end %>
+				<div>
+					<div class="exercise-name add-exercise-entry" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
+					<div class="ui-sortable">
+						<% exercise_entries_array.each do |exercise| %>
+							<div>
+								<li class="exercise-entry-bullet">
+									<span class="edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= get_exercise_sets_reps_weight_string(exercise) %></span>
+									<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
+									method: :delete,
+									data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
+									<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+								</li>
+							</div>	
+						<% end %>
+					</div>
+				</div>
 			<% end %>
-		<div>
+		</div>
 	<% else %>
 		<h5>You have no recorded exercises today.</h5>
 	<% end %>
@@ -190,30 +195,29 @@
 		<% url_string = {controller: 'notes', action: 'create'} %>
 	<% end %>
 	<%= form_for :note, url: url_string do |n| %>
-		<p>
-			<%= n.label :notes %> 
-			<div class="notes">
-				<% @post.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
-					<% if not note.id.to_s == @note_id %>
+		<%= n.label :notes %> 
+		<div id="notes-list" class="notes ui-sortable">
+			<% @post.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
+				<% if not note.id.to_s == @note_id %>
+					<div>
 						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
 						<span style="color:black"><%= note.text %></span><% end %>
 						<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
 						method: :delete,
 						data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %>
 						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-
 						<br/>
-					<% end %>
+					</div>
 				<% end %>
-			</div>
-			<% if @note_id %>
-				<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
-			<% else %>
-				<%= n.text_area :text, id: "note_entry", class: "form-control" %>
 			<% end %>
-			<%= n.hidden_field :post_id, value: @post.id%>
-			<%= n.hidden_field :return_to, value: @return_to %>
-		</p>
+		</div>
+		<% if @note_id %>
+			<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
+		<% else %>
+			<%= n.text_area :text, id: "note_entry", class: "form-control" %>
+		<% end %>
+		<%= n.hidden_field :post_id, value: @post.id%>
+		<%= n.hidden_field :return_to, value: @return_to %>
 
 		<div class = "row">
 			<fieldset class="form-group">
