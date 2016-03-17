@@ -35,13 +35,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      	<% if session[:user] %>
-          <li><%= link_to "Logout", controller: 'users', action: 'logout' %></li>
+      	<li><a href="/">Home</a></li>
+        <% if session[:user] %>
           <li><%= link_to "Create New Post", controller: 'posts', action: 'create' %></li>
           <li><%= link_to "View My Workouts", controller: 'posts', action: 'index' %></li>
           <li><%= link_to "View Teams", controller: 'teams', action: 'index' %></li>
+          <li><%= link_to "Logout", controller: 'users', action: 'logout' %></li> 
         <% end %>
-        <li><a href="/">Home</a></li>
+        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
