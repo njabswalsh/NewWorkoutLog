@@ -70,7 +70,7 @@
 		    		  <% if (not exercise_type.user_id) or (exercise_type.user_id == session[:user_id]) %>
 					      <div class="col-md-3 col-sm-4 col-xs-6 et_holder">
 					        <div class="dummy"></div>
-					        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail choose-exercise"><%= exercise_type.name %></a>
+					        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail choose-exercise" style = "background-image: url(<%= exercise_type.icon_address %>);"><span class = "vmiddle"><%= exercise_type.name %></span></a>
 					        <% if exercise_type.user_id == session[:user_id] %>
 								<button type="button" class="close delete_et" id="<%=exercise_type.id%>" style="position: absolute; top: 20px; right: 20px;">&times;</button>
 					        <% end %>
