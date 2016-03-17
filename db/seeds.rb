@@ -44,7 +44,8 @@ exercise_type_list = [
 	["Dumbbell Front Raise", "http://i.imgur.com/IemB1ug.png"]
 ]
 exercise_type_list = exercise_type_list.sort_by { |e| e[0] }
-puts exercise_type_list.to_s
 exercise_type_list.each do |name, icon_address|
 	ExerciseType.create(name: name, icon_address: icon_address)
 end
+
+puts "Filled ExerciseType Table."

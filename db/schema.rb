@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310205402) do
+ActiveRecord::Schema.define(version: 20160311215601) do
 
   create_table "exercise_types", force: true do |t|
     t.text     "name"
     t.text     "icon_address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "exercises", force: true do |t|

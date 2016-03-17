@@ -2,7 +2,7 @@ module PostsHelper
 
 	def get_post_exercises_mapping(post)
 		exercises_hash = Hash.new
-		post.exercises.each do |exercise|
+		post.exercises.sort { |a,b| a.id <=> b.id }.each do |exercise|
 			entries = exercises_hash[exercise.exercise_name]
 			if entries
 				entries.push(exercise)

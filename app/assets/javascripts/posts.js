@@ -10,23 +10,29 @@ $(document).on('click', '.number-spinner button', function (e) {
 	e.preventDefault();
 
 	var btn = $(this),
-		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+		textVal = btn.closest('.number-spinner').find('input').val().trim(),
 		newVal = 0;
+
+	oldValue = parseInt(textVal);
+	if (isNaN(oldValue)) {
+		oldValue = 0;
+	}
 
 	var incrementer = 1;
 	if (btn.hasClass("weight")) {
 		incrementer = 5;
 	}
 
-
 	if (btn.attr('data-dir') == 'up') {
-		newVal = Math.max(parseInt(oldValue) + incrementer, 1);
+		newVal = oldValue + incrementer;
 	} else {
-		newVal = Math.max(parseInt(oldValue) - incrementer, 1);
+		newVal = oldValue - incrementer;
 	}
-	if (isNaN(newVal)){
-		newVal = 1;
+
+	if (newVal == 0 || (newVal < 0 && !btn.hasClass("weight"))) {
+		newVal = ""
 	}
+
 	btn.closest('.number-spinner').find('input').val(newVal);
 });
 
@@ -95,10 +101,96 @@ $(document).on('input', '#search-box', function(e){
 			$(this).parent().hide();
 		}
     });
+    // Change the text displayed in the new exercise box
+    var cache_children = $('#new_exercise_link').children();
+    var default_link_text =  "New Exercise: "
+    var link_text = default_link_text + $("#search-box").val();
+    $('#new_exercise_link').text(link_text).prepend(cache_children);
+    // Change the hidden form value
+    $('#hidden_etype_name').val($("#search-box").val());
+    // Hide the new exercise button if there is no text
+    if ($("#search-box").val() == "") {
+    	$("#new_exercise_link").parent().hide()
+    } else {
+    	$("#new_exercise_link").parent().show()
+    }
 });
 
 $(document).on('click', '#add_note_button', function(e){
 	if ($("#note_entry").val() == "") {
 		e.preventDefault();
 	}
+});
+
+
+$(document).on('click', '.add-exercise-entry', function(){
+	$("#add_edit_exercise").text("Add Exercise");
+	$("#exercise-form").attr('action', '/exercises/create');
+	$(".sets-input").val("");
+	$(".reps-input").val("");
+	$(".weight-input").val("");
+});
+
+$(document).on('click', '.exercise-name', function(){
+	exercise_name = $(this).text();
+	$("#place_exercise").text(exercise_name);
+	$("#exercise_exercise_name").val(exercise_name);
+});
+
+$(document).on('click', '.edit-exercise-entry', function(){
+	exercise_id = parseInt($(this)[0].id.substr(9));
+	exercise_name = $(this).attr('e-name');
+
+	var sets = $(this).attr('e-sets');
+	var reps = $(this).attr('e-reps');
+	var weight = $(this).attr('e-weight');
+
+	$(".sets-input").val(sets);
+	$(".reps-input").val(reps);
+	$(".weight-input").val(weight);
+		
+
+	$("#place_exercise").text(exercise_name);
+	$("#add_edit_exercise").text("Save Exercise");
+
+	var action = '/exercises/update?exercise_id=' + exercise_id;
+	$("#exercise-form").attr('action', action);
+});
+
+$(document).on('click', '#new_exercise_link', function(e){
+	if (!$("#search-box").val() == "") {
+		var valuesToSubmit = $('#new_exercise_form').serialize();
+	    $.ajax({
+	        type: "POST",
+	        url: $('#new_exercise_form').attr('action'),
+	        data: valuesToSubmit,
+	        dataType: "JSON"
+	    }).success(function(json){
+	        if (json["status"] == "created"){
+	        	var name = json["name"];
+	        	var first_holder = $('.et_holder')[0];
+	        	var newThumbnail = $(first_holder).clone();
+	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
+	        	$(newThumbnail).children('.choose-exercise').text(name);
+	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
+	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
+	        	$(newThumbnail).append($(close_button));
+	        	$(newThumbnail).show();
+	        } else {
+	        	// Fail gracefully?
+	        }
+	    });
+	}
+});
+
+$(document).on('click', '.delete_et', function(e){
+	$(this).parent().remove();
+	$.ajax({
+	        type: "POST",
+	        url: "/exercise_types/" + $(this).attr("id"),
+	        data: {"_method":"delete"},
+	        dataType: "JSON"
+	}).success(function(json){
+		//console.log("Status: ", json)
+	});
 });

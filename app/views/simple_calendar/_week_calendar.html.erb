@@ -6,7 +6,7 @@
     <table class="table table-striped calendar-table">
       <thead>
         <tr>
-          <th class="calendar-header"></th>
+          <th class="calendar-header team-names-column"></th>
           <% date_range.slice(0, 7).each do |day| %>
             <th class="calendar-header"><%= I18n.t("date.abbr_day_names")[day.wday]  %> 
                <%= day.strftime("%m/%d") %>
@@ -20,7 +20,7 @@
 
       <% date_range.each_slice(7) do |week| %>
         <tr class="calendar-row">
-          <td class="calendar-name-box"> <%= @user_name %> </td>
+          <td class="calendar-name-box wrap-text handle-overflow"> <%= @user_name %> </td>
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% if defined?(Haml) && block_is_haml?(block) %>

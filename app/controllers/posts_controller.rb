@@ -33,7 +33,6 @@ class PostsController < ApplicationController
 			flash[:error] = "You must be logged in to access that page"
 			redirect_to controller: 'users', action: 'home'
 		end
-
 	end
 
 	def create
