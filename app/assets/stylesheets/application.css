@@ -97,18 +97,25 @@ body {
 
 @media screen and (min-width: 415px) and (max-width: 1000px) {
 	.calendar-table {
-		width: 300%;
+		width: 180%;
+		min-width: 1300px;
 	}
 }
 
 @media screen and (min-width: 1000px) {
 	.calendar-table {
 		width: 99%;
+		min-width: 1100px;
+
 	}
 }	
 
 .table>thead>tr>th.calendar-header {
 	border-bottom: 3px solid black;
+}
+
+.container {
+	width: auto;
 }
 
 .calendar-name-box {
@@ -190,4 +197,16 @@ li.exercise-entry-bullet:before {
 
 div.wrap-text {
     white-space: pre-wrap;
+}
+
+.day.has-post.today {
+    background: rgb(234,192,80);
+}
+
+.day.has-post.past {
+    background: rgb(28,237,232);
+}
+
+.day.has-post.future {
+    background: rgb(116,237,114);
 }

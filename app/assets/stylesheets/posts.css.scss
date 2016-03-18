@@ -4,6 +4,15 @@
 .dummy {
     margin-top: 100%;
 }
+.vmiddle {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    padding-top: 30%;
+/*    font-size: 120%;*/
+    font-weight: bold;
+    color: #96cbc7;
+}
 .thumbnail {
     position: absolute;
     top: 15px;
@@ -11,7 +20,8 @@
     left: 15px;
     right: 15px;
     text-align:center;
-    padding-top:calc(50% - 30px);
+/*    padding-top:calc(50% - 30px);*/
+    background-size: 100%;
 }
 .post-divider {
     display: block;
