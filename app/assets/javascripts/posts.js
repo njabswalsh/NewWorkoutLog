@@ -172,7 +172,6 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
-	        	$(newThumbnail).find(".choose-exercise").css('background-image', 'http://i.imgur.com/rtGyo8H.png');
 	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
 	        	$(newThumbnail).children('.choose-exercise').children(".vmiddle").text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
@@ -181,6 +180,7 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	$(newThumbnail).show();
 	        	var new_id = "favorite-" + json["id"];
 	        	$(newThumbnail).find(".toggle-favorite").attr("id", new_id);
+	        	$(newThumbnail).find(".choose-exercise").attr('style', 'background-image: url(http://i.imgur.com/rtGyo8H.png);');
 	        } else {
 	        	// Fail gracefully?
 	        }
