@@ -177,10 +177,10 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
 	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
 	        	$(newThumbnail).append($(close_button));
+	        	$(newThumbnail).find(".choose-exercise").attr('style', 'background-image: url(http://i.imgur.com/rtGyo8H.png);');
 	        	$(newThumbnail).show();
 	        	var new_id = "favorite-" + json["id"];
 	        	$(newThumbnail).find(".toggle-favorite").attr("id", new_id);
-	        	$(newThumbnail).find(".choose-exercise").attr('style', 'background-image: url(http://i.imgur.com/rtGyo8H.png);');
 	        } else {
 	        	// Fail gracefully?
 	        }
