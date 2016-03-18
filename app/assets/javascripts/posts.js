@@ -174,7 +174,7 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
-	        	$(newThumbnail).children(".choose-exercise").css('background-image', 'none');
+	        	$(newThumbnail).children(".choose-exercise").css('background-image', 'http://i.imgur.com/rtGyo8H.png');
 	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
 	        	$(newThumbnail).children('.choose-exercise').children(".vmiddle").text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
