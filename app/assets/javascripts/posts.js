@@ -1,9 +1,11 @@
 $(document).on("click", ".choose-exercise", function (e) {
 	var exercise_id = $(this)[0].id;
 	var exercise_name = $(this)[0].text;
+	var background = $(this).css("background-image");
 	
   	$("#exercise_exercise_name").val(exercise_name);
-  	$("#place_exercise").text(exercise_name);
+  	$("#place_exercise").children(".vmiddle").text(exercise_name);
+  	$("#place_exercise").css("background-image", background);
 });
 
 $(document).on('click', '.number-spinner button', function (e) {
@@ -103,17 +105,14 @@ $(document).on('input', '#search-box', function(e){
     });
     // Change the text displayed in the new exercise box
     var cache_children = $('#new_exercise_link').children();
-    var default_link_text =  "New Exercise: "
-    var link_text = default_link_text + $("#search-box").val();
-    $('#new_exercise_link').text(link_text).prepend(cache_children);
-    // Change the hidden form value
-    $('#hidden_etype_name').val($("#search-box").val());
-    // Hide the new exercise button if there is no text
-    if ($("#search-box").val() == "") {
-    	$("#new_exercise_link").parent().hide()
-    } else {
-    	$("#new_exercise_link").parent().show()
+    var default_link_text =  "CREATE NEW EXERCISE USING SEARCH BOX"
+    var link_text = default_link_text;
+    if ($("#search-box").val() != "") {
+    	link_text = $("#search-box").val()
     }
+	$('#new_exercise_link').text(link_text).prepend(cache_children);
+	// Change the hidden form value
+	$('#hidden_etype_name').val($("#search-box").val());
 });
 
 $(document).on('click', '#add_note_button', function(e){
@@ -133,7 +132,8 @@ $(document).on('click', '.add-exercise-entry', function(){
 
 $(document).on('click', '.exercise-name', function(){
 	exercise_name = $(this).text();
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#exercise_exercise_name").val(exercise_name);
 });
 
@@ -150,7 +150,8 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$(".weight-input").val(weight);
 		
 
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#add_edit_exercise").text("Save Exercise");
 
 	var action = '/exercises/update?exercise_id=' + exercise_id;
@@ -171,7 +172,7 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
-	        	$(newThumbnail).children(".choose-exercise").css('background-image', 'none');
+	        	$(newThumbnail).children(".choose-exercise").css('background-image', 'http://i.imgur.com/rtGyo8H.png');
 	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
 	        	$(newThumbnail).children('.choose-exercise').children(".vmiddle").text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());

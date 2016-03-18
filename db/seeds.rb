@@ -43,12 +43,12 @@ exercise_type_list = [
 	["Assisted Dips", "http://i.imgur.com/p545BJM.png"],
 	["Dumbbell Front Raise", "http://i.imgur.com/IemB1ug.png"],
 
-	["Assisted Pullups", ""],
-	["Kettlebell Swings", ""],
-	["Internal Shoulder Rotation", ""],
-	["External Shoulder Rotation", ""],
-	["Russian Twists", ""],
-	["Split Squats", ""]
+	["Assisted Pullups", "http://i.imgur.com/dhMjfQY.png"],
+	["Kettlebell Swings", "http://i.imgur.com/9Szb3rp.png"],
+	["Internal Shoulder Rotation", "http://i.imgur.com/pdWNK8L.png"],
+	["External Shoulder Rotation", "http://i.imgur.com/nmiWO9X.png"],
+	["Russian Twists", "http://i.imgur.com/wv8jpLj.png"],
+	["Split Squats", "http://i.imgur.com/tXZTnWM.png"]
 ]
 exercise_type_list = exercise_type_list.sort_by { |e| e[0] }
 exercise_type_list.each do |name, icon_address|

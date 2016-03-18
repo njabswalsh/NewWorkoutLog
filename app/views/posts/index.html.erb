@@ -14,7 +14,7 @@
 			<% if not post.notes.empty? and not post.exercises.empty? %>
 				<hr class="divide-cell"/>
 			<% end %>
-			<div class='wrap-text handle-overflow'><% post.notes.each do |note| %><%= note.text %>
+			<div class='wrap-text handle-overflow'><% post.notes.sort { |a,b| a.id <=> b.id }.each do |note| %><%= note.text %>
 <% end %></div>
 			<%= link_to controller: 'posts', action: 'edit', date: post.date do %>
 		    <span class="glyphicon glyphicon-pencil"></span><% end %>
