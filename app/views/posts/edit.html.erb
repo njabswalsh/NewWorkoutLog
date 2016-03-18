@@ -58,19 +58,22 @@
 		  <!-- Modal content-->
 		  <div class="modal-content">
 		    <div class="modal-header costum-tabs">
-		      <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <ul class="nav nav-tabs">
-		        	<li class="active"><a data-toggle="tab" href="#select-exercise">Select exercise</a></li>
-		        	<li><a data-toggle="tab" href="#favorites">Favorites</a></li>
-			 
-		      <h5><span class="glyphicon glyphicon-search search-span"> <%= text_field_tag "search-box", nil, class: "search-input"%></span></h5>
-		    	</ul>
+		    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		    	<!--div class="row"-->
+			        <ul class="nav nav-tabs">
+			        	<li class="active"><a data-toggle="tab" id="select-exercise">Exercise</a></li>
+			        	<li><a data-toggle="tab" id="favorites">Favorites</a></li>
+				 
+			      <h5><span class="glyphicon glyphicon-search search-span"> <%= text_field_tag "search-box", nil, class: "search-input"%></span></h5>
+			    	</ul>
+			    <!--/div-->
 		    </div>
 
 
 
 		    <div class="modal-body">
 		    	<div class="row">
+		    		<div class="exercises-list">
 		    		<% ExerciseType.all.sort{ |a, b| a.name <=> b.name }.each do |exercise_type| %>
 		    		  <% if (not exercise_type.user_id) or (exercise_type.user_id == session[:user_id]) %>
 					      <div class="col-md-3 col-sm-4 col-xs-6 et_holder">
@@ -79,12 +82,7 @@
 					        <% if exercise_type.user_id == session[:user_id] %>
 								<button type="button" class="close delete_et top-right" id="<%=exercise_type.id%>">&times;</button>
 					        <% end %>
-					        <button type="button" class="close toggle-favorite top-left" id="<%=exercise_type.id%>">
-					        <% if true %>
-					        	<span class="glyphicon glyphicon-star"></span>
-					       	<% else %>
-					       		<span class="glyphicon glyphicon-star-empty"></span>
-					        <% end %>
+					        <span class="<% if is_exercise_type_favorite(exercise_type) %>glyphicon-star<% else %> glyphicon-star-empty<% end %> glyphicon toggle-favorite top-left" id="favorite-<%=exercise_type.id%>"></span>
 					    	</button>
 					        
 					      </div>
@@ -97,8 +95,8 @@
 				         <a id="new_exercise_link" class="thumbnail"><span class="glyphicon glyphicon-plus"></span class="vmiddle">New Exercise: </a>
 				      </div>
 				    <% end %>
+					</div>
 				</div>
-				
 			</div>
 
 

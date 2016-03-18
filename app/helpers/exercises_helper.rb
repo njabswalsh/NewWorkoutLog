@@ -21,4 +21,22 @@ module ExercisesHelper
 		end
 		return str
 	end
+
+	def is_exercise_type_favorite(et)
+		user = User.find(session[:user_id])
+		if user
+			favorites_list = user.favorites
+			if favorites_list
+				favorites_list = favorites_list.split(",")
+				if favorites_list.include? et.name
+					return true
+				else
+					return false
+				end
+			end
+		else
+			return false
+		end
+		return false
+	end
 end

@@ -26,6 +26,54 @@ class UsersController < ApplicationController
 	def new
 	end
 
+	def add_favorite
+		user = User.find(session[:user_id])
+		et = ExerciseType.find(params[:id])
+		if user.favorites
+			favorites_list = user.favorites + "," + et.name
+		else
+			favorites_list = et.name
+		end
+		user.favorites = favorites_list
+
+
+		if user.save
+			#render json: {:status => 'favorite_added', :favorites => favorites, :id => user.id}
+			render json: {:status => 'favorite_added', :favorites => favorites_list, :id => user.id}
+		else
+			render json: {:status => 'failed'}
+		end
+	end
+
+	def delete_favorite
+		user = User.find(session[:user_id])
+		et = ExerciseType.find(params[:id])
+		if user.favorites
+			favorites_list = user.favorites.split(",")
+			if favorites_list.include? et.name
+				favorites_list -= [et.name]
+				favorites_list = favorites_list.join(",")
+			end
+
+		else
+			favorites_list = et.name
+			puts "UH OHHHH"
+		end
+		if favorites_list == ""
+			favorites_list = nil
+		end
+		user.favorites = favorites_list
+
+
+		if user.save
+			#render json: {:status => 'favorite_added', :favorites => favorites, :id => user.id}
+			render json: {:status => 'favorite_deleted', :favorites => favorites_list, :id => user.id}
+		else
+			render json: {:status => 'failed'}
+		end
+	end
+
+
 	def create
 		params[:login] = params[:login].downcase
 		if User.find_by(login: params[:login])

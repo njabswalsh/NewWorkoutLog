@@ -160,6 +160,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 $(document).on('click', '#new_exercise_link', function(e){
 	if (!$("#search-box").val() == "") {
 		var valuesToSubmit = $('#new_exercise_form').serialize();
+		console.log($('#new_exercise_form').attr('action'));
 	    $.ajax({
 	        type: "POST",
 	        url: $('#new_exercise_form').attr('action'),
@@ -177,6 +178,8 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
 	        	$(newThumbnail).append($(close_button));
 	        	$(newThumbnail).show();
+	        	var new_id = "favorite-" + json["id"];
+	        	$(newThumbnail).find(".toggle-favorite").attr("id", new_id);
 	        } else {
 	        	// Fail gracefully?
 	        }
@@ -197,16 +200,66 @@ $(document).on('click', '.delete_et', function(e){
 });
 
 $(document).on('click', '.toggle-favorite', function(e){
-	$.ajax({
-		type: "POST",
-		url: "/exercise_types/" + $(this).attr("id"),
-		data: {"_method":"update"},
-		dataType: "JSON"
-	}).success(function(json){
-		if (json["status"] == "updated"){
+	var id = $(this).attr("id").substr(9);
+	console.log(id);
 
-		} else {
 
+	if ($(this).hasClass("glyphicon-star-empty")){
+		$item = $(this);
+
+
+		$.ajax({
+			type: "POST",
+			url: "/users/add_favorite/" + id,
+			data: null,
+			dataType: "JSON"
+		}).success(function(json){
+			if (json["status"] == "favorite_added"){
+				$item.removeClass("glyphicon-star-empty");
+				$item.addClass("glyphicon-star");
+			} else {
+
+			}
+		});
+	} else if ($(this).hasClass("glyphicon-star")){
+		$item = $(this);
+
+		$.ajax({
+			type: "POST",
+			url: "/users/delete_favorite/" + id,
+			data: null,
+			dataType: "JSON"
+		}).success(function(json){
+			if (json["status"] == "favorite_deleted"){
+				$item.removeClass("glyphicon-star");
+				$item.addClass("glyphicon-star-empty");
+
+				if ($("#favorites").parent().hasClass("active")){
+					$item.parent().addClass("hidden");
+				}
+			} else {
+				console.log("uh oh error in delete");
+			}
+		});
+	}
+
+
+});
+
+$(document).on('click', '#favorites', function(e){
+	$(".et_holder").each(function(){
+		$favorite_button = $(this).find(".glyphicon");
+		if ($favorite_button.hasClass("glyphicon-star-empty")){
+			$(this).addClass('hidden');
+		}
+	});
+});
+
+$(document).on('click', '#select-exercise', function(e){
+	$(".et_holder").each(function(){
+		$favorite_button = $(this).find(".glyphicon");
+		if ($favorite_button.hasClass("glyphicon-star-empty")){
+			$(this).removeClass('hidden');
 		}
 	});
 });

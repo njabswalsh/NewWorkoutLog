@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311215601) do
+ActiveRecord::Schema.define(version: 20160318042232) do
 
   create_table "exercise_types", force: true do |t|
     t.text     "name"
@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(version: 20160311215601) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
-    t.text     "workout"
-    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160311215601) do
     t.string   "login"
     t.float    "salt"
     t.string   "password_digest"
+    t.text     "favorites"
   end
 
 end
