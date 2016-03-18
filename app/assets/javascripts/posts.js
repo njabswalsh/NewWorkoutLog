@@ -170,7 +170,7 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
-	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
+	        	var close_button = $('<button type="button" class="close delete_et top-right" id="'+json["id"]  +'>&times;</button>')
 	        	$(newThumbnail).children('.choose-exercise').text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
 	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
@@ -191,6 +191,21 @@ $(document).on('click', '.delete_et', function(e){
 	        data: {"_method":"delete"},
 	        dataType: "JSON"
 	}).success(function(json){
-		//console.log("Status: ", json)
+		//console.log("Status: ", json);
+	});
+});
+
+$(document).on('click', '.toggle-favorite', function(e){
+	$.ajax({
+		type: "POST",
+		url: "/exercise_types/" + $(this).attr("id"),
+		data: {"_method":"update"},
+		dataType: "JSON"
+	}).success(function(json){
+		if (json["status"] == "updated"){
+
+		} else {
+
+		}
 	});
 });

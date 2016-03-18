@@ -46,7 +46,7 @@
 					</li>
 				<% end %>
 			<% end %>
-		<div>
+		</div>
 	<% else %>
 		<h5>You have no recorded exercises today.</h5>
 	<% end %>
@@ -57,23 +57,35 @@
 
 		  <!-- Modal content-->
 		  <div class="modal-content">
-		    <div class="modal-header">
+		    <div class="modal-header costum-tabs">
 		      <button type="button" class="close" data-dismiss="modal">&times;</button>
-		      <h4 class="modal-title">Select exercise
-		      <span class="glyphicon glyphicon-search search-span"> <%= text_field_tag "search-box", nil, class: "search-input"%></span></h4>
+		        <ul class="nav nav-tabs">
+		        	<li class="active"><a data-toggle="tab" href="#select-exercise">Select exercise</a></li>
+		        	<li><a data-toggle="tab" href="#favorites">Favorites</a></li>
+			 
+		      <h5><span class="glyphicon glyphicon-search search-span"> <%= text_field_tag "search-box", nil, class: "search-input"%></span></h5>
+		    	</ul>
 		    </div>
 
-
-		    <div class="modal-body">
-		    	<div class="row">
+		    
+	    	<div class="modal-body">
+	    		<div class="row">
 		    		<% ExerciseType.all.each do |exercise_type| %>
 		    		  <% if (not exercise_type.user_id) or (exercise_type.user_id == session[:user_id]) %>
 					      <div class="col-md-3 col-sm-4 col-xs-6 et_holder">
 					        <div class="dummy"></div>
 					        <a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail choose-exercise"><%= exercise_type.name %></a>
 					        <% if exercise_type.user_id == session[:user_id] %>
-								<button type="button" class="close delete_et" id="<%=exercise_type.id%>" style="position: absolute; top: 20px; right: 20px;">&times;</button>
+								<button type="button" class="close delete_et top-right" id="<%=exercise_type.id%>">&times;</button>
 					        <% end %>
+					        <button type="button" class="close toggle-favorite top-left" id="<%=exercise_type.id%>">
+					        <% if true %>
+					        	<span class="glyphicon glyphicon-star"></span>
+					       	<% else %>
+					       		<span class="glyphicon glyphicon-star-empty"></span>
+					        <% end %>
+					    	</button>
+					        
 					      </div>
 					   <% end %>
 				    <% end %>
@@ -85,6 +97,7 @@
 				      </div>
 				    <% end %>
 				</div>
+				
 			</div>
 
 
