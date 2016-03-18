@@ -198,3 +198,15 @@ li.exercise-entry-bullet:before {
 div.wrap-text {
     white-space: pre-wrap;
 }
+
+.day.has-post.today {
+    background: rgb(234,192,80);
+}
+
+.day.has-post.past {
+    background: rgb(28,237,232);
+}
+
+.day.has-post.future {
+    background: rgb(116,237,114);
+}
