@@ -59,14 +59,13 @@
 		  <div class="modal-content">
 		    <div class="modal-header costum-tabs">
 		    	<button type="button" class="close" data-dismiss="modal">&times;</button>
-		    	<!--div class="row"-->
 			        <ul class="nav nav-tabs">
 			        	<li class="active"><a data-toggle="tab" id="select-exercise">Exercise</a></li>
 			        	<li><a data-toggle="tab" id="favorites">Favorites</a></li>
-				 
+				 	
 			      <h5><span class="glyphicon glyphicon-search search-span"> <%= text_field_tag "search-box", nil, class: "search-input"%></span></h5>
-			    	</ul>
-			    <!--/div-->
+			      </ul>
+			   		
 		    </div>
 
 
@@ -78,7 +77,7 @@
 		    		  <% if (not exercise_type.user_id) or (exercise_type.user_id == session[:user_id]) %>
 					      <div class="col-md-3 col-sm-4 col-xs-6 et_holder">
 					        <div class="dummy"></div>
-							<a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail vcenter-thumbnail choose-exercise child" style = "background-image: url(<%= exercise_type.icon_address %>);"><span class = "vmiddle"><%= exercise_type.name %></span></a>
+							<a data-target="#add-exercise" data-dismiss="modal" data-toggle="modal" id="<%= exercise_type.name.downcase %>" class="thumbnail vcenter-thumbnail choose-exercise child" style = "background-image: url(<%= get_icon_address(exercise_type) %>);"><span class = "vmiddle"><%= exercise_type.name %></span></a>
 				        
 					        <% if exercise_type.user_id == session[:user_id] %>
 								<button type="button" class="close delete_et top-right" id="<%=exercise_type.id%>">&times;</button>

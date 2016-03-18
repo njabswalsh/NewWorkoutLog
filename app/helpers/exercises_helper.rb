@@ -39,4 +39,12 @@ module ExercisesHelper
 		end
 		return false
 	end
+
+	def get_icon_address(et)
+		if (not et.icon_address) or (et.icon_address == "")
+			return "http://i.imgur.com/rtGyo8H.png"
+		else
+			return et.icon_address
+		end
+	end
 end
