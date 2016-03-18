@@ -1,9 +1,11 @@
 $(document).on("click", ".choose-exercise", function (e) {
 	var exercise_id = $(this)[0].id;
 	var exercise_name = $(this)[0].text;
+	var background = $(this).css("background-image");
 	
   	$("#exercise_exercise_name").val(exercise_name);
-  	$("#place_exercise").text(exercise_name);
+  	$("#place_exercise").children(".vmiddle").text(exercise_name);
+  	$("#place_exercise").css("background-image", background);
 });
 
 $(document).on('click', '.number-spinner button', function (e) {
@@ -133,7 +135,8 @@ $(document).on('click', '.add-exercise-entry', function(){
 
 $(document).on('click', '.exercise-name', function(){
 	exercise_name = $(this).text();
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#exercise_exercise_name").val(exercise_name);
 });
 
@@ -150,7 +153,8 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$(".weight-input").val(weight);
 		
 
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#add_edit_exercise").text("Save Exercise");
 
 	var action = '/exercises/update?exercise_id=' + exercise_id;
