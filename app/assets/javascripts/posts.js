@@ -105,17 +105,14 @@ $(document).on('input', '#search-box', function(e){
     });
     // Change the text displayed in the new exercise box
     var cache_children = $('#new_exercise_link').children();
-    var default_link_text =  "New Exercise: "
-    var link_text = default_link_text + $("#search-box").val();
-    $('#new_exercise_link').text(link_text).prepend(cache_children);
-    // Change the hidden form value
-    $('#hidden_etype_name').val($("#search-box").val());
-    // Hide the new exercise button if there is no text
-    if ($("#search-box").val() == "") {
-    	$("#new_exercise_link").parent().hide()
-    } else {
-    	$("#new_exercise_link").parent().show()
+    var default_link_text =  "CREATE NEW EXERCISE USING SEARCH BOX"
+    var link_text = default_link_text;
+    if ($("#search-box").val() != "") {
+    	link_text = $("#search-box").val()
     }
+	$('#new_exercise_link').text(link_text).prepend(cache_children);
+	// Change the hidden form value
+	$('#hidden_etype_name').val($("#search-box").val());
 });
 
 $(document).on('click', '#add_note_button', function(e){

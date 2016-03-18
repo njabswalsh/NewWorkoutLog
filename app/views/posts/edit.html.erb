@@ -79,9 +79,9 @@
 				    <% end %>
 				   	<%= form_for :exercise_type, url: {controller: "exercise_types", action: 'create'}, html: {id: "new_exercise_form"} do |e| %>
 				   	  <%= e.hidden_field :name, value: "", id: "hidden_etype_name" %>
-				      <div class="col-md-3 col-sm-4 col-xs-6" style="display:none;">
+				      <div class="col-md-3 col-sm-4 col-xs-6">
 				        <div class="dummy"></div>
-				         <a id="new_exercise_link" class="thumbnail"><span class="glyphicon glyphicon-plus"></span class="vmiddle">New Exercise: </a>
+				         <a id="new_exercise_link" class="thumbnail"><span class="glyphicon glyphicon-plus"></span class="vmiddle">CREATE NEW EXERCISE USING SEARCH BOX</a>
 				      </div>
 				    <% end %>
 				</div>
