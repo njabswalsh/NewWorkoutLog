@@ -7,12 +7,21 @@
 .vmiddle {
     display: inline-block;
     vertical-align: middle;
-    line-height: 30px;
-    padding-top: 30%;
+
+    padding-top: 17%;
 /*    font-size: 120%;*/
     font-weight: bold;
     color: #96cbc7;
+    line-height: 20px;
 }
+
+.parent {display: table;}
+
+.child {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .thumbnail {
     position: absolute;
     top: 15px;
@@ -23,6 +32,32 @@
 /*    padding-top:calc(50% - 30px);*/
     background-size: 100%;
 }
+
+/*used to center text on tiled exercise page:*/
+.vcenter-thumbnail {
+    position: absolute;
+    top: 15px;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    text-align:center;
+/*    padding-top:calc(50% - 30px);*/
+    background-size: 100%;
+}
+
+/*used for set/rep page, to display exercise name*/
+.thumbnail2 {
+    text-align: center;
+    padding-top:calc(50% - 30px);
+    position: absolute;
+    font-size: 200%;
+    top: 15px;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+    color: #96cbc7;
+}
+
 .post-divider {
     display: block;
     height: 1px;
