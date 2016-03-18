@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-ExerciseType.delete_all
+ExerciseType.where(:user_id => nil).destroy_all
 
 
 top_exercise_type_list = [
