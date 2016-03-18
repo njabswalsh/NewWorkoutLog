@@ -200,13 +200,13 @@ div.wrap-text {
 }
 
 .day.has-post.today {
-    background: rgb(234,192,80);
+    background: rgb(237,184,56,0.7);
 }
 
 .day.has-post.past {
-    background: rgb(28,237,232);
+    background: rgba(237,232,100,0.7);
 }
 
 .day.has-post.future {
-    background: rgb(116,237,114);
+    background: rgb(1237,140,114,0.7);
 }
