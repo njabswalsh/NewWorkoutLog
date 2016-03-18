@@ -4,12 +4,16 @@
 <% content_for :title, "Users" %>
 <div class="background-well max-well-width">
 <% if session[:user] %>
-<div class="btn-group-vertical center-block" role="group">
-	<%= link_to "Create New Post", "/posts/create", class: "btn btn-primary btn-lg", style:"border-radius:4px;margin-bottom:5px" %>
-	<%= link_to "View My Workouts", "/posts/index", class: "btn btn-primary btn-lg" , style:"border-radius:4px;margin-bottom:5px" %>
-	<%= link_to "View My Teams", "/teams", class: "btn btn-primary btn-lg" , style:"border-radius:4px;margin-bottom:5px" %>
-	<%= link_to "Sign Out", "/users/logout", class: "btn btn-primary btn-lg", style:"border-radius:4px" %>
-</div>
+
+	<div class = "row">
+		<center><%= link_to image_tag("http://i.imgur.com/PaxkgYF.png", class:"homeicontop", style:"border-radius:4px;margin-bottom:5px"), "/posts/create" %>
+		<%= link_to image_tag("http://i.imgur.com/hPFTmMf.png", class:"homeicontop", style:"border-radius:4px;margin-bottom:5px"), "/posts/index" %></center>
+	</div>
+	<div class="row">
+		<center><%= link_to image_tag("http://i.imgur.com/qmiZg3C.png", class:"homeiconbottom", style:"border-radius:4px;margin-bottom:5px"), "/teams" %>
+		<%= link_to image_tag("http://i.imgur.com/I25ziip.png", class:"homeiconbottom", style:"border-radius:4px;margin-bottom:5px"), "/users/logout" %></center>
+	</div>
+
 <% else %>
 	<div class="btn-group-vertical center-block" role="group">	
 		<%= link_to "Create New Account", "new", class: "btn btn-primary btn-lg", style:"border-radius:4px;margin-bottom:5px" %>

@@ -7,14 +7,22 @@
 .vmiddle {
     display: inline-block;
     vertical-align: middle;
-
     padding-top: 17%;
 /*    font-size: 120%;*/
     font-weight: bold;
     color: #96cbc7;
     line-height: 20px;
 }
-
+.homeicontop{
+   padding-top: 50px;
+    max-width: 30%;
+    max-height: 30%;
+}
+.homeiconbottom{
+   padding-bottom: 50px;
+    max-width: 30%;
+    max-height: 30%;
+}
 .parent {display: table;}
 
 .child {
