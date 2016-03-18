@@ -1,9 +1,11 @@
 $(document).on("click", ".choose-exercise", function (e) {
 	var exercise_id = $(this)[0].id;
 	var exercise_name = $(this)[0].text;
+	var background = $(this).css("background-image");
 	
   	$("#exercise_exercise_name").val(exercise_name);
-  	$("#place_exercise").text(exercise_name);
+  	$("#place_exercise").children(".vmiddle").text(exercise_name);
+  	$("#place_exercise").css("background-image", background);
 });
 
 $(document).on('click', '.number-spinner button', function (e) {
@@ -133,7 +135,8 @@ $(document).on('click', '.add-exercise-entry', function(){
 
 $(document).on('click', '.exercise-name', function(){
 	exercise_name = $(this).text();
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#exercise_exercise_name").val(exercise_name);
 });
 
@@ -150,7 +153,8 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$(".weight-input").val(weight);
 		
 
-	$("#place_exercise").text(exercise_name);
+	$("#place_exercise").children(".vmiddle").text(exercise_name);
+	$("#place_exercise").css("background-image", "none");
 	$("#add_edit_exercise").text("Save Exercise");
 
 	var action = '/exercises/update?exercise_id=' + exercise_id;
@@ -170,8 +174,9 @@ $(document).on('click', '#new_exercise_link', function(e){
 	        	var name = json["name"];
 	        	var first_holder = $('.et_holder')[0];
 	        	var newThumbnail = $(first_holder).clone();
+	        	$(newThumbnail).children(".choose-exercise").css('background-image', 'none');
 	        	var close_button = $('<button type="button" class="close delete_et" id="'+json["id"]  +'" style="position: absolute; top: 20px; right: 20px;">&times;</button>')
-	        	$(newThumbnail).children('.choose-exercise').text(name);
+	        	$(newThumbnail).children('.choose-exercise').children(".vmiddle").text(name);
 	        	$(newThumbnail).children('.choose-exercise').attr("id", name.toLowerCase());
 	        	$(newThumbnail).prependTo($('#new_exercise_form').parent());
 	        	$(newThumbnail).append($(close_button));

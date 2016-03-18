@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-ExerciseType.delete_all
+ExerciseType.where(:user_id => nil).destroy_all
 
 
 top_exercise_type_list = [
@@ -25,7 +25,7 @@ exercise_type_list = [
 	["Single Leg Deadlifts", "http://i.imgur.com/c5NPvZY.png"],
 	["Bicep Curls", "http://i.imgur.com/FjtH79d.png"],
 	["Barbell Rows", "http://i.imgur.com/o2q5UJr.png"],
-	["Power Clean", "http://i.imgur.com/WMvADss.png"],
+	["Power Cleans", "http://i.imgur.com/WMvADss.png"],
 	["Jerk", "http://i.imgur.com/v4IAOb8.png"],
 	["Clean and Jerk", "http://i.imgur.com/aVe2OpC.png"],
 	["Tricep Pushdowns", "http://i.imgur.com/UcVt6KF.png"],
@@ -41,7 +41,14 @@ exercise_type_list = [
 	["Dips", "http://i.imgur.com/ErHByNH.png"],
 	["Hamstring Ball Curls", "http://i.imgur.com/ak1MWXd.png"],
 	["Assisted Dips", "http://i.imgur.com/p545BJM.png"],
-	["Dumbbell Front Raise", "http://i.imgur.com/IemB1ug.png"]
+	["Dumbbell Front Raise", "http://i.imgur.com/IemB1ug.png"],
+
+	["Assisted Pullups", ""],
+	["Kettlebell Swings", ""],
+	["Internal Shoulder Rotation", ""],
+	["External Shoulder Rotation", ""],
+	["Russian Twists", ""],
+	["Split Squats", ""]
 ]
 exercise_type_list = exercise_type_list.sort_by { |e| e[0] }
 exercise_type_list.each do |name, icon_address|
