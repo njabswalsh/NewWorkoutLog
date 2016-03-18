@@ -38,7 +38,6 @@ class UsersController < ApplicationController
 
 
 		if user.save
-			#render json: {:status => 'favorite_added', :favorites => favorites, :id => user.id}
 			render json: {:status => 'favorite_added', :favorites => favorites_list, :id => user.id}
 		else
 			render json: {:status => 'failed'}
@@ -57,7 +56,7 @@ class UsersController < ApplicationController
 
 		else
 			favorites_list = et.name
-			puts "UH OHHHH"
+			#puts "UH OHHHH"
 		end
 		if favorites_list == ""
 			favorites_list = nil

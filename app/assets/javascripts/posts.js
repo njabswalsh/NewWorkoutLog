@@ -161,7 +161,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 $(document).on('click', '#new_exercise_link', function(e){
 	if (!$("#search-box").val() == "") {
 		var valuesToSubmit = $('#new_exercise_form').serialize();
-		console.log($('#new_exercise_form').attr('action'));
+		
 	    $.ajax({
 	        type: "POST",
 	        url: $('#new_exercise_form').attr('action'),
@@ -202,7 +202,6 @@ $(document).on('click', '.delete_et', function(e){
 
 $(document).on('click', '.toggle-favorite', function(e){
 	var id = $(this).attr("id").substr(9);
-	console.log(id);
 
 
 	if ($(this).hasClass("glyphicon-star-empty")){
@@ -239,7 +238,7 @@ $(document).on('click', '.toggle-favorite', function(e){
 					$item.parent().addClass("hidden");
 				}
 			} else {
-				console.log("uh oh error in delete");
+				// fail gracefully
 			}
 		});
 	}
