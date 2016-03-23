@@ -15,12 +15,16 @@ module PostsHelper
 	end
 
 	def get_exercise_string_from_exercise_entries_array(exercise_name, exercise_entries_array)
-		exercise_string = exercise_name + ": "
+		exercise_string = ""
 		sets_reps_weights_strings = Array.new
 		exercise_entries_array.each do |exercise|
 			sets_reps_weights_strings.push(get_exercise_sets_reps_weight_string(exercise))
 		end
 		exercise_string += sets_reps_weights_strings.join(", ")
+		if not exercise_string == ""
+			exercise_string = ": " + exercise_string
+		end
+		exercise_string = exercise_name + exercise_string
 		return exercise_string
 	end
 
