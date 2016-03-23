@@ -108,7 +108,7 @@ $(document).on('input', '#search-box', function(e){
     var default_link_text =  "CREATE NEW EXERCISE USING SEARCH BOX"
     var link_text = default_link_text;
     if ($("#search-box").val() != "") {
-    	link_text = $("#search-box").val()
+    	link_text = "New Exercise: " + $("#search-box").val()
     }
 	$('#new_exercise_link').text(link_text).prepend(cache_children);
 	// Change the hidden form value
