@@ -206,30 +206,29 @@
 		<% url_string = {controller: 'notes', action: 'create'} %>
 	<% end %>
 	<%= form_for :note, url: url_string do |n| %>
-		<p>
 			<%= n.label :notes %> 
 			<div class="notes">
 				<% @post.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
 					<% if not note.id.to_s == @note_id %>
-						<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
-						<span style="color:black"><%= note.text %></span><% end %>
-						<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
-						method: :delete,
-						data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %>
-						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-
-						<br/>
+						<div class="row">
+							<%= link_to note_id: note.id, date: @post.date, return_to: @return_to do %>
+							<div class="wrap-text handle-overflow col-xs-11" style="color:black"><%= note.text %></div><% end %>
+							<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
+							method: :delete,
+							data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %><span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+						</div>
 					<% end %>
 				<% end %>
 			</div>
-			<% if @note_id %>
-				<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
-			<% else %>
-				<%= n.text_area :text, id: "note_entry", class: "form-control" %>
-			<% end %>
+			<div style="margin-bottom:5px;">
+				<% if @note_id %>
+					<%= n.text_area :text, value: @note_to_edit.text, class: "form-control" %>
+				<% else %>
+					<%= n.text_area :text, id: "note_entry", class: "form-control" %>
+				<% end %>
+			</div>
 			<%= n.hidden_field :post_id, value: @post.id%>
 			<%= n.hidden_field :return_to, value: @return_to %>
-		</p>
 
 		<div class = "row">
 			<fieldset class="form-group">
