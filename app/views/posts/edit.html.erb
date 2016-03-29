@@ -131,17 +131,17 @@
 		    </div>
 
 
-		    <div class="modal-body">
-		    	<%= form_for :exercise, :html => {:id => "exercise-form"}, url: {controller: 'exercises', action: 'create'} do |e| %>
+			<div class="modal-body">
+				<%= form_for :exercise, :html => {:id => "exercise-form"}, url: {controller: 'exercises', action: 'create'} do |e| %>
 				<div class="row">
 					<div class="col-sm-4 col-xs-6 col-sm-offset-4 col-xs-offset-3">
-		      			<div class="dummy"></div>
+						<div class="dummy"></div>
 
-		        		<!-- <div class="thumbnail2" id="place_exercise"></div> -->
+						<!-- <div class="thumbnail2" id="place_exercise"></div> -->
 
-		        		<div class="thumbnail" id="place_exercise"><span class="vmiddle"></span></div>
+						<div class="thumbnail" id="place_exercise" data-toggle="modal" data-dismiss="modal" data-target="#pick-exercise"><span class="vmiddle"></span></div>
 
-		      		</div>
+					</div>
 				</div>
 
 
