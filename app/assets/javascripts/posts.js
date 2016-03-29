@@ -253,6 +253,7 @@ $(document).on('click', '#favorites', function(e){
 			$(this).addClass('hidden');
 		}
 	});
+	$("#new_exercise_link").hide();
 });
 
 $(document).on('click', '#select-exercise', function(e){
@@ -262,4 +263,5 @@ $(document).on('click', '#select-exercise', function(e){
 			$(this).removeClass('hidden');
 		}
 	});
+	$("#new_exercise_link").show();
 });
