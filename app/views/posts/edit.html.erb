@@ -42,7 +42,7 @@
 							<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
 								method: :delete,
 								data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name } do %>
-								<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+								<span class="glyphicon glyphicon-trash pull-right" style="margin-right: 10px;"></span><% end %>
 					<% else %>
 						<div class="exercise-name add-exercise-entry col-xs-11" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
 						<% exercise_entries_array.each do |exercise| %>
@@ -52,7 +52,7 @@
 							<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
 								method: :delete,
 								data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
-								<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+								<span class="glyphicon glyphicon-trash pull-right" style="margin-right: 10px;"></span><% end %>
 						<% end %>
 					<% end %>
 				</div>
@@ -226,7 +226,7 @@
 							<div class="wrap-text handle-overflow col-xs-11" style="color:black"><%= note.text %></div><% end %>
 							<%= link_to "/notes/" + note.id.to_s + "?date=" + @post.date.to_s,
 							method: :delete,
-							data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %><span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+							data: { confirm: "Are you sure you want to delete the note:\n" + note.text} do %><span class="glyphicon glyphicon-trash pull-right" style="margin-right: 10px;"></span><% end %>
 						</div>
 					<% end %>
 				<% end %>
