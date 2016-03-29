@@ -51,7 +51,7 @@ function delay_spinner_change(spinner) {
     return false;
 }
 
-$(document).on('mousedown', '.number-spinner button', function(e){
+$(document).on('mousedown touchstart', '.number-spinner button', function(e){
 	e.preventDefault();
 	var spinner = $(this);
 	delay = setTimeout(function() { delay_spinner_change(spinner); }, 500);
@@ -59,6 +59,12 @@ $(document).on('mousedown', '.number-spinner button', function(e){
     return false;
 });
 
+$(document).on('touchend touchcancel', '.number-spinner button', function(e){
+    clearInterval(timeout);
+    clearTimeout(delay);
+
+    return false;
+});
 
 
 $(document).mouseup(function(){
