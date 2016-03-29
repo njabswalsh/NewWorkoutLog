@@ -8,10 +8,8 @@ $(document).on("click", ".choose-exercise", function (e) {
   	$("#place_exercise").css("background-image", background);
 });
 
-$(document).on('click', '.number-spinner button', function (e) {
-	e.preventDefault();
-
-	var btn = $(this),
+function spinner_change(spinner) {
+	var btn = spinner,
 		textVal = btn.closest('.number-spinner').find('input').val().trim(),
 		newVal = 0;
 
@@ -36,6 +34,37 @@ $(document).on('click', '.number-spinner button', function (e) {
 	}
 
 	btn.closest('.number-spinner').find('input').val(newVal);
+}
+
+$(document).on('click', '.number-spinner button', function (e) {
+	e.preventDefault();
+	spinner_change($(this), e);
+});
+
+var timeout;
+var delay;
+
+function delay_spinner_change(spinner) {
+	timeout = setInterval(function(){
+        spinner_change(spinner);
+    }, 150);
+    return false;
+}
+
+$(document).on('mousedown', '.number-spinner button', function(e){
+	e.preventDefault();
+	var spinner = $(this);
+	delay = setTimeout(function() { delay_spinner_change(spinner); }, 500);
+
+    return false;
+});
+
+
+
+$(document).mouseup(function(){
+    clearInterval(timeout);
+    clearTimeout(delay);
+    return false;
 });
 
 
