@@ -6,12 +6,12 @@
 <% if session[:user] %>
 
 	<div class = "row">
-		<center><%= link_to image_tag("http://i.imgur.com/PaxkgYF.png", class:"homeicontop", style:"border-radius:4px;margin-bottom:5px"), "/posts/create" %>
-		<%= link_to image_tag("http://i.imgur.com/hPFTmMf.png", class:"homeicontop", style:"border-radius:4px;margin-bottom:5px"), "/posts/index" %></center>
+		<center><%= link_to image_tag("http://i.imgur.com/PaxkgYF.png", class:"homeicontop"), "/posts/create" %>
+		<%= link_to image_tag("http://i.imgur.com/hPFTmMf.png", class:"homeicontop"), "/posts/index" %></center>
 	</div>
 	<div class="row">
-		<center><%= link_to image_tag("http://i.imgur.com/qmiZg3C.png", class:"homeiconbottom", style:"border-radius:4px;margin-bottom:5px"), "/teams" %>
-		<%= link_to image_tag("http://i.imgur.com/I25ziip.png", class:"homeiconbottom", style:"border-radius:4px;margin-bottom:5px"), "/users/logout" %></center>
+		<center><%= link_to image_tag("http://i.imgur.com/qmiZg3C.png", class:"homeiconbottom"), "/teams" %>
+		<%= link_to image_tag("http://i.imgur.com/I25ziip.png", class:"homeiconbottom"), "/users/logout" %></center>
 	</div>
 
 <% else %>
