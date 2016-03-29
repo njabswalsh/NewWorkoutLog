@@ -22,6 +22,7 @@ class ExercisesController < ApplicationController
 
 	def update
 		post_id = params[:exercise][:post_id]
+		exercise_name = params[:exercise][:exercise_name]
 		sets = params[:sets]
 		reps = params[:reps]
 		weight = params[:weight]
@@ -31,6 +32,7 @@ class ExercisesController < ApplicationController
 		exercise.sets = sets
 		exercise.reps = reps
 		exercise.weight = weight
+		exercise.exercise_name = exercise_name
 
 		if not exercise.save
 			redirect_to controller: 'posts', action: 'index'
