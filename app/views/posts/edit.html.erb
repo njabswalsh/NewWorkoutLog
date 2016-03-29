@@ -35,16 +35,27 @@
 
 			<% exercises_mapping = get_post_exercises_mapping(@post) %>
 			<% exercises_mapping.each do |exercise_name, exercise_entries_array| %>
-				<div class="exercise-name add-exercise-entry" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
-				<% exercise_entries_array.each do |exercise| %>
-					<li class="exercise-entry-bullet">
-						<span class="edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= get_exercise_sets_reps_weight_string(exercise) %></span>
-						<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
-						method: :delete,
-						data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
-						<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
-					</li>
-				<% end %>
+				<div class="row">
+					<% if exercise_entries_array.each.all? {|exercise| get_exercise_sets_reps_weight_string(exercise) == ""}%>
+						<% exercise = exercise_entries_array.first %>
+						<div class="edit-exercise-entry col-xs-11" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= exercise_name %></div>
+							<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
+								method: :delete,
+								data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name } do %>
+								<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+					<% else %>
+						<div class="exercise-name add-exercise-entry col-xs-11" data-toggle="modal" data-target="#add-exercise"><%= exercise_name %></div>
+						<% exercise_entries_array.each do |exercise| %>
+							<li class="exercise-entry-bullet col-xs-11">
+								<span class="edit-exercise-entry" id="exercise-<%= exercise.id.to_s %>" data-toggle="modal" data-target="#add-exercise" e-name="<%= exercise_name %>" e-sets="<%= exercise.sets %>" e-reps="<%= exercise.reps %>" e-weight="<%= exercise.weight %>"><%= get_exercise_sets_reps_weight_string(exercise) %></span>
+							</li>
+							<%= link_to "/exercises/" + exercise.id.to_s + "?date=" + @post.date.to_s,
+								method: :delete,
+								data: { confirm: "Are you sure you want to remove the exercise:\n" +  exercise_name + ": " + get_exercise_sets_reps_weight_string(exercise)} do %>
+								<span class="glyphicon glyphicon-trash pull-right"></span><% end %>
+						<% end %>
+					<% end %>
+				</div>
 			<% end %>
 		</div>
 	<% else %>
