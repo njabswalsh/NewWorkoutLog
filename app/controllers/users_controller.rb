@@ -78,6 +78,9 @@ class UsersController < ApplicationController
 		if User.find_by(login: params[:login])
 			flash[:error] = "Sorry, but that username is already taken."
 			redirect_to(:action => :new)
+		elsif params[:password_1] != params[:password_2]
+			flash[:error] = "The passwords that you typed do not match."
+			redirect_to(:action => :new)
 		elsif User.create(params[:first_name], params[:last_name], params[:login], params[:password_1])
 			flash[:message] = "Account created!"
 			@user = User.find_by(login: params[:login])

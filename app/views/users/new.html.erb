@@ -19,6 +19,7 @@
 		</fieldset>
 		<fieldset class="form-group">
 				<%= password_field_tag(:password_1, nil, placeholder: "Password", class: "form-control") %>
+				<%= password_field_tag(:password_2, nil, placeholder: "Confirm Password", class: "form-control") %>
 				<% if flash[:error] %>
 					<span class="help-block" id="error-exists">
 						<p class="error_message text-danger"><%= flash[:error] %></p>
