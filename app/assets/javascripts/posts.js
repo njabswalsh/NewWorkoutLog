@@ -184,6 +184,7 @@ $(document).on('click', '.edit-exercise-entry', function(){
 	$(".sets-input").val(sets);
 	$(".reps-input").val(reps);
 	$(".weight-input").val(weight);
+	$("#exercise_exercise_name").val(exercise_name);
 		
 
 	$("#place_exercise").children(".vmiddle").text(exercise_name);
