@@ -36,7 +36,7 @@ function spinner_change(spinner) {
 	btn.closest('.number-spinner').find('input').val(newVal);
 }
 
-$(document).on('click', '.number-spinner button', function (e) {
+$(document).on('click mousedown touchstart', '.number-spinner button', function (e) {
 	e.preventDefault();
 	spinner_change($(this), e);
 });
