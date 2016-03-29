@@ -128,6 +128,13 @@ $(document).on('click', '.add-exercise-entry', function(){
 	$(".sets-input").val("");
 	$(".reps-input").val("");
 	$(".weight-input").val("");
+	$("#search-box").val("");
+	$("#search-box").trigger("input");
+});
+
+$(document).on('click', '#place_exercise', function(){
+	$("#search-box").val("");
+	$("#search-box").trigger("input");
 });
 
 $(document).on('click', '.exercise-name', function(){
