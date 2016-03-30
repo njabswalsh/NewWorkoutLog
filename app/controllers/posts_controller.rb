@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 	def index
 		if session[:user]
 			if not params[:start_date]
-				redirect_to action: 'index', start_date: Date.today
+				redirect_to action: 'index', start_date: Time.zone.now.to_date
 			end
 			@posts = Post.where("user_id = ?", session[:user_id])
 		else
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
 			if params[:date]
 				@date = Date.parse(params[:date])
 			else
-				@date = Date.today
+				@date = Time.zone.now.to_date
 				params[:date] = @date
 			end
 
