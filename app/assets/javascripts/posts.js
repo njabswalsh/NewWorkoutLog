@@ -36,41 +36,43 @@ function spinner_change(spinner) {
 	btn.closest('.number-spinner').find('input').val(newVal);
 }
 
-$(document).on('click', '.number-spinner button', function (e) {
+ $(document).on('click', '.number-spinner button', function (e) {
+ 	e.preventDefault();
+ 	//spinner_change($(this), e);
+ });
+
+var timeout;
+var delay;
+
+function delay_spinner_change(spinner) {
+	timeout = setInterval(function(){
+        spinner_change(spinner);
+    }, 150);
+    return false;
+}
+
+$(document).on('mousedown touchstart', '.number-spinner button', function(e){
 	e.preventDefault();
-	spinner_change($(this), e);
+	var spinner = $(this);
+	spinner_change(spinner);
+	
+	delay = setTimeout(function() { delay_spinner_change(spinner); }, 500);
+
+    return false;
 });
 
-// var timeout;
-// var delay;
-
-// function delay_spinner_change(spinner) {
-// 	timeout = setInterval(function(){
-//         spinner_change(spinner);
-//     }, 150);
-//     return false;
-// }
-
-// $(document).on('mousedown touchstart', '.number-spinner button', function(e){
-// 	e.preventDefault();
-// 	var spinner = $(this);
-// 	delay = setTimeout(function() { delay_spinner_change(spinner); }, 500);
-
-//     return false;
-// });
-
-// $(document).on('touchend touchcancel', '.number-spinner button', function(e){
-//     clearInterval(timeout);
-//     clearTimeout(delay);
-//     return false;
-// });
+$(document).on('touchend touchcancel', '.number-spinner button', function(e){
+    clearInterval(timeout);
+    clearTimeout(delay);
+    return false;
+});
 
 
-// $(document).mouseup(function(){
-//     clearInterval(timeout);
-//     clearTimeout(delay);
-//     return false;
-// });
+$(document).mouseup(function(){
+    clearInterval(timeout);
+    clearTimeout(delay);
+    return false;
+});
 
 
 $(document).on('click', '#everyone-box', function(e) {
