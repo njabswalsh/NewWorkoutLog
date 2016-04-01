@@ -309,27 +309,3 @@ $(document).on('click', '#select-exercise', function(e){
 	});
 	$("#new_exercise_link").show();
 });
-
-$(document).on('click', '.zoom-out', function(e){
-	var content_str = $("#viewport").attr("content");
-	var start_index = content_str.indexOf("initial-scale=") + 14;
-	var num_str = content_str.slice(start_index)
-	var end_index = num_str.indexOf(",")
-	num_str = num_str.slice(0, end_index);
-	var scale = parseFloat(num_str);
-	scale = scale / 2;
-	var new_content_str = content_str.slice(0, start_index) + scale + content_str.slice(start_index + end_index);
-	$("#viewport").attr("content", new_content_str);
-});
-
-$(document).on('click', '.zoom-in', function(e){
-	var content_str = $("#viewport").attr("content");
-	var start_index = content_str.indexOf("initial-scale=") + 14;
-	var num_str = content_str.slice(start_index)
-	var end_index = num_str.indexOf(",")
-	num_str = num_str.slice(0, end_index);
-	var scale = parseFloat(num_str);
-	scale = scale * 2;
-	var new_content_str = content_str.slice(0, start_index) + scale + content_str.slice(start_index + end_index);
-	$("#viewport").attr("content", new_content_str);
-});
