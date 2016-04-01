@@ -32,8 +32,10 @@ $(document).ready(function() {
       </button>
       <% if session[:user] %>
 		<a class="navbar-brand" href="/posts/index"><%= session[:user_name] + "'s Workout Log" %></a>
-    <span class="navbar-text zoom-out glyphicon glyphicon-zoom-out" style="float:right; padding-right:5px;"></span>
-    <span class="navbar-text zoom-in glyphicon glyphicon-zoom-in" style="float:right; padding-right:5px;"></span>
+      <% if browser.device.mobile? %>
+        <span class="navbar-text zoom-out glyphicon glyphicon-zoom-out" style="float:right; padding-right:5px;"></span>
+        <span class="navbar-text zoom-in glyphicon glyphicon-zoom-in" style="float:right; padding-right:5px;"></span>
+      <% end %>
 	  <% else %>
         <a class="navbar-brand" href="#">Get TWOL</a>
       <% end %>
