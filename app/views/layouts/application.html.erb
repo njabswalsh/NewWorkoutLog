@@ -45,6 +45,7 @@ $(document).ready(function() {
           <li><%= link_to "Create New Post", controller: 'posts', action: 'create' %></li>
           <li><%= link_to "View My Workouts", controller: 'posts', action: 'index' %></li>
           <li><%= link_to "View Teams", controller: 'teams', action: 'index' %></li>
+          <li><%= link_to "All Team Members", controller: 'teams', action: 'view_all' %></li>
           <li><%= link_to "Logout", controller: 'users', action: 'logout' %></li> 
         <% end %>
         
