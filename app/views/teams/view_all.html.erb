@@ -1,0 +1,43 @@
+<% user = User.find(session[:user_id]) %>
+<% if user %>
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=0.25, user-scalable=yes">
+    <% content_for :title, "View All Teams" %>
+    <div class="calendar-background-well">
+
+        <h2 class="text-center resizable">
+            <% date = Date.parse(params[:start_date]) %>
+            <%= link_to start_date: (date.beginning_of_week - 1) do %>
+            <span class="glyphicon glyphicon-chevron-left"></span><% end %>
+            <%= date.beginning_of_week.strftime("%D") %>
+            <%= link_to start_date: (date.end_of_week + 1) do %>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            <% end %>
+        </h2>
+
+        <% @first_user = true %>
+
+        <% observed_users = Set.new %>
+        <% user.teams.each do |team| %>
+            <% @team = team %>
+            <% team.users.each do |disp_user| %>
+                <% if not observed_users.include? disp_user.id %>
+                    <% @user_name = disp_user.first_name + " " + disp_user.last_name %>
+                    <% @user_id = disp_user.id %>
+                    <% if disp_user == team.users.last and team == user.teams.last %>
+                        <% @last_user = true %>
+                    <% end %>
+                    <% @return_to = "/teams/view_all" %>
+                    <%= render "shared/user_display" %>
+                    <% observed_users.add disp_user.id %>
+                <% end %>
+                <% @first_user = false %>
+                <% @last_user = false %>
+            <% end %>
+
+        <% end %>
+    </div>
+<% else %>
+    You must be logged in to view this page.
+<% end %>
+</div>
+

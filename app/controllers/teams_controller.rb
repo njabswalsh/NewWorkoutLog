@@ -39,6 +39,17 @@ class TeamsController < ApplicationController
 		end
 	end
 
+	def view_all
+		if session[:user]
+			if not params[:start_date]
+				redirect_to action: 'view_all', start_date: Date.today
+			end
+		else
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
+		end
+	end
+
 	def create
 		if session[:user]
 			if Team.find_by(name: params[:team_name])
