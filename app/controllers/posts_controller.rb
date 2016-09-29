@@ -88,11 +88,8 @@ class PostsController < ApplicationController
 
 			# Sign in to wolt
 			signin_uri = URI.parse("http://www.workoutlogthing.com/?action=signIn")
-			puts params[:wolt_email]
-			puts params[:wolt_password]
 			resp = Net::HTTP.post_form(signin_uri, {'email'=>params[:wolt_email],'signIn'=>'Sign+In', 'password'=>params[:wolt_password]})
 			cookie = resp.response['set-cookie'].split('; ')[0]
-			puts "########################################"
 			day = date.day
 			month = date.month
 			year = date.year
@@ -102,7 +99,11 @@ class PostsController < ApplicationController
 			data = 'from=2016-9-23&workout=' + post_html + '&save=Update'
 			headers = {'Cookie' => cookie}
 			resp = http.post(post_uri.request_uri, data, headers)
-			puts resp.body
+			if resp.message.to_s == "OK"
+				flash[:success] = "Succesfully exported post to Workoutlogthing"
+			else
+				flash[:error] = "Error while exporting post to Workoutlogthing"
+			end
 
 			redirect_to controller: 'posts', action: 'edit', date: date, return_to: params[:return_to]
 		else
