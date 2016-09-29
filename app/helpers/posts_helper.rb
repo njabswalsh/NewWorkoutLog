@@ -28,4 +28,23 @@ module PostsHelper
 		return exercise_string
 	end
 
+	def get_post_html_for_wolt(post)
+		post_html = ""
+		# Excercises
+		exercises_mapping = get_post_exercises_mapping(post)
+		exercises_mapping.each do |exercise_name, exercise_entries_array|
+			if post_html != ""
+				post_html += "<br>"
+			end
+			post_html += get_exercise_string_from_exercise_entries_array(exercise_name, exercise_entries_array)
+		end
+		# Notes
+		post.notes.sort { |a,b| a.id <=> b.id }.each do |note|
+			if post_html != ""
+				post_html += "<br>"
+			end
+			post_html += note.text
+		end
+		return post_html
+	end
 end

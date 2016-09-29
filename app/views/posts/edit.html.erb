@@ -306,4 +306,40 @@
 		<% end %>
 	</p>
 	<% end %>
+	<!-- Modal4 -->
+	<div class="modal fade" id="export-wolt" role="dialog">
+		<div class="modal-dialog">
+
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      <h4 class="modal-title">Enter Workoutlogthing Credentials</h4>
+		    </div>
+
+			<div class="modal-body">
+
+				<%= form_tag("export?id=" + @post.id.to_s, :method => "post") do %>
+
+					<fieldset class="form-group">
+					<%= text_field_tag :wolt_email, nil, placeholder: "Workoutlogthing Email", class: "form-control" %>
+					</fieldset>
+					<fieldset class="form-group">
+						<%= password_field_tag :wolt_password, nil, placeholder: "Password", class: "form-control" %>
+						<% if flash[:error] %>
+							<span id="error-exists" class="help-block"><p class="error_message text-danger"><%= flash[:error] %></p></span>
+						<% end %>
+					</fieldset>
+					<div class="modal-footer">
+						<span id="error-exists" class="help-block"><p class="error_message text-danger">Warning: This will overwrite the current contents of workoutlogthing.com</p></span>
+						<%= button_tag(type: "submit", class: "btn btn-block btn-primary") do %>
+						    Export
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<button type="button" class="btn btn-block btn-med" data-toggle="modal" data-target="#export-wolt">Export this post to Workoutlogthing</button>
 </div>

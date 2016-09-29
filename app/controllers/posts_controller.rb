@@ -1,7 +1,12 @@
+require "net/http"
+require "uri"
+
 class PostsController < ApplicationController
 	helper ExercisesHelper
 	helper PostsHelper
 	helper NotesHelper
+	include PostsHelper
+	include ExercisesHelper
 
 	def index
 		if session[:user]
@@ -70,6 +75,36 @@ class PostsController < ApplicationController
 			else
 				redirect_to action: 'index', start_date: date
 			end
+		else
+			flash[:error] = "You must be logged in to access that page"
+			redirect_to controller: 'users', action: 'home'
+		end
+	end
+
+	def export
+		if session[:user]
+			@post = Post.find_by(id: params[:id])
+			date = @post.date
+
+			# Sign in to wolt
+			signin_uri = URI.parse("http://www.workoutlogthing.com/?action=signIn")
+			puts params[:wolt_email]
+			puts params[:wolt_password]
+			resp = Net::HTTP.post_form(signin_uri, {'email'=>params[:wolt_email],'signIn'=>'Sign+In', 'password'=>params[:wolt_password]})
+			cookie = resp.response['set-cookie'].split('; ')[0]
+			puts "########################################"
+			day = date.day
+			month = date.month
+			year = date.year
+			post_uri = URI('http://www.workoutlogthing.com/?action=saveEntry&day=' + day.to_s + '&month=' + month.to_s + '&year=' + year.to_s)
+			http = Net::HTTP.new(post_uri.host, 80)
+			post_html = get_post_html_for_wolt(@post)
+			data = 'from=2016-9-23&workout=' + post_html + '&save=Update'
+			headers = {'Cookie' => cookie}
+			resp = http.post(post_uri.request_uri, data, headers)
+			puts resp.body
+
+			redirect_to controller: 'posts', action: 'edit', date: date, return_to: params[:return_to]
 		else
 			flash[:error] = "You must be logged in to access that page"
 			redirect_to controller: 'users', action: 'home'
